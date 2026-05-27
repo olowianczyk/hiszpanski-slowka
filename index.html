@@ -494,6 +494,13 @@ body::before {
   border-color: var(--accent-coral);
 }
 
+.speak-controls-quiz {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 16px 0;
+}
+
 .quiz-question {
   background: var(--paper-card);
   border: 2px solid var(--line);
@@ -1438,6 +1445,9 @@ function renderQuiz() {
       <div class="quiz-question">
         <div class="question-number">Pytanie ${state.quizCurrentQuestion + 1}</div>
         <div class="question-text">Co oznacza <strong>"${currentQuestion.es}"</strong>?</div>
+        <div class="speak-controls-quiz">
+          <button class="speak-btn" id="quiz-speak-btn">🔊 Wysłuchaj wymowę</button>
+        </div>
         ${isAnswered ? `<div class="quiz-feedback ${isCorrect ? 'correct' : 'incorrect'}">
           ${isCorrect ? '✓ Poprawna odpowiedź!' : '✗ Zła odpowiedź!'}
         </div>` : ''}
@@ -1532,6 +1542,15 @@ function render() {
    EVENT HANDLERS
    ========================================================== */
 document.addEventListener('click', (e) => {
+  // Quiz speak button
+  if (e.target.id === 'quiz-speak-btn') {
+    if (state.view === 'quiz' && state.quizQuestions.length > 0) {
+      const currentQuestion = state.quizQuestions[state.quizCurrentQuestion];
+      speak(currentQuestion.es, { rate: 0.9, btn: e.target });
+    }
+    return;
+  }
+
   const actionEl = e.target.closest('[data-action]');
   if (actionEl) {
     const action = actionEl.dataset.action;
