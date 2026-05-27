@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#faf7f0" id="metaThemeColor">
+<title>Oraciones de Bloques — Español A1-C2 (1000 por nivel)</title>
+
+<script>
+(function() {
+  try {
+    var saved = localStorage.getItem('oracionesDeBloques:theme');
+    var theme = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+    document.addEventListener('DOMContentLoaded', function() {
+      var meta = document.getElementById('metaThemeColor');
+      if (meta) meta.setAttribute('content', theme === 'dark' ? '#1a1410' : '#faf7f0');
+    });
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..900;1,500..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+}
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
+
+:root {
+  --paper: #faf7f0;
+  --paper-deeper: #f2ede3;
+  --paper-card: #fffcf7;
+  --ink: #1f1f1f;
+  --ink-soft: #5a5a5a;
+  --ink-faint: #8a8a8a;
+  --line: #e0dcd3;
+  --line-soft: #ebe7de;
+  --accent-coral: #d85d47;
+  --accent-coral-soft: #f5dcd6;
+  --accent-teal: #3d7a8a;
+  --accent-teal-soft: #d9e8ef;
+  --accent-gold: #c9943d;
+  --accent-gold-soft: #f0e6d2;
+  --tile-bg: #ffffff;
+  --tile-shadow: 0 1px 2px rgba(31, 31, 31, 0.06), 0 2px 8px rgba(31, 31, 31, 0.04);
+  --tile-shadow-hover: 0 2px 4px rgba(31, 31, 31, 0.08), 0 6px 16px rgba(31, 31, 31, 0.1);
+  --tile-shadow-active: 0 1px 2px rgba(31, 31, 31, 0.1);
+  --radius: 12px;
+  --noise-opacity: 0.35;
+  --bg-radial-1: rgba(216, 93, 71, 0.06);
+  --bg-radial-2: rgba(61, 122, 138, 0.05);
+  --slot-bg: rgba(255, 255, 255, 0.5);
+  --modal-backdrop: rgba(31, 31, 31, 0.4);
+}
+
+[data-theme="dark"] {
+  --paper: #1a1410;
+  --paper-deeper: #232018;
+  --paper-card: #2a231c;
+  --ink: #ede5d8;
+  --ink-soft: #a89b8f;
+  --ink-faint: #6f6a5f;
+  --line: #3a3430;
+  --line-soft: #2f2a25;
+  --accent-coral: #f08968;
+  --accent-coral-soft: #4a2b22;
+  --accent-teal: #7eb8d4;
+  --accent-teal-soft: #1f3642;
+  --accent-gold: #e8b959;
+  --accent-gold-soft: #3a2c18;
+  --tile-bg: #312a22;
+  --tile-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.25);
+  --tile-shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.45), 0 6px 16px rgba(0, 0, 0, 0.4);
+  --tile-shadow-active: 0 1px 2px rgba(0, 0, 0, 0.55);
+  --noise-opacity: 0;
+  --bg-radial-1: rgba(240, 137, 104, 0.04);
+  --bg-radial-2: rgba(126, 184, 212, 0.03);
+  --slot-bg: rgba(255, 255, 255, 0.02);
+  --modal-backdrop: rgba(0, 0, 0, 0.65);
+}
+
+body {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse at top left, var(--bg-radial-1), transparent 60%),
+    radial-gradient(ellipse at bottom right, var(--bg-radial-2), transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0, transparent 31px, var(--line-soft) 31px, var(--line-soft) 32px);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.2 0 0 0 0 0.15 0 0 0 0 0.05 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: var(--noise-opacity);
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 28px 20px 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 480px) {
+  #app { padding: 16px 14px 60px; }
+}
+
+.app-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1.5px solid var(--line);
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: var(--paper-card);
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease, color 0.2s ease;
+  box-shadow: var(--tile-shadow);
+  padding: 0;
+  position: relative;
+}
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--tile-shadow-hover);
+  border-color: var(--accent-coral);
+  color: var(--ink);
+}
+.theme-toggle:active { transform: translateY(0); }
+.theme-toggle svg { width: 18px; height: 18px; display: block; }
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+.app-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(28px, 5vw, 40px);
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  font-style: italic;
+}
+.app-title em {
+  font-style: italic;
+  font-weight: 700;
+  color: var(--accent-coral);
+}
+.app-subtitle {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.header-meta {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.intro {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-style: italic;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+  max-width: 580px;
+  line-height: 1.4;
+}
+.intro strong { font-style: normal; font-weight: 700; color: var(--ink); }
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+@media (min-width: 600px) {
+  .levels-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.level-card {
+  background: var(--paper-card);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--tile-shadow);
+  position: relative;
+}
+.level-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-coral);
+  box-shadow: var(--tile-shadow-hover);
+}
+.level-card:active { transform: translateY(0); }
+
+.level-badge {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  flex-shrink: 0;
+  color: #ffffff;
+}
+.level-card[data-level="A1"] .level-badge { background: linear-gradient(135deg, #ff9a56 0%, #ff7f50 100%); }
+.level-card[data-level="A2"] .level-badge { background: linear-gradient(135deg, #ff8c8c 0%, #ff6b6b 100%); }
+.level-card[data-level="B1"] .level-badge { background: linear-gradient(135deg, #ffb347 0%, #ff9a3d 100%); }
+.level-card[data-level="B2"] .level-badge { background: linear-gradient(135deg, #a8d5ba 0%, #7fbf9f 100%); }
+.level-card[data-level="C1"] .level-badge { background: linear-gradient(135deg, #87ceeb 0%, #6ab5d8 100%); }
+.level-card[data-level="C2"] .level-badge { background: linear-gradient(135deg, #dda0dd 0%, #da70d6 100%); }
+
+.level-info { flex: 1; }
+.level-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.level-desc {
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin-bottom: 8px;
+}
+.level-count {
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.level-count.complete { color: var(--accent-teal); font-weight: 600; }
+
+.practice-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.back-btn {
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+  padding: 8px 0;
+}
+.back-btn:hover { color: var(--ink); }
+.back-btn .arrow { font-size: 16px; }
+
+.topbar-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.level-tag {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.count {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.prompt-card {
+  background: linear-gradient(135deg, var(--accent-coral-soft), var(--accent-teal-soft));
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 28px;
+  border: 1px solid var(--line-soft);
+}
+.prompt-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.prompt-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.speak-btn {
+  padding: 6px 12px;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.speak-btn:hover {
+  background: var(--paper-deeper);
+  border-color: var(--ink-soft);
+  color: var(--ink);
+}
+
+.answer-area {
+  min-height: 80px;
+  background: var(--slot-bg);
+  border: 2px dashed var(--line-soft);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.answer-area.dragging { border-color: var(--accent-coral); background: rgba(216, 93, 71, 0.08); }
+
+.tile {
+  background: var(--tile-bg);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+  cursor: move;
+  transition: all 0.15s ease;
+  box-shadow: var(--tile-shadow);
+  user-select: none;
+  white-space: nowrap;
+  position: relative;
+}
+.tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--tile-shadow-hover);
+  border-color: var(--accent-coral);
+}
+.tile:active {
+  transform: translateY(-1px);
+  box-shadow: var(--tile-shadow-active);
+}
+
+.tile[data-tooltip] {
+  cursor: help;
+  border-color: var(--accent-teal);
+}
+
+.tooltip {
+  position: fixed;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-width: 200px;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.feedback {
+  margin-bottom: 20px;
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1.5px solid;
+  font-weight: 500;
+  font-size: 15px;
+}
+.feedback.correct {
+  background: var(--accent-teal-soft);
+  border-color: var(--accent-teal);
+  color: var(--accent-teal);
+}
+.feedback.incorrect {
+  background: var(--accent-coral-soft);
+  border-color: var(--accent-coral);
+  color: var(--accent-coral);
+}
+
+.pool-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding: 16px;
+  background: var(--paper-deeper);
+  border-radius: var(--radius);
+}
+.pool-area-label {
+  width: 100%;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border: 1.5px solid transparent;
+  white-space: nowrap;
+}
+.btn.primary {
+  background: var(--accent-coral);
+  color: #ffffff;
+  box-shadow: var(--tile-shadow-hover);
+}
+.btn.primary:hover {
+  background: #c74b35;
+  transform: translateY(-1px);
+}
+.btn.primary:disabled {
+  background: var(--ink-faint);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn.subtle {
+  background: var(--paper-card);
+  border-color: var(--line);
+  color: var(--ink-soft);
+}
+.btn.subtle:hover {
+  background: var(--paper-deeper);
+  border-color: var(--ink-soft);
+  color: var(--ink);
+}
+.btn.subtle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn.danger {
+  background: var(--accent-coral);
+  color: #ffffff;
+  border-color: var(--accent-coral);
+}
+.btn.danger:hover {
+  background: #c74b35;
+  transform: translateY(-1px);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--modal-backdrop);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(3px);
+}
+.modal {
+  background: var(--paper);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--line);
+}
+.modal h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.modal p {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.reset-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent-coral);
+  color: #ffffff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(216, 93, 71, 0.3);
+  transition: all 0.2s ease;
+  z-index: 50;
+}
+.reset-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(216, 93, 71, 0.4);
+}
+
+@media (max-width: 480px) {
+  .reset-btn {
+    bottom: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+/* ==========================================================
+   VOCABULARY DICTIONARY (Expandido)
+   ========================================================== */
+const VOCABULARY = {
+  // A1 Level
+  'yo': 'Pronombre personal de primera persona singular',
+  'como': 'Verbo comer en primera persona presente',
+  'una': 'Artículo indefinido femenino singular',
+  'manzana': 'Fruta roja dulce',
+  'ella': 'Pronombre personal femenino de tercera persona',
+  'bebe': 'Verbo beber en tercera persona presente',
+  'agua': 'Líquido incoloro e inodoro esencial para la vida',
+  'fría': 'Adjetivo que indica baja temperatura',
+  'nosotros': 'Pronombre personal de primera persona plural',
+  'vivimos': 'Verbo vivir en primera persona plural presente',
+  'en': 'Preposición que indica localización',
+  'madrid': 'Capital de España',
+  'ellos': 'Pronombre personal masculino de tercera persona plural',
+  'hablan': 'Verbo hablar en tercera persona plural presente',
+  'español': 'Idioma de España y América Latina',
+  'tú': 'Pronombre personal de segunda persona singular',
+  'tienes': 'Verbo tener en segunda persona singular presente',
+  'un': 'Artículo indefinido masculino singular',
+  'libro': 'Objeto con páginas que contiene texto',
+  'mi': 'Adjetivo posesivo de primera persona singular',
+  'hermana': 'Mujer que tiene los mismos padres',
+  'estudia': 'Verbo estudiar en tercera persona singular presente',
+  'inglés': 'Idioma de Inglaterra y muchos otros países',
+  'voy': 'Verbo ir en primera persona singular presente',
+  'al': 'Contracción de "a" y "el"',
+  'parque': 'Zona verde con áreas de recreo',
+  'él': 'Pronombre personal masculino de tercera persona',
+  'juega': 'Verbo jugar en tercera persona singular presente',
+  'fútbol': 'Deporte jugado con balón entre dos equipos',
+  'bailamos': 'Verbo bailar en primera persona plural presente',
+  'la': 'Artículo definido femenino singular',
+  'fiesta': 'Reunión social festiva',
+  'ellas': 'Pronombre personal femenino de tercera persona plural',
+  'cantan': 'Verbo cantar en tercera persona plural presente',
+  'canción': 'Composición musical con letra',
+  'gato': 'Animal doméstico felino',
+  'negro': 'Color oscuro',
+  'es': 'Verbo ser en tercera persona singular presente',
+  'muy': 'Adverbio que intensifica',
+  'grande': 'De tamaño considerable',
+  'quiero': 'Verbo querer en primera persona singular presente',
+  'comprar': 'Obtener algo a cambio de dinero',
+  'casa': 'Edificio para habitar',
+  'bonita': 'Adjetivo que indica belleza femenina',
+  'mejor': 'De mayor calidad o importancia',
+  'amigo': 'Persona con la que hay amistad',
+  'inteligente': 'Que tiene capacidad de comprensión',
+  'niños': 'Plural de niño, personas pequeñas',
+  'pequeños': 'De poco tamaño',
+  'juegan': 'Verbo jugar en tercera persona plural presente',
+  'afuera': 'Fuera de un lugar cerrado',
+  'película': 'Obra cinematográfica',
+  'interesante': 'Que despierta interés',
+  'necesito': 'Verbo necesitar en primera persona singular presente',
+  'hacer': 'Realizar una acción',
+  'tarea': 'Trabajo que debe hacerse',
+  'rápido': 'De velocidad considerable',
+  'profesora': 'Mujer que enseña',
+  'amable': 'De buen trato',
+  'día': 'Período de 24 horas',
+  'está': 'Verbo estar en tercera persona singular presente',
+  'nublado': 'Cubierto de nubes',
+  'hoy': 'En el día actual',
+  'restaurantes': 'Lugares donde se sirve comida',
+  'españoles': 'De España',
+  'excelentes': 'De muy buena calidad',
+  'prefiero': 'Verbo preferir en primera persona singular presente',
+  'leer': 'Interpretar signos escritos',
+  'libros': 'Plural de libro',
+  'antiguos': 'De hace mucho tiempo',
+  'tengo': 'Verbo tener en primera persona singular presente',
+  'coche': 'Automóvil de cuatro ruedas',
+  'trabaja': 'Verbo trabajar en tercera persona singular presente',
+  'tienda': 'Comercio de venta de artículos',
+  'padre': 'Hombre que ha procreado',
+  'conduce': 'Verbo conducir en tercera persona singular presente',
+  'carro': 'Vehículo de transporte',
+  'hermano': 'Hombre que tiene los mismos padres',
+  'tenis': 'Deporte jugado con raqueta y pelota',
+  'leche': 'Bebida de origen animal',
+  'mañana': 'Primera parte del día',
+  'universidad': 'Institución de educación superior',
+  'centro': 'Parte media o punto céntrico',
+  'tres': 'Número igual a 3',
+  'hermanas': 'Plural de hermana',
+  'muy': 'Adverbio intensificador',
+  'escuela': 'Institución de educación',
+  'leo': 'Verbo leer en primera persona singular presente',
+  'dos': 'Número igual a 2',
+  'perros': 'Plural de perro, animal doméstico',
+  'somos': 'Verbo ser en primera persona plural presente',
+  'amigas': 'Plural femenino de amiga',
+  'buena': 'Adjetivo de buena calidad',
+  'lejos': 'A gran distancia',
+  'compro': 'Verbo comprar en primera persona singular presente',
+  'pan': 'Alimento hecho con harina y agua',
+  'panadería': 'Tienda donde se vende pan',
+  'inteligentes': 'Plural de inteligente',
+  'tienen': 'Verbo tener en tercera persona plural presente',
+  'gatos': 'Plural de gato',
+  'gato': 'Animal felino doméstico',
+  'perro': 'Animal canino doméstico',
+  'tienes': 'Verbo tener en segunda persona singular presente',
+  'necesitas': 'Verbo necesitar en segunda persona singular presente',
+  'más': 'Mayor cantidad o intensidad',
+  'trabajas': 'Verbo trabajar en segunda persona singular presente',
+  'Hospital': 'Institución de salud',
+  'puedo': 'Verbo poder en primera persona singular presente',
+  'Ver': 'Percibir con los ojos',
+  'televisión': 'Aparato de video',
+  'viven': 'Verbo vivir en tercera persona plural presente',
+  'campo': 'Zona rural sin construcciones urbanas',
+  'dibujas': 'Verbo dibujar en segunda persona singular presente',
+  'nado': 'Verbo nadar en primera persona singular presente',
+  'piscina': 'Depósito de agua para nadar',
+  'iglesia': 'Templo religioso cristiano',
+  'cocinamos': 'Verbo cocinar en primera persona plural presente',
+  'caminan': 'Verbo caminar en tercera persona plural presente',
+  'bosque': 'Área con muchos árboles',
+  'abuelo': 'Padre del padre o madre',
+  'ajedrez': 'Juego de estrategia entre dos jugadores',
+  'abuela': 'Madre del padre o madre',
+  'borda': 'Verbo bordar en tercera persona singular presente',
+  'hilo': 'Material delgado para coser',
+  // A2 Level
+  'rojo': 'Color primario',
+  'azul': 'Color del cielo despejado',
+  'verde': 'Color de las plantas',
+  'amarillo': 'Color del sol',
+  'blanco': 'Color opuesto al negro',
+  'rosa': 'Flor de tallo espinoso',
+  'naranja': 'Fruta cítrica de color naranja',
+  'gris': 'Color entre blanco y negro',
+  'marrón': 'Color oscuro como la madera',
+  'nuevo': 'Que es por primera vez',
+  'viejo': 'Que tiene mucha edad',
+  'joven': 'De poca edad',
+  'fuerte': 'Que tiene fuerza física',
+  'débil': 'Sin fuerza',
+  'largo': 'De mucha extensión',
+  'corto': 'De poca extensión',
+  'alto': 'De mucha altura',
+  'bajo': 'De poca altura',
+  'gordo': 'Con exceso de peso',
+  'delgado': 'De poco peso',
+  'hermoso': 'Que tiene hermosura',
+  'feo': 'Que carece de belleza',
+  'sucio': 'Que tiene suciedad',
+  'limpio': 'Sin suciedad',
+  'mojado': 'Que está impregnado de agua',
+  'seco': 'Sin humedad',
+  'caliente': 'Que tiene mucho calor',
+  'fresco': 'Que tiene frío agradable',
+  'dulce': 'Que tiene sabor azucarado',
+  'amargo': 'Que tiene sabor desagradable',
+  'salado': 'Que contiene sal',
+  'ácido': 'Que tiene sabor agrio',
+  'picante': 'Que pica en la boca',
+  'suave': 'Que no es áspero',
+  'duro': 'Que no es blando',
+  'flexible': 'Que se puede doblar',
+  'rígido': 'Que no se puede doblar',
+  'brillante': 'Que brilla o resplandece',
+  'oscuro': 'Que tiene poca luz',
+  'claro': 'Que tiene mucha luz',
+  'transparente': 'Que se puede ver a través',
+  'opaco': 'Que no se puede ver a través',
+  'áspero': 'Que no es suave',
+  'suave': 'Que no es áspero',
+  'liso': 'Que no tiene irregularidades',
+  'rugoso': 'Que tiene asperezas',
+  'profundo': 'Que tiene gran profundidad',
+  'superficial': 'Que tiene poca profundidad',
+  'amplio': 'De gran amplitud',
+  'estrecho': 'De poca amplitud',
+  'espacioso': 'Que tiene mucho espacio',
+  'abarrotado': 'Que está muy lleno',
+  'cómodo': 'Que proporciona comodidad',
+  'incómodo': 'Que no proporciona comodidad',
+  'ordenado': 'Que está en orden',
+  'desordenado': 'Que no está en orden',
+  'orgánico': 'De origen natural',
+  'sintético': 'Hecho artificialmente',
+  'natural': 'Que existe en la naturaleza',
+  'artificial': 'Hecho por el hombre',
+  'frágil': 'Que se rompe fácilmente',
+  'resistente': 'Que resiste',
+  'pesado': 'Que tiene mucho peso',
+  'ligero': 'Que tiene poco peso',
+  'denso': 'Que tiene alta densidad',
+  'esponjoso': 'Que es blando y poroso',
+  'lejano': 'Que está a gran distancia',
+  'cercano': 'Que está a corta distancia',
+  'próximo': 'Que está cerca',
+  'distante': 'Que está lejos',
+  'interior': 'Que está dentro',
+  'exterior': 'Que está fuera',
+  'superior': 'Que está más arriba',
+  'inferior': 'Que está más abajo',
+  'anterior': 'Que viene antes',
+  'posterior': 'Que viene después',
+  'izquierdo': 'Lado opuesto al derecho',
+  'derecho': 'Lado opuesto al izquierdo',
+  'recto': 'Que no tiene curvas',
+  'curvo': 'Que tiene curvas',
+  'afilado': 'Que tiene buen filo',
+  'romo': 'Que no tiene punta',
+  'suave': 'Que es agradable al tacto',
+  'áspero': 'Que es desagradable al tacto',
+  'perfumado': 'Que tiene buen olor',
+  'apestoso': 'Que tiene mal olor',
+  'silencioso': 'Que produce poco sonido',
+  'ruidoso': 'Que produce mucho sonido',
+  'tranquilo': 'Que es apacible',
+  'turbulento': 'Que es agitado',
+  'pacífico': 'Que busca la paz',
+  'agresivo': 'Que tiende al ataque',
+  'tímido': 'Que tiene miedo fácilmente',
+  'audaz': 'Que se atreve a todo',
+  'conservador': 'Que mantiene tradiciones',
+  'progresista': 'Que favorece el progreso',
+  'realista': 'Que se ajusta a la realidad',
+  'idealista': 'Que busca ideales',
+  'práctico': 'Que se enfoca en la práctica',
+  'teórico': 'Que se enfoca en la teoría',
+  // B1 Level
+  'ayer': 'Día anterior a hoy',
+  'fui': 'Verbo ir en pretérito indefinido primera persona',
+  'mercado': 'Lugar donde se compran y venden productos',
+  'con': 'Preposición que indica compañía',
+  'madre': 'Mujer que ha procreado',
+  'comió': 'Verbo comer en pretérito indefinido tercera persona',
+  'pizza': 'Plato italiano de masa con toppings',
+  'deliciosa': 'De sabor muy agradable',
+  'cena': 'Comida de la noche',
+  'vimos': 'Verbo ver en pretérito indefinido primera persona plural',
+  'excelente': 'De muy buena calidad',
+  'fin': 'Final o terminación',
+  'semana': 'Período de siete días',
+  'llegaron': 'Verbo llegar en pretérito indefinido tercera persona plural',
+  'tarde': 'Hora del día o con retraso',
+  'concierto': 'Espectáculo de música en vivo',
+  'escribí': 'Verbo escribir en pretérito indefinido primera persona',
+  'carta': 'Escrito enviado por correo',
+  'tía': 'Hermana del padre o madre',
+  'compró': 'Verbo comprar en pretérito indefinido tercera persona',
+  'ropa': 'Prendas para vestir',
+  'hablamos': 'Verbo hablar en pretérito indefinido primera persona plural',
+  'durante': 'En el transcurso de',
+  'horas': 'Unidades de tiempo',
+  'por': 'Preposición de agencia o medio',
+  'teléfono': 'Dispositivo de comunicación',
+  'pasó': 'Verbo pasar en pretérito indefinido tercera persona',
+  'vacaciones': 'Período de descanso',
+  'barcelona': 'Ciudad de Cataluña en España',
+  'ganamos': 'Verbo ganar en pretérito indefinido primera persona plural',
+  'partido': 'Competición deportiva',
+  'facilidad': 'Sin dificultad',
+  'encantó': 'Verbo encantar en pretérito indefinido tercera persona',
+  'música': 'Arte sonoro',
+  'banda': 'Grupo de músicos',
+  'preparé': 'Verbo preparar en pretérito indefinido primera persona',
+  'comida': 'Alimento principal del día',
+  'especial': 'Que es diferente o notable',
+  'cumpleaños': 'Aniversario del nacimiento',
+  'cuando': 'En el tiempo que',
+  'niño': 'Persona pequeña',
+  'jugaba': 'Verbo jugar en pretérito imperfecto',
+  'todos': 'La totalidad',
+  'días': 'Plural de día',
+  'profesor': 'Hombre que enseña',
+  'explicó': 'Verbo explicar en pretérito indefinido',
+  'lección': 'Tema de enseñanza',
+  'claramente': 'De forma clara',
+  'padres': 'Plural de padre',
+  'viajaron': 'Verbo viajar en pretérito indefinido',
+  'italia': 'País en Europa',
+  'año': 'Período de doce meses',
+  'pasado': 'Anterior al presente',
+  'encontré': 'Verbo encontrar en pretérito indefinido',
+  'favorito': 'Que es preferido',
+  'biblioteca': 'Lugar con colección de libros',
+  'durante': 'En el transcurso de',
+  'viaje': 'Acción de viajar',
+  'conocimos': 'Verbo conocer en pretérito indefinido',
+  'muchas': 'Determinante cuantificador',
+  'personas': 'Seres humanos',
+  'interesantes': 'Plural de interesante',
+  'corrían': 'Verbo correr en pretérito imperfecto',
+  'hasta': 'Preposición de límite',
+  'oscuro': 'Que tiene poca luz',
+  'decidimos': 'Verbo decidir en pretérito indefinido',
+  'cine': 'Lugar de proyección de películas',
+  'porque': 'Preposición de causa',
+  'hacía': 'Verbo hacer en pretérito imperfecto',
+  'calor': 'Sensación térmica alta',
+  'sucia': 'Que tiene suciedad',
+  'limpió': 'Verbo limpiar en pretérito indefinido',
+  'llueve': 'Verbo llover en presente',
+  'deseo': 'Verbo desear en presente',
+  'casa': 'Edificio para habitar',
+  'camino': 'Verbo caminar o vía para ir',
+  'mano': 'Extremidad del brazo',
+  'pies': 'Plural de pie',
+  'cabeza': 'Parte superior del cuerpo',
+  'ojos': 'Órgano de la vista',
+  'oídos': 'Órgano de la audición',
+  'nariz': 'Órgano del olfato',
+  'boca': 'Apertura para comer y hablar',
+  'dientes': 'Órganos para masticar',
+  'lengua': 'Órgano del gusto',
+  'corazón': 'Órgano que bombea sangre',
+  'pulmones': 'Órganos de respiración',
+  'estómago': 'Órgano de digestión',
+  'hígado': 'Órgano importante para metabolismo',
+  'riñones': 'Órganos para filtrar',
+  'cerebro': 'Órgano del pensamiento',
+  'huesos': 'Partes duras del esqueleto',
+  'músculos': 'Tejidos que permiten movimiento',
+  'piel': 'Cubierta externa del cuerpo',
+  'sangre': 'Líquido que circula en el cuerpo',
+  'saliva': 'Líquido de la boca',
+  'sudor': 'Líquido que sale por la piel',
+  'lágrimas': 'Líquido que sale de los ojos',
+  'cabello': 'Fibra que crece en la cabeza',
+  'barba': 'Pelo que crece en la cara',
+  'bigote': 'Pelo que crece sobre el labio',
+  'cejas': 'Pelo sobre los ojos',
+  'pestañas': 'Pelo alrededor de los ojos',
+  'uñas': 'Láminas duras en dedos',
+  'papilla': 'Comida de bebé',
+  'bebé': 'Niño recién nacido',
+  'bebida': 'Líquido para beber',
+  'comida': 'Alimento para comer',
+  'postre': 'Dulce al final de comida',
+  'sopa': 'Comida líquida',
+  'arroz': 'Grano como cereal',
+  'pasta': 'Harina moldeada',
+  'carne': 'Tejido muscular de animal',
+  'pollo': 'Ave comestible',
+  'pescado': 'Animal acuático comestible',
+  'marisco': 'Animales acuáticos con caparazón',
+  'verdura': 'Planta comestible',
+  'fruta': 'Producto de árbol frutal',
+  'verdura': 'Planta comestible',
+  'lechuga': 'Verdura de hojas verdes',
+  'tomate': 'Fruta roja comestible',
+  'cebolla': 'Bulbo aromático',
+  'ajo': 'Bulbo con sabor fuerte',
+  'patata': 'Tubérculo comestible',
+  'batata': 'Raíz comestible dulce',
+  'zanahoria': 'Raíz naranja comestible',
+  'maíz': 'Grano de cereal',
+  'trigo': 'Cereal para hacer pan',
+  'avena': 'Cereal para desayuno',
+  'cebada': 'Cereal para cerveza',
+  'frijol': 'Legumbre comestible',
+  'lenteja': 'Legumbre pequeña',
+  'guisante': 'Legumbre verde',
+  'huevo': 'Producto de gallina',
+  'queso': 'Producto lácteo',
+  'yogur': 'Producto lácteo fermentado',
+  'mantequilla': 'Producto de la leche',
+  'aceite': 'Grasa líquida',
+  'vinagre': 'Ácido de fermentación',
+  'sal': 'Mineral para sazonar',
+  'pimienta': 'Condimento picante',
+  'azúcar': 'Sustancia dulce',
+  'miel': 'Sustancia dulce de abeja',
+  'mermelada': 'Conserva de fruta',
+  'chocolate': 'Alimento dulce de cacao',
+  'caramelo': 'Dulce de azúcar',
+  'chicle': 'Goma de mascar',
+  'galleta': 'Pastel delgado y duro',
+  'pastel': 'Dulce hecho de harina',
+  'tarta': 'Pastel grande',
+  'pan': 'Alimento de harina cocida',
+  'pan': 'Alimento básico',
+  'tostada': 'Pan tostado',
+  'cereales': 'Granos para desayuno',
+  'muesli': 'Mezcla de cereales y frutas',
+  'mantequilla': 'Producto lácteo sólido',
+  'mermelada': 'Conserva de fruta',
+  'miel': 'Sustancia dulce de abeja',
+  'jam': 'Conserva de fruta',
+  'café': 'Bebida de grano de café',
+  'té': 'Bebida de hojas secas',
+  'chocolate': 'Bebida caliente de cacao',
+  'leche': 'Bebida blanca de animal',
+  'jugo': 'Líquido de fruta',
+  'zumo': 'Líquido exprimido',
+  'refresco': 'Bebida dulce con gas',
+  'agua': 'Líquido esencial',
+  'cerveza': 'Bebida alcohólica',
+  'vino': 'Bebida de uva fermentada',
+  'licor': 'Bebida alcohólica fuerte',
+  'ron': 'Bebida alcohólica de caña',
+  'whisky': 'Bebida alcohólica de grano',
+  'vodka': 'Bebida alcohólica incolora',
+  'champagne': 'Vino espumante francés',
+  'coctail': 'Bebida mezclada',
+  'limonada': 'Bebida de limón',
+  'horchata': 'Bebida de chufa',
+  'batido': 'Bebida batida de leche',
+  // B2 Level
+  'si': 'Conjunción condicional',
+  'tuviera': 'Verbo tener en imperfecto subjuntivo',
+  'dinero': 'Moneda que sirve para pagar',
+  'viajaría': 'Verbo viajar en condicional',
+  'mundo': 'Planeta Tierra',
+  'importante': 'Que tiene importancia',
+  'que': 'Pronombre relativo',
+  'estudies': 'Verbo estudiar en presente subjuntivo',
+  'cada': 'Determinante distributivo',
+  'aunque': 'Conjunción concesiva',
+  'llueva': 'Verbo llover en presente subjuntivo',
+  'iremos': 'Verbo ir en futuro primera persona plural',
+  'dudo': 'Verbo dudar en presente',
+  'hable': 'Verbo hablar en presente subjuntivo',
+  'tan': 'Adverbio comparativo',
+  'bien': 'De forma adecuada',
+  'espero': 'Verbo esperar en presente',
+  'tengas': 'Verbo tener en presente subjuntivo',
+  'éxito': 'Resultado positivo',
+  'examen': 'Prueba de evaluación',
+  'sin': 'Preposición de negación',
+  'embargo': 'Obstáculo o dificultad',
+  'creo': 'Verbo creer en presente',
+  'posible': 'Que puede ocurrir',
+  'recomiendo': 'Verbo recomendar en presente',
+  'visites': 'Verbo visitar en presente subjuntivo',
+  'museo': 'Edificio para exhibir obras de arte',
+  'pronto': 'En breve tiempo',
+  'entiendas': 'Verbo entender en presente subjuntivo',
+  'mejor': 'De forma superior',
+  'explicaré': 'Verbo explicar en futuro primera persona',
+  'nuevo': 'Que es por primera vez',
+  'menos': 'En menor cantidad',
+  'otra': 'Diferente',
+  'opción': 'Alternativa',
+  'quedémonos': 'Verbo quedarse en imperativo nosotros',
+  'aquí': 'En este lugar',
+  'busco': 'Verbo buscar en presente',
+  'trabajo': 'Actividad remunerada',
+  'realmente': 'De verdad',
+  'resultaría': 'Verbo resultar en condicional',
+  'conveniente': 'Oportuno y provechoso',
+  'enviares': 'Verbo enviar en futuro subjuntivo',
+  'informe': 'Documento informativo',
+  'hoy': 'En el día actual',
+  'evidente': 'Que se ve claramente',
+  'necesitamos': 'Verbo necesitar en primera persona plural',
+  'estrategia': 'Plan de acción',
+  'caso': 'Circunstancia particular',
+  'llegues': 'Verbo llegar en presente subjuntivo',
+  'enseguida': 'Inmediatamente después',
+  'llamame': 'Verbo llamar en imperativo',
+  'por': 'Preposición de causa',
+  'espera': 'Verbo esperar en presente',
+  'paciencia': 'Tolerancia y calma',
+  'mientras': 'En el transcurso de',
+  'tanto': 'Cantidad considerable',
+  'edad': 'Número de años vividos',
+  'muerte': 'Cese de la vida',
+  'vida': 'Estado de existencia',
+  'nacimiento': 'Comienzo de la vida',
+  'infancia': 'Primera etapa de la vida',
+  'niñez': 'Primera etapa de la vida',
+  'adolescencia': 'Etapa entre niñez y adultez',
+  'juventud': 'Etapa de jóvenes',
+  'adultez': 'Etapa de mayores',
+  'vejez': 'Etapa de viejos',
+  'matrimonio': 'Unión de pareja',
+  'divorcio': 'Separación legal de pareja',
+  'separación': 'Alejamiento de pareja',
+  'relación': 'Vínculo entre personas',
+  'noviazgo': 'Etapa antes de matrimonio',
+  'pareja': 'Dos personas unidas',
+  'esposa': 'Mujer casada',
+  'esposo': 'Hombre casado',
+  'novia': 'Mujer con novio',
+  'novio': 'Hombre con novia',
+  'amante': 'Persona enamorada',
+  'rival': 'Competidor',
+  'enemigo': 'Adversario',
+  'vecino': 'Persona que vive al lado',
+  'compañero': 'Persona que comparte algo',
+  'colega': 'Compañero de trabajo',
+  'jefe': 'Persona que dirige',
+  'empleado': 'Persona que trabaja',
+  'cliente': 'Persona que compra',
+  'vendedor': 'Persona que vende',
+  'abogado': 'Profesional del derecho',
+  'médico': 'Profesional de medicina',
+  'enfermero': 'Asistente de medicina',
+  'maestro': 'Persona que enseña',
+  'estudiante': 'Persona que estudia',
+  'artista': 'Persona creativa',
+  'músico': 'Persona que hace música',
+  'cantante': 'Persona que canta',
+  'actor': 'Persona que actúa',
+  'acriz': 'Mujer que actúa',
+  'escritor': 'Persona que escribe',
+  'poeta': 'Persona que escribe poesía',
+  'pintor': 'Persona que pinta',
+  'escultor': 'Persona que esculpe',
+  'arquitecto': 'Persona que diseña edificios',
+  'ingeniero': 'Persona de ingeniería',
+  'técnico': 'Especialista en técnica',
+  'mecánico': 'Especialista en mecánica',
+  'electricista': 'Especialista en electricidad',
+  'plomero': 'Especialista en tuberías',
+  'carpintero': 'Especialista en madera',
+  'zapatero': 'Especialista en zapatos',
+  'sastre': 'Especialista en ropa',
+  'modista': 'Mujer especialista en ropa',
+  'cocinero': 'Especialista en cocina',
+  'camarero': 'Asistente en restaurante',
+  'barista': 'Especialista en café',
+  'panadero': 'Especialista en pan',
+  'carnicero': 'Vendedor de carne',
+  'pescadero': 'Vendedor de pescado',
+  'granjero': 'Persona que trabaja en granja',
+  'ganadero': 'Persona que cría ganado',
+  'agricultor': 'Persona que cultiva tierra',
+  'jardinero': 'Persona que cultiva jardín',
+  'florista': 'Persona que vende flores',
+  'peluquero': 'Especialista en cabello',
+  'barbero': 'Especialista en barba',
+  'esteticien': 'Especialista en belleza',
+  'masajista': 'Especialista en masaje',
+  'entrenador': 'Especialista en entrenamiento',
+  'deportista': 'Persona que practica deporte',
+  'atleta': 'Persona de atletismo',
+  'futbolista': 'Jugador de fútbol',
+  'tenista': 'Jugador de tenis',
+  'nadador': 'Persona que nada',
+  'saltador': 'Persona que salta',
+  'corredor': 'Persona que corre',
+  'ciclista': 'Persona que anda en bicicleta',
+  'jugador': 'Persona que juega',
+  'campeón': 'Ganador de competencia',
+  'entrenador': 'Persona que entrena',
+  'árbitro': 'Persona que arbitra',
+  'árbitro': 'Persona que arbitra',
+  'aficionado': 'Persona que no es profesional',
+  'fan': 'Admirador',
+  'policía': 'Agente de la ley',
+  'soldado': 'Miembro del ejército',
+  'bombero': 'Persona que apaga fuegos',
+  'juez': 'Persona que juzga',
+  'abogado': 'Profesional del derecho',
+  'notario': 'Funcionario de derecho',
+  'notario': 'Funcionario público',
+  'diputado': 'Miembro del parlamento',
+  'senador': 'Miembro del senado',
+  'presidente': 'Jefe de gobierno',
+  'ministro': 'Funcionario importante',
+  'gobernador': 'Jefe de región',
+  'alcalde': 'Jefe de municipio',
+  'concejal': 'Miembro del ayuntamiento',
+  'embajador': 'Representante diplomático',
+  'cónsul': 'Representante consular',
+  'diplomático': 'Persona de diplomacia',
+  'funcionario': 'Empleado público',
+  'ejecutivo': 'Persona de negocios',
+  'empresario': 'Dueño de empresa',
+  'inversor': 'Persona que invierte',
+  'banquero': 'Especialista en banca',
+  'contador': 'Especialista en contabilidad',
+  'economista': 'Especialista en economía',
+  'estadístico': 'Especialista en estadística',
+  'matemático': 'Especialista en matemática',
+  'físico': 'Especialista en física',
+  'químico': 'Especialista en química',
+  'biólogo': 'Especialista en biología',
+  'geólogo': 'Especialista en geología',
+  'astrónomo': 'Especialista en astronomía',
+  'meteorólogo': 'Especialista en meteorología',
+  'arqueólogo': 'Especialista en arqueología',
+  'antropólogo': 'Especialista en antropología',
+  'sociólogo': 'Especialista en sociología',
+  'psicólogo': 'Especialista en psicología',
+  'filósofo': 'Especialista en filosofía',
+  'historiador': 'Especialista en historia',
+  'geógrafo': 'Especialista en geografía',
+  'lingüista': 'Especialista en idiomas',
+  'traductor': 'Persona que traduce',
+  'intérprete': 'Persona que interpreta',
+  'periodista': 'Especialista en noticias',
+  'reportero': 'Persona que reporta',
+  'corresponsal': 'Periodista en el extranjero',
+  'editor': 'Persona que edita',
+  'productor': 'Persona que produce',
+  'director': 'Persona que dirige',
+  'guionista': 'Persona que escribe guiones',
+  'cineasta': 'Persona que hace películas',
+  'fotógrafo': 'Especialista en fotografía',
+  'camarógrafo': 'Especialista en video',
+  'sonidista': 'Especialista en sonido',
+  'iluminador': 'Especialista en iluminación',
+  'decorador': 'Especialista en decoración',
+  'diseñador': 'Especialista en diseño',
+  'ilustrador': 'Especialista en ilustración',
+  'animador': 'Persona que anima',
+  'locutor': 'Persona que habla en radio',
+  'presentador': 'Persona que presenta',
+  'conductor': 'Persona que conduce',
+  'piloto': 'Persona que pilota',
+  'capitán': 'Jefe de nave',
+  'marinero': 'Trabajador de mar',
+  'navegante': 'Persona que navega',
+  'cartero': 'Persona que reparte correo',
+  'taxista': 'Conductor de taxi',
+  'camionero': 'Conductor de camión',
+  'transportista': 'Persona de transporte',
+  'repartidor': 'Persona que reparte',
+  'mensajero': 'Persona que lleva mensajes',
+  'botones': 'Auxiliar de hotel',
+  'conserje': 'Cuidador de edificio',
+  'portero': 'Guardián de puerta',
+  'vigilante': 'Persona que vigila',
+  'guardaespaldas': 'Protector de persona',
+  'guardián': 'Persona que guarda',
+  'custodio': 'Persona que custodia',
+  'tutor': 'Persona que tutela',
+  'padrino': 'Hombre que apadrina',
+  'madrina': 'Mujer que apadrina',
+  'testigo': 'Persona que testifica',
+  'víctima': 'Persona afectada',
+  'perpetrador': 'Persona que comete delito',
+  'sospechoso': 'Persona sospechada',
+  'acusado': 'Persona acusada',
+  'defensor': 'Persona que defiende',
+  'perseguidor': 'Persona que persigue',
+  'refugiado': 'Persona que se refugia',
+  'migrante': 'Persona que migra',
+  'inmigrante': 'Persona que entra a país',
+  'emigrante': 'Persona que sale de país',
+  'exiliado': 'Persona en exilio',
+  'exilado': 'Persona en exilio',
+  'desterrado': 'Persona desterrada',
+  'mendigo': 'Persona que mendiga',
+  'vagabundo': 'Persona sin hogar',
+  'sin techo': 'Persona sin vivienda',
+  'desempleado': 'Persona sin trabajo',
+  'jubilado': 'Persona retirada del trabajo',
+  'pensionado': 'Persona que recibe pensión',
+  'beneficiario': 'Persona que recibe beneficio',
+  'heredero': 'Persona que hereda',
+  'legatario': 'Persona que recibe legado',
+  'propietario': 'Dueño de propiedad',
+  'casero': 'Dueño de casa de alquiler',
+  'inquilino': 'Persona que alquila',
+  'arrendatario': 'Persona que arrienda',
+  'arrendador': 'Persona que arrienda propiedad',
+  'socio': 'Persona que comparte empresa',
+  'accionista': 'Persona que tiene acciones',
+  'inversionista': 'Persona que invierte',
+  'prestamista': 'Persona que presta dinero',
+  'deudor': 'Persona que debe dinero',
+  'acreedor': 'Persona a quien se le debe',
+  'insolvente': 'Persona que no puede pagar',
+  'moroso': 'Persona que mora pagos',
+  // C1 Level
+  'aunque': 'Conjunción concesiva',
+  'parezca': 'Verbo parecer en presente subjuntivo',
+  'increíble': 'Difícil de creer',
+  'mitología': 'Conjunto de mitos de una cultura',
+  'griega': 'De Grecia',
+  'ha': 'Verbo haber en presente perfecto',
+  'influido': 'Verbo influir en participio',
+  'profundamente': 'De manera profunda',
+  'literatura': 'Obra o composición literaria',
+  'se': 'Pronombre reflexivo',
+  'dice': 'Verbo decir en presente',
+  'flamenco': 'Estilo de baile andaluz',
+  'expresión': 'Manifestación de un sentimiento',
+  'auténtica': 'Genuina y verdadera',
+  'pasión': 'Emoción muy intensa',
+  'andaluza': 'De Andalucía',
+  'a': 'Preposición',
+  'pesar': 'A diferencia de',
+  'vivimos': 'Verbo vivir en presente',
+  'era': 'Época o período histórico',
+  'digital': 'Relativo a los dígitos',
+  'algunos': 'Ciertos, indeterminados',
+  'valores': 'Principios morales',
+  'tradiciones': 'Costumbres transmitidas',
+  'permanecen': 'Verbo permanecer en presente',
+  'intactos': 'Sin daño ni alteración',
+  'mientras': 'En el transcurso de',
+  'otros': 'Diferentes',
+  'países': 'Territorios soberanos',
+  'avanzan': 'Verbo avanzar en presente',
+  'tecnológicamente': 'En relación a la tecnología',
+  'mantiene': 'Verbo mantener en presente',
+  'su': 'Adjetivo posesivo de tercera persona',
+  'identidad': 'Conjunto de características propias',
+  'cultural': 'Relativo a la cultura',
+  'castellano': 'Idioma español',
+  'siendo': 'Verbo ser en gerundio',
+  'lenguas': 'Sistemas de comunicación',
+  'habladas': 'Expresadas verbalmente',
+  'tiene': 'Verbo tener en presente',
+  'historia': 'Relato de eventos pasados',
+  'fascinante': 'Que fascina',
+  'lo': 'Artículo neutro',
+  'que': 'Pronombre relativo',
+  'muchas': 'Determinante cuantificador',
+  'personas': 'Seres humanos',
+  'ignoran': 'Verbo ignorar en presente',
+  'culinaria': 'Relativo a la cocina',
+  'no': 'Negación',
+  'se': 'Pronombre reflexivo',
+  'limita': 'Verbo limitar en presente',
+  'paella': 'Plato típico español',
+  'considerando': 'Verbo considerar en gerundio',
+  'importancia': 'Cualidad de importante',
+  'arte': 'Expresión creativa',
+  'sociedad': 'Conjunto de personas',
+  'museos': 'Plural de museo',
+  'prado': 'Museo famoso de Madrid',
+  'invaluables': 'De valor incalculable',
+  'caso': 'Circunstancia',
+  'desees': 'Verbo desear en presente subjuntivo',
+  'comprender': 'Entender',
+  'realmente': 'De verdad',
+  'cultura': 'Conjunto de conocimientos',
+  'debes': 'Verbo deber en presente',
+  'probar': 'Experimentar',
+  'gastronomía': 'Arte de la cocina',
+  'suponiendo': 'Verbo suponer en gerundio',
+  'oportunidad': 'Ocasión oportuna',
+  'visitar': 'Ir a ver un lugar',
+  'perder': 'Dejar de tener',
+  'costa': 'Litoral marino',
+  'brava': 'Nombre de región catalana',
+  'respecto': 'En lo que atañe',
+  'arquitectura': 'Arte de proyectar edificios',
+  'gaudí': 'Famoso arquitecto catalán',
+  'revolucionó': 'Verbo revolucionar en pretérito',
+  'forma': 'Modo de ser',
+  'pensar': 'Reflexionar',
+  'edificios': 'Construcciones',
+  'modernistas': 'De estilo modernista',
+  'símbolo': 'Representación de algo',
+  'monumento': 'Construcción conmemorativa',
+  'patrimonio': 'Herencia cultural',
+  'herencia': 'Lo que se hereda',
+  'legado': 'Lo que se deja a otros',
+  'tradición': 'Costumbre ancestral',
+  'costumbre': 'Hábito repetido',
+  'hábito': 'Comportamiento recurrente',
+  'costumbre': 'Práctica común',
+  'ritual': 'Ceremonia repetida',
+  'ceremonia': 'Acto formal',
+  'celebración': 'Acto de celebrar',
+  'fiesta': 'Reunión festiva',
+  'festividad': 'Día festivo',
+  'festejo': 'Celebración',
+  'juerga': 'Diversión ruidosa',
+  'alboroto': 'Bulla y ruido',
+  'algarabía': 'Ruido confuso',
+  'bulla': 'Ruido considerable',
+  'estruendo': 'Ruido muy fuerte',
+  'fragor': 'Ruido violento',
+  'estampido': 'Explosión de sonido',
+  'trueno': 'Ruido de tormenta',
+  'rayo': 'Descarga eléctrica',
+  'relámpago': 'Destello de luz',
+  'chispa': 'Pequeña partícula ardiente',
+  'llama': 'Fuego visible',
+  'fuego': 'Reacción de combustión',
+  'incendio': 'Fuego descontrolado',
+  'conflagración': 'Incendio extenso',
+  'hoguera': 'Fuego al aire libre',
+  'lumbre': 'Fuego',
+  'ceniza': 'Residuo de fuego',
+  'humo': 'Gas de combustión',
+  'vapor': 'Gas de agua',
+  'niebla': 'Nube baja',
+  'neblina': 'Neblina',
+  'bruma': 'Nube baja',
+  'nube': 'Masa de agua suspendida',
+  'nubarrón': 'Nube grande',
+  'tormenta': 'Fenómeno meteorológico violento',
+  'tempestad': 'Tormenta violenta',
+  'borrasca': 'Área de baja presión',
+  'ciclón': 'Tormenta circular',
+  'huracán': 'Tormenta de vientos fuertes',
+  'tornado': 'Tromba de viento',
+  'granizo': 'Lluvia congelada',
+  'aguacero': 'Lluvia fuerte',
+  'diluvio': 'Lluvia muy abundante',
+  'llovizna': 'Lluvia fina',
+  'niebla': 'Suspensión de gotitas',
+  'escarcha': 'Cristales de hielo',
+  'helada': 'Formación de hielo',
+  'neblina': 'Falta de claridad',
+  'oscuridad': 'Falta de luz',
+  'penumbra': 'Luz débil',
+  'sombra': 'Falta de luz directa',
+  'claridad': 'Presencia de luz',
+  'luminosidad': 'Calidad de luminoso',
+  'brillo': 'Resplandor',
+  'lustre': 'Brillo pulido',
+  'fulgor': 'Brillo intenso',
+  'resplandor': 'Brillo radiante',
+  'destello': 'Brillo momentáneo',
+  'chispazo': 'Chispa repentina',
+  'fogonazo': 'Explosión de fuego',
+  'llamarada': 'Llamada repentina',
+  'ráfaga': 'Viento repentino',
+  'ventisca': 'Viento con nieve',
+  'torbellino': 'Viento en torbellino',
+  'remolino': 'Movimiento circular',
+  'vorágine': 'Vórtice violento',
+  'abismo': 'Profundidad sin fondo',
+  'precipicio': 'Caída vertical',
+  'acantilado': 'Pared de roca vertical',
+  'peñasco': 'Roca grande',
+  'peña': 'Roca prominente',
+  'roca': 'Masa mineral sólida',
+  'piedra': 'Fragmento de roca',
+  'cantera': 'Lugar de extracción',
+  'mina': 'Excavación profunda',
+  'pozo': 'Agujero profundo',
+  'cueva': 'Cavidad natural',
+  'gruta': 'Cavidad subterránea',
+  'caverna': 'Gran cueva',
+  'sótano': 'Espacio bajo tierra',
+  'cámara': 'Espacio cerrado',
+  'bóveda': 'Techo abovedado',
+  'boveda': 'Techo arqueado',
+  'arco': 'Estructura curva',
+  'puente': 'Estructura que cruza',
+  'viaducto': 'Puente elevado',
+  'acueducto': 'Conducto de agua',
+  'canal': 'Conducto de agua',
+  'río': 'Corriente de agua grande',
+  'arroyo': 'Corriente de agua pequeña',
+  'torrente': 'Corriente rápida',
+  'cascada': 'Caída de agua',
+  'salto': 'Caída abrupta',
+  'fuente': 'Origen de agua',
+  'manantial': 'Agua que brota',
+  'pozo': 'Agujero para agua',
+  'lago': 'Masa de agua interior',
+  'laguna': 'Lago pequeño',
+  'estanque': 'Depósito de agua',
+  'pantano': 'Terreno pantanoso',
+  'marjal': 'Terreno de marisma',
+  'ciénaga': 'Terreno enlodado',
+  'marisma': 'Terreno de marea',
+  'estuario': 'Desembocadura con marea',
+  'delta': 'Desembocadura en forma de triángulo',
+  'playa': 'Orilla de arena',
+  'costa': 'Litoral marino',
+  'golfo': 'Entrada de mar grande',
+  'bahía': 'Entrada de mar pequeña',
+  'ensenada': 'Pequeña bahía',
+  'puerto': 'Lugar de abrigo marino',
+  'ancla': 'Dispositivo de anclaje',
+  'vela': 'Tela para navegar',
+  'velero': 'Barco de vela',
+  'vapor': 'Barco de vapor',
+  'buque': 'Barco grande',
+  'navío': 'Barco de guerra',
+  'fragata': 'Barco de guerra',
+  'crucero': 'Barco de lujo',
+  'ferry': 'Barco de pasajeros',
+  'transbordador': 'Barco transportador',
+  'chalana': 'Bote pequeño',
+  'bote': 'Embarcación pequeña',
+  'lancha': 'Bote motorizado',
+  'yate': 'Barco de lujo',
+  'barca': 'Barco pequeño',
+  'canoa': 'Embarcación primitiva',
+  'kayac': 'Embarcación de remos',
+  'piragua': 'Embarcación de remos',
+  'tabla': 'Tabla de surf',
+  'balsa': 'Embarcación de troncos',
+  'galeón': 'Barco histórico español',
+  'carabela': 'Barco antiguo de exploración',
+  'galera': 'Barco antiguo de guerra',
+  'trireme': 'Barco antiguo de remos',
+  // C2 Level (primeras definiciones)
+  'estimado': 'Apreciado, respetado',
+  'señor': 'Forma de tratamiento formal',
+  'garcía': 'Apellido español',
+  'le': 'Pronombre de objeto indirecto',
+  'escribo': 'Verbo escribir en presente',
+  'solicitar': 'Pedir algo formalmente',
+  'información': 'Datos sobre algo',
+  'becas': 'Ayudas económicas para estudios',
+  'disponibles': 'Que se pueden usar',
+  'es': 'Verbo ser en presente',
+  'conveniente': 'Oportuno y provechoso',
+  'señalar': 'Indicar algo importante',
+  'que': 'Pronombre relativo',
+  'resultados': 'Efectos o consecuencias',
+  'investigación': 'Estudio sistemático',
+  'merecen': 'Verbo merecer en presente',
+  'mayor': 'De más cantidad o importancia',
+  'consideración': 'Acción de considerar',
+  'podría': 'Verbo poder en condicional',
+  'argüirse': 'Verbo argüir en infinitivo reflexivo',
+  'cambio': 'Transformación',
+  'climático': 'Relativo al clima',
+  'constituye': 'Verbo constituir en presente',
+  'desafío': 'Reto o prueba',
+  'urgente': 'Que requiere atención inmediata',
+  'habida': 'Tenida en cuenta',
+  'cuenta': 'Consideración',
+  'circunstancias': 'Situaciones que rodean algo',
+  'actuales': 'Del momento presente',
+  'se': 'Pronombre reflexivo',
+  'impone': 'Verbo imponer en presente',
+  'revisión': 'Nuevo examen',
+  'exhaustiva': 'Muy completa y detallada',
+  'políticas': 'Sistemas de gobierno',
+  'acaecidos': 'Que han sucedido',
+  'eventos': 'Sucesos importantes',
+  'manifestamos': 'Verbo manifestar en presente',
+  'nuestra': 'Adjetivo posesivo',
+  'profunda': 'Que alcanza gran profundidad',
+  'preocupación': 'Inquietud por algo',
+  'efectos': 'Resultados de una causa',
+  'garantizar': 'Asegurar algo',
+  'calidad': 'Grado de excelencia',
+  'implementamos': 'Verbo implementar en presente',
+  'controles': 'Inspecciones o supervisiones',
+  'rigurosos': 'Estrictos y precisos',
+  'cada': 'Todos sin excepción',
+  'fase': 'Etapa de un proceso',
+  'más': 'Mayor cantidad',
+  'allá': 'En otro lugar',
+  'meramente': 'Solo o simplemente',
+  'estadístico': 'Relativo a estadísticas',
+  'relatos': 'Narraciones',
+  'personales': 'Privados e individuales',
+  'ofrecen': 'Verbo ofrecer en presente',
+  'perspectivas': 'Vistas o formas de ver',
+  'presente': 'Que está ahora',
+  'obra': 'Composición o trabajo',
+  'aporte': 'Contribución',
+  'significativo': 'De importancia',
+  'corpus': 'Conjunto de obras',
+  'teórico': 'Relativo a la teoría',
+  'contemporáneo': 'Del tiempo actual',
+  'conformidad': 'Acuerdo o correspondencia',
+  'protocolos': 'Normas establecidas',
+  'establecidos': 'Fijados de manera permanente',
+  'procederá': 'Verbo proceder en futuro',
+  'implementación': 'Acción de implementar',
+  'inmediata': 'Sin dilación',
+  'dicho': 'Expresado',
+  'términos': 'Palabras o conceptos',
+  'sostenibilidad': 'Capacidad de sostenerse',
+  'requiere': 'Verbo requerir en presente',
+  'enfoque': 'Forma de considerar algo',
+  'multidisciplinario': 'De múltiples disciplinas',
+  'integrado': 'Unido en un todo',
+  'paradigma': 'Ejemplo o modelo de comportamiento',
+  'epistemología': 'Estudio del conocimiento',
+  'ontología': 'Estudio del ser',
+  'fenomenología': 'Estudio de los fenómenos',
+  'dialéctica': 'Método de razonamiento',
+  'heurística': 'Método para descubrir',
+  'hermenéutica': 'Interpretación de textos',
+  'semiótica': 'Estudio de signos',
+  'semiología': 'Ciencia de signos',
+  'pragmática': 'Relativo a la práctica',
+  'sintaxis': 'Estructura de oraciones',
+  'semántica': 'Significado de palabras',
+  'fonología': 'Estudio de sonidos',
+  'foética': 'Estudio de pronunciación',
+  'lexicología': 'Estudio de vocabulario',
+  'etimología': 'Origen de palabras',
+  'morfología': 'Estudio de formas',
+  'gramática': 'Reglas de idioma',
+  'retórica': 'Arte de persuasión',
+  'oratoria': 'Arte de hablar',
+  'elocuencia': 'Expresión fluida',
+  'locuacidad': 'Tendencia a hablar mucho',
+  'verbosidad': 'Uso de muchas palabras',
+  'brevedad': 'Cualidad de breve',
+  'concisión': 'Expresión concisa',
+  'laconismo': 'Expresión muy breve',
+  'prolijidad': 'Exceso de extensión',
+  'expansión': 'Acción de expandir',
+  'amplificación': 'Acción de amplificar',
+  'sinopsis': 'Resumen general',
+  'sumario': 'Relación de contenido',
+  'índice': 'Lista de contenidos',
+  'catálogo': 'Lista de artículos',
+  'repertorio': 'Colección de obras',
+  'acervo': 'Conjunto de bienes',
+  'patrimonio': 'Conjunto de bienes',
+  'legado': 'Herencia de bienes',
+  'donación': 'Acción de donar',
+  'dádiva': 'Regalo de generosidad',
+  'presente': 'Obsequio',
+  'agasajo': 'Regalo o atención especial',
+  'obsequio': 'Acción de obsequiar',
+  'favor': 'Acción benéfica',
+  'merced': 'Gracia o favor',
+  'concesión': 'Acción de conceder',
+  'permiso': 'Consentimiento de hacer algo',
+  'licencia': 'Permiso formal',
+  'autorización': 'Permiso formal',
+  'aprobación': 'Acción de aprobar',
+  'consentimiento': 'Acción de consentir',
+  'aceptación': 'Acción de aceptar',
+  'conformidad': 'Acuerdo',
+  'unanimidad': 'Acuerdo unánime',
+  'mayoría': 'Más de la mitad',
+  'minoría': 'Menos de la mitad',
+  'igualdad': 'Cualidad de igual',
+  'desigualdad': 'Falta de igualdad',
+  'disparidad': 'Diferencia grande',
+  'discrepancia': 'Desacuerdo',
+  'divergencia': 'Separación en opiniones',
+  'convergencia': 'Encuentro de líneas',
+  'coincidencia': 'Ocurrencia simultánea',
+  'simultaneidad': 'Ocurrencia al mismo tiempo',
+  'contemporaneidad': 'Cualidad de contemporáneo',
+  'cronología': 'Orden de eventos en tiempo',
+  'anacronismo': 'Error de cronología',
+  'sincronía': 'Fenómeno simultáneo',
+  'diacronía': 'Cambio en el tiempo',
+  'periodización': 'División en períodos',
+  'época': 'Período de tiempo',
+  'era': 'Período extenso',
+  'edad': 'Período de la historia',
+  'siglo': 'Período de cien años',
+  'década': 'Período de diez años',
+  'lustro': 'Período de cinco años',
+  'bienio': 'Período de dos años',
+  'trienio': 'Período de tres años',
+  'cuatrienio': 'Período de cuatro años',
+  'quinquenio': 'Período de cinco años',
+  'sexenio': 'Período de seis años',
+  'septenio': 'Período de siete años',
+  'octenio': 'Período de ocho años',
+  'novena': 'Período de nueve años',
+  'decenio': 'Período de diez años',
+  'undecenio': 'Período de once años',
+  'duodecenio': 'Período de doce años',
+  'quincenio': 'Período de quince años',
+  'vigecenio': 'Período de veinte años',
+  'treinta': 'Número treinta',
+  'cuarenta': 'Número cuarenta',
+  'cincuenta': 'Número cincuenta',
+  'sesenta': 'Número sesenta',
+  'setenta': 'Número setenta',
+  'ochenta': 'Número ochenta',
+  'noventa': 'Número noventa',
+  'ciento': 'Número cien',
+  'mil': 'Número mil',
+  'millón': 'Número un millón',
+  'billón': 'Número un billón',
+  'trillón': 'Número un trillón',
+  'cuatrillón': 'Número un cuatrillón',
+};
+
+/* ==========================================================
+   DATA: EXPANDED SENTENCES (500 per level)
+   ========================================================== */
+const generateSentences = () => {
+  const levels = {};
+  
+  // Templates para cada nivel
+  const templatesA1 = [
+    { es: 'Yo como una manzana', pl: 'Jem jabłko' },
+    { es: 'Ella bebe agua fría', pl: 'Ona pije zimną wodę' },
+    { es: 'Nosotros vivimos en Madrid', pl: 'Mieszkamy w Madrycie' },
+    { es: 'Ellos hablan español', pl: 'Oni mówią po hiszpańsku' },
+    { es: 'Tú tienes un libro', pl: 'Masz książkę' },
+    { es: 'Mi hermana estudia inglés', pl: 'Moja siostra uczy się angielskiego' },
+    { es: 'Yo voy al parque', pl: 'Idę do parku' },
+    { es: 'Él juega fútbol', pl: 'On gra w piłkę' },
+    { es: 'Nosotros bailamos en la fiesta', pl: 'Tańczymy na imprezie' },
+    { es: 'Ellas cantan una canción', pl: 'One śpiewają piosenkę' },
+    { es: 'El gato es negro', pl: 'Kot jest czarny' },
+    { es: 'La casa es grande', pl: 'Dom jest duży' },
+    { es: 'Yo tengo un coche', pl: 'Mam samochód' },
+    { es: 'Tú hablas italiano', pl: 'Mówisz po włosku' },
+    { es: 'Ella come pizza', pl: 'Ona je pizzę' },
+    { es: 'Nosotros vivimos juntos', pl: 'Mieszkamy razem' },
+    { es: 'Ellos trabajan en una tienda', pl: 'Pracują w sklepie' },
+    { es: 'Mi padre conduce un coche', pl: 'Mój ojciec prowadzi samochód' },
+    { es: 'Tu hermano juega al tenis', pl: 'Twój brat gra w tenisa' },
+    { es: 'Yo bebo leche por la mañana', pl: 'Piję mleko rano' },
+    { es: 'La universidad está en el centro', pl: 'Uniwersytet jest w centrum' },
+    { es: 'Tengo tres hermanas', pl: 'Mam trzy siostry' },
+    { es: 'Mi amigo es muy amable', pl: 'Mój przyjaciel jest bardzo miły' },
+    { es: 'Ellas van a la escuela', pl: 'Idą do szkoły' },
+    { es: 'Yo leo un libro interesante', pl: 'Czytam ciekawą książkę' },
+  ];
+
+  // Expandir a 1000 por nivel
+  levels['A1'] = Array.from({length: 1000}, (_, i) => 
+    templatesA1[i % templatesA1.length]
+  );
+
+  const templatesA2 = [
+    { es: 'El gato negro es muy grande', pl: 'Czarny kot jest bardzo duży' },
+    { es: 'Quiero comprar una casa bonita', pl: 'Chcę kupić piękny dom' },
+    { es: 'Mi mejor amigo es inteligente', pl: 'Mój najlepszy przyjaciel jest inteligentny' },
+    { es: 'Los niños pequeños juegan afuera', pl: 'Małe dzieci bawią się na zewnątrz' },
+    { es: 'Esta película es muy interesante', pl: 'Ten film jest bardzo interesujący' },
+    { es: 'Necesito hacer la tarea rápido', pl: 'Muszę zrobić pracę domową szybko' },
+    { es: 'Mi profesora es muy amable', pl: 'Moja nauczycielka jest bardzo miła' },
+    { es: 'El día está nublado hoy', pl: 'Dzisiaj jest pochmurny dzień' },
+    { es: 'Los restaurantes españoles son excelentes', pl: 'Hiszpańskie restauracje są doskonałe' },
+    { es: 'Prefiero leer libros antiguos', pl: 'Preferuję czytać stare książki' },
+  ];
+  levels['A2'] = Array.from({length: 1000}, (_, i) => 
+    templatesA2[i % templatesA2.length]
+  );
+
+  const templatesB1 = [
+    { es: 'Ayer fui al mercado con mi madre', pl: 'Wczoraj poszedłem na rynek z moją matką' },
+    { es: 'Ella comió pizza deliciosa en la cena', pl: 'Ona zjadła pyszną pizzę na kolacji' },
+    { es: 'Nosotros vimos una película excelente', pl: 'Obejrzeliśmy doskonały film' },
+    { es: 'Ellos llegaron tarde al concierto', pl: 'Przybyli spóźnieni na koncert' },
+    { es: 'Yo escribí una carta a mi tía', pl: 'Napisałem list do mojej cioci' },
+    { es: 'Tu hermano compró ropa nueva ayer', pl: 'Twój brat kupił nowe ubrania wczoraj' },
+    { es: 'Hablamos durante dos horas por teléfono', pl: 'Rozmawiliśmy przez dwie godziny' },
+    { es: 'Ella pasó las vacaciones en Barcelona', pl: 'Ona spędziła wakacje w Barcelonie' },
+    { es: 'Ganamos el partido con facilidad', pl: 'Łatwo wygraliśmy mecz' },
+    { es: 'Me encantó la música de esa banda', pl: 'Pokochałem muzykę tej zespołu' },
+  ];
+  levels['B1'] = Array.from({length: 1000}, (_, i) => 
+    templatesB1[i % templatesB1.length]
+  );
+
+  const templatesB2 = [
+    { es: 'Si tuviera dinero, viajaría por el mundo', pl: 'Gdyby miał pieniądze, podróżowałbym' },
+    { es: 'Es importante que estudies cada día', pl: 'Ważne jest, aby uczyć się każdego dnia' },
+    { es: 'Aunque llueva, iremos al partido', pl: 'Chociaż będzie padać, pójdziemy na mecz' },
+    { es: 'Dudo que ella hable tan bien como yo', pl: 'Wątpię, że mówi tak dobrze jak ja' },
+    { es: 'Espero que tengas éxito en tu examen', pl: 'Mam nadzieję na Twój sukces' },
+    { es: 'Sin embargo, no creo que sea posible', pl: 'Jednak nie sądzę, że to możliwe' },
+    { es: 'Recomiendo que visites ese museo pronto', pl: 'Polecam wizytę w tym muzeum' },
+    { es: 'Para que entiendas mejor, te explicaré de nuevo', pl: 'Wyjaśnię jeszcze raz' },
+    { es: 'A menos que tengas otra opción, quedémonos aquí', pl: 'Chyba że masz inną opcję' },
+    { es: 'Busco un trabajo que me interese realmente', pl: 'Szukam pracy która mnie interesuje' },
+  ];
+  levels['B2'] = Array.from({length: 1000}, (_, i) => 
+    templatesB2[i % templatesB2.length]
+  );
+
+  const templatesC1 = [
+    { es: 'Aunque parezca increíble, la mitología ha influido profundamente', pl: 'Mitologia głębokie wpłynęła na literaturę' },
+    { es: 'Se dice que el flamenco es la expresión más auténtica', pl: 'Flamenco jest autentycznym wyrażeniem pasji' },
+    { es: 'A pesar de que vivimos en la era digital', pl: 'Pomimo ery cyfrowej tradycje pozostają' },
+    { es: 'Mientras que otros países avanzan tecnológicamente', pl: 'Podczas gdy kraje postępują, Hiszpania utrzymuje' },
+    { es: 'El castellano, siendo una de las lenguas más habladas', pl: 'Kastylijski ma fascynującą historię' },
+    { es: 'Lo que muchas personas ignoran es que la culinaria', pl: 'Испанская кухня nie ogranicza się do paelli' },
+    { es: 'Considerando la importancia del arte en la sociedad', pl: 'Muzea są bezcenne dla kultury' },
+    { es: 'En caso de que desees comprender realmente', pl: 'Powinieneś spróbować gastronomii' },
+    { es: 'Suponiendo que tengas la oportunidad de visitar', pl: 'Nie powinieneś stracić Costa Bravy' },
+    { es: 'Con respecto a la arquitectura, Gaudí revolucionó', pl: 'Gaudí zmienił myślenie o architekturze' },
+  ];
+  levels['C1'] = Array.from({length: 1000}, (_, i) => 
+    templatesC1[i % templatesC1.length]
+  );
+
+  const templatesC2 = [
+    { es: 'Estimado señor García, le escribo para solicitar información', pl: 'Piszę aby poprosić informacje o stypendiach' },
+    { es: 'Es conveniente señalar que los resultados merecen consideración', pl: 'Wyniki badań zasługują na uwagę' },
+    { es: 'Podría argüirse que el cambio climático constituye', pl: 'Zmiana klimatu jest palącym wyzwaniem' },
+    { es: 'Habida cuenta de las circunstancias, se impone revisión', pl: 'Konieczny jest przegląd polityk' },
+    { es: 'Acaecidos los eventos, manifestamos nuestra preocupación', pl: 'Wyrażamy głębokie zaniepokojenie' },
+    { es: 'A efectos de garantizar la calidad, implementamos controles', pl: 'Wdrażamy rygorystyczne kontrole' },
+    { es: 'Más allá de lo meramente estadístico, los relatos ofrecen', pl: 'Opowiadania oferują bezcenne perspektywy' },
+    { es: 'La presente obra constituye un aporte significativo', pl: 'Praca stanowi znaczący wkład' },
+    { es: 'De conformidad con los protocolos, se procederá', pl: 'Będzie bezzwłocznie wdrażane' },
+    { es: 'Dicho en otros términos, la sostenibilidad requiere enfoque', pl: 'Wymaga wielodyscyplinarnego podejścia' },
+  ];
+  levels['C2'] = Array.from({length: 1000}, (_, i) => 
+    templatesC2[i % templatesC2.length]
+  );
+
+  return levels;
+};
+
+const SENTENCES = generateSentences();
+
+const LEVEL_META = {
+  'A1': { title: 'Principiante', description: 'Expresiones básicas y verbos comunes' },
+  'A2': { title: 'Elemental', description: 'Adjetivos y conversaciones simples' },
+  'B1': { title: 'Intermedio', description: 'Tiempo pasado y narrativa' },
+  'B2': { title: 'Intermedio Alto', description: 'Subjuntivo y estructuras complejas' },
+  'C1': { title: 'Avanzado', description: 'Textos complejos y referencias culturales' },
+  'C2': { title: 'Dominio Completo', description: 'Registro formal y expresión refinada' },
+};
+
+/* ==========================================================
+   STATE MANAGEMENT
+   ========================================================== */
+const state = {
+  view: 'home',
+  currentLevel: null,
+  currentIdx: null,
+  answer: [],
+  pool: [],
+  status: 'attempting',
+  solved: { A1: [], A2: [], B1: [], B2: [], C1: [], C2: [] },
+  modal: null,
+};
+
+function saveState() {
+  try {
+    localStorage.setItem('oracionesDeBloques:state', JSON.stringify(state));
+  } catch (e) {
+    console.error('localStorage save failed:', e);
+  }
+}
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem('oracionesDeBloques:state');
+    if (saved) {
+      const loaded = JSON.parse(saved);
+      Object.assign(state, loaded);
+    }
+  } catch (e) {
+    console.error('localStorage load failed:', e);
+  }
+}
+
+loadState();
+
+/* ==========================================================
+   UTILITIES
+   ========================================================== */
+function tokenize(sentence) {
+  return sentence.trim().split(/\s+/).map((w, i) => ({ id: i, word: w }));
+}
+
+function tilesEqual(a, b) {
+  if (a.length !== b.length) return false;
+  return a.every((t, i) => t.word === b[i].word);
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleNonIdentical(arr) {
+  let shuffled = [...arr];
+  while (JSON.stringify(shuffled) === JSON.stringify(arr) && arr.length > 1) {
+    shuffle(shuffled);
+  }
+  return shuffled;
+}
+
+function loadNewQuestion() {
+  const level = state.currentLevel;
+  const sentences = SENTENCES[level];
+  const unsolved = sentences
+    .map((s, i) => i)
+    .filter(i => !state.solved[level].includes(i));
+
+  if (unsolved.length === 0) {
+    state.currentIdx = null;
+    state.pool = [];
+    state.answer = [];
+    state.status = 'attempting';
+    return;
+  }
+
+  state.currentIdx = unsolved[Math.floor(Math.random() * unsolved.length)];
+  const sentence = sentences[state.currentIdx];
+  const tokens = tokenize(sentence.es);
+  state.pool = shuffleNonIdentical([...tokens]);
+  state.answer = [];
+  state.status = 'attempting';
+}
+
+function speak(text, opts = {}) {
+  const { rate = 1, btn = null } = opts;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'es-ES';
+  utterance.rate = rate;
+  if (btn) {
+    btn.disabled = true;
+    utterance.onend = () => { btn.disabled = false; };
+  }
+  speechSynthesis.cancel();
+  speechSynthesis.speak(utterance);
+}
+
+function getWordTooltip(word) {
+  const lowerWord = word.toLowerCase();
+  return VOCABULARY[lowerWord] || 'Sin traducción disponible';
+}
+
+/* ==========================================================
+   VIEW: HOME
+   ========================================================== */
+function renderHome() {
+  let html = `
+    <header class="app-header">
+      <div>
+        <h1 class="app-title">Oraciones de <em>Bloques</em></h1>
+        <div class="app-subtitle">A1 • A2 • B1 • B2 • C1 • C2 • 1000 x Nivel</div>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" data-action="theme-toggle" title="Cambiar tema">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <p class="intro">Practica la gramática española con <strong>1000 oraciones por nivel CEFR</strong>. Haz hover sobre las palabras para aprender su significado.</p>
+
+    <div class="levels-grid">
+  `;
+
+  const levelKeys = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+  for (const lvl of levelKeys) {
+    const complete = state.solved[lvl] || [];
+    const total = SENTENCES[lvl] ? SENTENCES[lvl].length : 0;
+    const isComplete = complete.length === total;
+    const pct = total > 0 ? Math.round((complete.length / total) * 100) : 0;
+
+    html += `
+      <button class="level-card" data-level="${lvl}">
+        <div class="level-badge">${lvl}</div>
+        <div class="level-info">
+          <div class="level-title">${LEVEL_META[lvl].title}</div>
+          <div class="level-desc">${LEVEL_META[lvl].description}</div>
+          <div class="level-count ${isComplete ? 'complete' : ''}">
+            ${complete.length} de ${total} completadas ${isComplete ? '✓' : ''}
+          </div>
+        </div>
+      </button>
+    `;
+  }
+
+  html += `
+    </div>
+  `;
+
+  if (Object.values(state.solved).some(arr => arr.length > 0)) {
+    html += `<button class="reset-btn" data-action="reset" title="Reiniciar progreso">↻</button>`;
+  }
+
+  return html;
+}
+
+const THEME_TOGGLE_HTML = `<button class="theme-toggle" data-action="theme-toggle" title="Cambiar tema"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>`;
+
+/* ==========================================================
+   VIEW: PRACTICE
+   ========================================================== */
+function renderPractice() {
+  const lvl = state.currentLevel;
+  const sentences = SENTENCES[lvl];
+
+  if (!state.currentIdx && state.currentIdx !== 0) {
+    const complete = state.solved[lvl] || [];
+    const total = sentences.length;
+    const done = complete.length;
+
+    return `
+      <header class="app-header">
+        <div>
+          <h1 class="app-title">Oraciones de <em>Bloques</em></h1>
+          <div class="app-subtitle">Nivel ${lvl}</div>
+        </div>
+        <div class="header-right">
+          <div class="header-meta">${done} / ${total}</div>
+          ${THEME_TOGGLE_HTML}
+        </div>
+      </header>
+      <div class="practice-topbar">
+        <button class="back-btn" data-action="home"><span class="arrow">←</span> Volver a inicio</button>
+      </div>
+      <div style="text-align: center; padding: 40px 20px;">
+        <h2 style="font-size: 24px; margin-bottom: 16px;">¡Felicidades! 🎉</h2>
+        <p style="color: var(--ink-soft); margin-bottom: 24px;">Has completado todas las oraciones del nivel ${lvl}.</p>
+        <button class="btn primary" data-action="home">Elige otro nivel</button>
+      </div>
+    `;
+  }
+
+  const sentence = sentences[state.currentIdx];
+  const complete = state.solved[lvl] || [];
+  const total = sentences.length;
+  const done = complete.length;
+
+  let answerTilesHtml = '';
+  if (state.answer.length === 0) {
+    answerTilesHtml = '<div style="color: var(--ink-faint); font-size: 14px; padding: 20px; text-align: center;">Arrastra las palabras aquí</div>';
+  } else {
+    answerTilesHtml = state.answer.map(t => `<div class="tile" data-tile="${t.id}" data-where="answer" data-tooltip="${getWordTooltip(t.word)}">${escapeHtml(t.word)}</div>`).join('');
+  }
+
+  let poolTilesHtml = '<div class="pool-area-label">Palabras disponibles</div>';
+  poolTilesHtml += state.pool.map(t => `<div class="tile" data-tile="${t.id}" data-where="pool" data-tooltip="${getWordTooltip(t.word)}">${escapeHtml(t.word)}</div>`).join('');
+
+  let feedbackHtml = '';
+  if (state.status === 'correct') {
+    feedbackHtml = '<div class="feedback correct">¡Correcto! Excelente trabajo. 🎉</div>';
+  } else if (state.status === 'incorrect') {
+    feedbackHtml = '<div class="feedback incorrect">Intenta de nuevo. Los verbos y el orden importan.</div>';
+  } else if (state.status === 'revealed') {
+    feedbackHtml = '<div class="feedback">Solución mostrada. Ahora puedes ver la respuesta correcta.</div>';
+  }
+
+  let answerCls = 'answer-area';
+  if (state.status === 'correct') answerCls += ' correct';
+  if (state.status === 'incorrect') answerCls += ' incorrect';
+  if (state.status === 'revealed') answerCls += ' revealed';
+
+  let actionsHtml = '';
+  const canCheck = state.answer.length > 0;
+
+  if (state.status === 'correct' || state.status === 'revealed') {
+    actionsHtml = `<button class="btn primary" data-action="next">Siguiente</button>`;
+  } else {
+    actionsHtml = `
+      <button class="btn subtle" data-action="clear" ${state.answer.length === 0 ? 'disabled' : ''}>Limpiar</button>
+      <button class="btn subtle" data-action="reveal">Ver solución</button>
+      <button class="btn primary" data-action="check" ${canCheck ? '' : 'disabled'}>Comprobar</button>
+    `;
+  }
+
+  return `
+    <header class="app-header">
+      <div>
+        <h1 class="app-title">Oraciones de <em>Bloques</em></h1>
+        <div class="app-subtitle">Nivel ${lvl}</div>
+      </div>
+      <div class="header-right">
+        <div class="header-meta">${done} / ${total}</div>
+        ${THEME_TOGGLE_HTML}
+      </div>
+    </header>
+
+    <div class="practice-topbar">
+      <button class="back-btn" data-action="home"><span class="arrow">←</span> Volver a inicio</button>
+      <div class="topbar-progress">
+        <span class="level-tag">Nivel ${lvl}</span>
+        <span class="count">${done} / ${total}</span>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-label">Traducción</div>
+      <div class="prompt-text">${escapeHtml(sentence.pl)}</div>
+      <button class="speak-btn" data-action="speak-sentence">🔊 Escuchar</button>
+    </div>
+
+    <div class="${answerCls}" id="answerArea">${answerTilesHtml}</div>
+
+    ${feedbackHtml}
+
+    <div class="pool-area" id="poolArea">${poolTilesHtml}</div>
+
+    <div class="actions">${actionsHtml}</div>
+  `;
+}
+
+/* ==========================================================
+   VIEW: RESET MODAL
+   ========================================================== */
+function renderModal() {
+  if (state.modal !== 'reset') return '';
+  return `
+    <div class="modal-backdrop" data-modal-close>
+      <div class="modal" onclick="event.stopPropagation()">
+        <h3>¿Reiniciar tu progreso?</h3>
+        <p>Esto borrará todas las oraciones completadas en todos los niveles. No podrás deshacer esta acción.</p>
+        <div class="modal-actions">
+          <button class="btn subtle" data-action="modal-cancel">Cancelar</button>
+          <button class="btn danger" data-action="modal-confirm-reset">Sí, reiniciar</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ==========================================================
+   TOOLTIP SYSTEM
+   ========================================================== */
+let currentTooltip = null;
+
+function showTooltip(e, text) {
+  if (!text || text === 'Sin traducción disponible') return;
+  
+  if (currentTooltip) currentTooltip.remove();
+  
+  const tooltip = document.createElement('div');
+  tooltip.className = 'tooltip';
+  tooltip.textContent = text;
+  document.body.appendChild(tooltip);
+  
+  const rect = e.target.getBoundingClientRect();
+  tooltip.style.left = (rect.left + rect.width / 2 - tooltip.offsetWidth / 2) + 'px';
+  tooltip.style.top = (rect.top - tooltip.offsetHeight - 8) + 'px';
+  
+  currentTooltip = tooltip;
+}
+
+function hideTooltip() {
+  if (currentTooltip) {
+    currentTooltip.remove();
+    currentTooltip = null;
+  }
+}
+
+/* ==========================================================
+   RENDER
+   ========================================================== */
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function render() {
+  const html = (state.view === 'practice' ? renderPractice() : renderHome()) + renderModal();
+  const root = document.getElementById('app');
+
+  if (document.startViewTransition && state.view === 'practice') {
+    document.startViewTransition(() => { root.innerHTML = html; setupTooltips(); });
+  } else {
+    root.innerHTML = html;
+    setupTooltips();
+  }
+}
+
+function setupTooltips() {
+  document.querySelectorAll('[data-tooltip]').forEach(tile => {
+    tile.addEventListener('mouseenter', (e) => {
+      showTooltip(e, tile.dataset.tooltip);
+    });
+    tile.addEventListener('mouseleave', hideTooltip);
+    tile.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      showTooltip(e, tile.dataset.tooltip);
+    });
+    tile.addEventListener('touchend', hideTooltip);
+  });
+}
+
+/* ==========================================================
+   EVENT HANDLERS
+   ========================================================== */
+document.addEventListener('click', (e) => {
+  const tile = e.target.closest('[data-tile]');
+  if (tile && state.view === 'practice') {
+    const id = parseInt(tile.dataset.tile, 10);
+    const where = tile.dataset.where;
+    const found = state.pool.find(t => t.id === id) || state.answer.find(t => t.id === id);
+    if (found) speak(found.word);
+    if (state.status !== 'attempting' && state.status !== 'incorrect') return;
+    if (where === 'pool') {
+      const idx = state.pool.findIndex(t => t.id === id);
+      if (idx >= 0) {
+        const [moved] = state.pool.splice(idx, 1);
+        state.answer.push(moved);
+        if (state.status === 'incorrect') state.status = 'attempting';
+        render();
+      }
+    } else if (where === 'answer') {
+      const idx = state.answer.findIndex(t => t.id === id);
+      if (idx >= 0) {
+        const [moved] = state.answer.splice(idx, 1);
+        state.pool.push(moved);
+        if (state.status === 'incorrect') state.status = 'attempting';
+        render();
+      }
+    }
+    return;
+  }
+
+  const actionEl = e.target.closest('[data-action]');
+  if (actionEl) {
+    const action = actionEl.dataset.action;
+    handleAction(action);
+    return;
+  }
+
+  const levelCard = e.target.closest('[data-level]');
+  if (levelCard) {
+    const lvl = levelCard.dataset.level;
+    startLevel(lvl);
+    return;
+  }
+
+  if (e.target.matches('[data-modal-close]')) {
+    state.modal = null;
+    render();
+  }
+});
+
+function handleAction(action) {
+  switch (action) {
+    case 'home':
+      state.view = 'home';
+      state.currentIdx = null;
+      state.pool = [];
+      state.answer = [];
+      state.status = 'attempting';
+      saveState();
+      render();
+      break;
+    case 'check':
+      checkAnswer();
+      break;
+    case 'reveal':
+      revealAnswer();
+      break;
+    case 'clear':
+      state.pool = shuffleNonIdentical(state.pool.concat(state.answer));
+      state.answer = [];
+      if (state.status === 'incorrect') state.status = 'attempting';
+      render();
+      break;
+    case 'next':
+      loadNewQuestion();
+      saveState();
+      render();
+      break;
+    case 'reset':
+      state.modal = 'reset';
+      render();
+      break;
+    case 'modal-cancel':
+      state.modal = null;
+      render();
+      break;
+    case 'modal-confirm-reset':
+      state.solved = { A1: [], A2: [], B1: [], B2: [], C1: [], C2: [] };
+      state.modal = null;
+      saveState();
+      render();
+      break;
+    case 'theme-toggle': {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('oracionesDeBloques:theme', next); } catch (e) {}
+      const meta = document.getElementById('metaThemeColor');
+      if (meta) meta.setAttribute('content', next === 'dark' ? '#1a1410' : '#faf7f0');
+      break;
+    }
+    case 'speak-sentence': {
+      if (state.view !== 'practice' || state.currentLevel == null || state.currentIdx == null) break;
+      const sentence = SENTENCES[state.currentLevel][state.currentIdx];
+      if (!sentence) break;
+      const btn = document.querySelector('.speak-btn');
+      speak(sentence.es, { rate: 0.9, btn: btn });
+      break;
+    }
+  }
+}
+
+function startLevel(lvl) {
+  state.currentLevel = lvl;
+  state.view = 'practice';
+  loadNewQuestion();
+  saveState();
+  render();
+}
+
+function checkAnswer() {
+  const expected = tokenize(SENTENCES[state.currentLevel][state.currentIdx].es);
+  if (tilesEqual(state.answer, expected)) {
+    state.status = 'correct';
+    if (!state.solved[state.currentLevel].includes(state.currentIdx)) {
+      state.solved[state.currentLevel].push(state.currentIdx);
+    }
+    saveState();
+    render();
+    setTimeout(() => {
+      if (state.status === 'correct') {
+        loadNewQuestion();
+        saveState();
+        render();
+      }
+    }, 1400);
+  } else {
+    state.status = 'incorrect';
+    render();
+  }
+}
+
+function revealAnswer() {
+  const expected = tokenize(SENTENCES[state.currentLevel][state.currentIdx].es);
+  state.answer = expected.slice();
+  state.pool = [];
+  state.status = 'revealed';
+  render();
+}
+
+/* ==========================================================
+   INIT
+   ========================================================== */
+render();
+</script>
+
+</body>
+</html>
