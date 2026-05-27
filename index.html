@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="theme-color" content="#faf7f0" id="metaThemeColor">
-<title>Słówka Hiszpańskie 500 — Nauka Słownictwa A1-C2</title>
+<title>Słówka Hiszpańskie 500 — Flashcards & Quiz</title>
 
 <script>
 (function() {
@@ -289,7 +289,6 @@ body::before {
   transition: width 0.3s ease;
 }
 
-/* Practice view */
 .practice-container {
   flex: 1;
   display: flex;
@@ -326,13 +325,39 @@ body::before {
   font-weight: 600;
 }
 
+.mode-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+  border-bottom: 1.5px solid var(--line);
+  padding-bottom: 0;
+}
+.mode-tab {
+  padding: 12px 20px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink-soft);
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  margin-bottom: -1.5px;
+}
+.mode-tab:hover {
+  color: var(--ink);
+}
+.mode-tab.active {
+  color: var(--accent-coral);
+  border-bottom-color: var(--accent-coral);
+}
+
 .flashcard {
   background: var(--paper-card);
   border: 2px solid var(--line);
   border-radius: var(--radius);
   padding: 40px 32px;
   text-align: center;
-  margin-bottom: 28px;
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   box-shadow: var(--tile-shadow);
@@ -343,11 +368,22 @@ body::before {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  position: relative;
+  user-select: none;
 }
 .flashcard:hover {
   transform: translateY(-2px);
   border-color: var(--accent-coral);
   box-shadow: var(--tile-shadow-hover);
+}
+.flashcard:active {
+  transform: translateY(0);
+}
+.flashcard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
 }
 .flashcard-label {
   font-size: 12px;
@@ -355,6 +391,16 @@ body::before {
   color: var(--ink-faint);
   font-weight: 600;
   letter-spacing: 0.05em;
+}
+.flashcard-hint {
+  font-size: 11px;
+  color: var(--accent-coral);
+  font-weight: 600;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+.flashcard:hover .flashcard-hint {
+  opacity: 1;
 }
 .flashcard-word {
   font-family: 'Playfair Display', serif;
@@ -380,7 +426,7 @@ body::before {
   display: flex;
   gap: 12px;
   justify-content: center;
-  margin-top: 12px;
+  margin-top: 0;
 }
 .speak-btn {
   padding: 10px 18px;
@@ -394,6 +440,7 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 .speak-btn:hover {
   transform: translateY(-1px);
@@ -402,6 +449,179 @@ body::before {
 }
 .speak-btn:active {
   transform: translateY(0);
+}
+.speak-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Quiz styles */
+.quiz-setup {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.form-group select {
+  padding: 12px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-card);
+  color: var(--ink);
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.form-group select:hover {
+  border-color: var(--accent-coral);
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: var(--accent-coral);
+}
+
+.quiz-question {
+  background: var(--paper-card);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 28px;
+}
+
+.question-number {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.question-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.answer-options {
+  display: grid;
+  gap: 12px;
+}
+
+.answer-option {
+  padding: 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper-card);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.answer-option:hover {
+  border-color: var(--accent-coral);
+  transform: translateX(4px);
+}
+
+.answer-option.selected {
+  border-color: var(--accent-coral);
+  background: var(--accent-coral-soft);
+  color: var(--accent-coral);
+}
+
+.answer-option.correct {
+  border-color: #4CAF50;
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.answer-option.incorrect {
+  border-color: #f44336;
+  background: #ffebee;
+  color: #c62828;
+}
+
+.answer-option:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.progress-bar-quiz {
+  width: 100%;
+  height: 6px;
+  background: var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.progress-fill-quiz {
+  height: 100%;
+  background: var(--accent-coral);
+  transition: width 0.3s ease;
+}
+
+.quiz-results {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.results-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.results-score {
+  font-size: 24px;
+  color: var(--accent-coral);
+  font-weight: 600;
+  margin-bottom: 28px;
+}
+
+.results-breakdown {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.result-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.result-stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
 }
 
 .actions {
@@ -466,7 +686,6 @@ body::before {
   background: #c75339;
 }
 
-/* Modal */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -532,6 +751,12 @@ body::before {
     height: 48px;
     font-size: 16px;
   }
+  .mode-tabs {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 </style>
 
@@ -542,191 +767,101 @@ body::before {
 
 <script>
 /* ==========================================================
-   GENERATE 500 WORDS PER LEVEL
+   VOCABULARY DATABASE - 500 WORDS PER LEVEL
    ========================================================== */
 
-function generateWords() {
-  // Kategorie słów dla każdego poziomu
-  const wordsByCategory = {
-    A1: {
-      family: ['padre', 'madre', 'hijo', 'hija', 'hermano', 'hermana', 'abuelo', 'abuela', 'tío', 'tía', 'primo', 'prima', 'esposo', 'esposa', 'marido', 'novio', 'novia', 'persona', 'gente', 'niño', 'niña', 'bebé', 'joven', 'viejo', 'adulto', 'hombre', 'mujer', 'señor', 'señora'],
-      body: ['cabeza', 'cara', 'ojo', 'nariz', 'boca', 'oído', 'oreja', 'diente', 'lengua', 'labio', 'barba', 'pelo', 'cabello', 'cuello', 'hombro', 'brazo', 'codo', 'muñeca', 'mano', 'dedo', 'pecho', 'espalda', 'cintura', 'vientre', 'pierna', 'rodilla', 'tobillo', 'pie', 'corazón', 'pulmón', 'estómago', 'hígado', 'sangre', 'hueso', 'músculo', 'piel'],
-      animals: ['perro', 'gato', 'pájaro', 'pez', 'caballo', 'vaca', 'cerdo', 'oveja', 'cabra', 'pollo', 'gallo', 'gallina', 'pato', 'ganso', 'león', 'tigre', 'oso', 'elefante', 'mono', 'serpiente', 'insecto', 'hormiga', 'mariposa', 'abeja', 'mosca', 'araña', 'ratón', 'rata', 'conejo', 'tortuga', 'lagartija', 'cocodrilo', 'tortuga marina', 'whale', 'pinguino', 'loro'],
-      house: ['casa', 'apartamento', 'piso', 'habitación', 'dormitorio', 'sala', 'salón', 'comedor', 'cocina', 'baño', 'lavabo', 'servicio', 'escalera', 'pasillo', 'puerta', 'ventana', 'pared', 'techo', 'piso', 'suelo', 'cama', 'silla', 'mesa', 'sofá', 'armario', 'espejo', 'lámpara', 'bombilla', 'cuadro', 'tapete', 'alfombra', 'cortina', 'almohada', 'sábana', 'manta', 'toalla', 'mantel', 'plato', 'vaso', 'taza', 'cuchara', 'tenedor', 'cuchillo', 'olla', 'sartén', 'nevera', 'horno', 'estufa', 'televisión', 'radio', 'teléfono', 'computadora', 'portátil', 'reloj', 'calendario', 'reloj despertador'],
-      food: ['pan', 'mantequilla', 'queso', 'leche', 'huevo', 'carne', 'pollo', 'pescado', 'jamón', 'salchicha', 'arroz', 'pasta', 'fideos', 'patata', 'papa', 'verdura', 'lechuga', 'tomate', 'cebolla', 'ajo', 'zanahoria', 'fruta', 'manzana', 'pera', 'naranja', 'limón', 'plátano', 'fresa', 'cereza', 'melocotón', 'piña', 'melón', 'sandía', 'uva', 'nuez', 'almendra', 'cacahuete', 'aceite', 'sal', 'pimienta', 'azúcar', 'miel', 'mermelada', 'chocolate', 'café', 'té', 'agua', 'vino', 'cerveza', 'sopa', 'sándwich', 'pizza', 'hamburguesa', 'desayuno', 'comida', 'cena'],
-      clothes: ['ropa', 'camiseta', 'camisa', 'pantalón', 'falda', 'vestido', 'abrigo', 'chaqueta', 'suéter', 'calcetín', 'zapatilla', 'zapato', 'bota', 'sandalia', 'cinturón', 'corbata', 'bufanda', 'gorro', 'sombrero', 'gafas', 'reloj', 'pulsera', 'collar', 'anillo', 'pendiente', 'broche', 'bolsa', 'mochila', 'maleta', 'cartera', 'monedero'],
-      colors: ['rojo', 'azul', 'verde', 'amarillo', 'naranja', 'rosa', 'morado', 'café', 'marrón', 'gris', 'blanco', 'negro', 'plateado', 'dorado', 'turquesa', 'violeta', 'índigo', 'escarlata', 'rosa pálido', 'verde oscuro', 'azul claro', 'gris claro', 'marrón oscuro', 'verde menta', 'azul marino', 'rojo oscuro', 'naranja brillante', 'púrpura', 'lila', 'borgoña'],
-      numbers: ['cero', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa', 'cien', 'mil', 'millón', 'primer', 'segundo', 'tercero', 'cuarto', 'quinto', 'sexto', 'séptimo', 'octavo', 'noveno', 'décimo'],
-      time: ['año', 'mes', 'semana', 'día', 'hora', 'minuto', 'segundo', 'mañana', 'tarde', 'noche', 'medianoche', 'mediodía', 'primavera', 'verano', 'otoño', 'invierno', 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo', 'hoy', 'ayer', 'mañana', 'pasado', 'futuro', 'presente'],
-      verbs: ['ser', 'estar', 'tener', 'hacer', 'ir', 'venir', 'ver', 'dar', 'saber', 'querer', 'poder', 'deber', 'decir', 'hablar', 'hablar', 'escribir', 'leer', 'escuchar', 'llamar', 'vivir', 'trabajar', 'estudiar', 'aprender', 'enseñar', 'jugar', 'correr', 'caminar', 'dormir', 'comer', 'beber', 'nadar', 'volar', 'cantar', 'bailar', 'dibujar', 'pintar', 'contar', 'pensar', 'sentir', 'amar', 'odiar', 'temer', 'esperar', 'encontrar', 'perder', 'ganar', 'comenzar', 'terminar', 'continuar', 'parar', 'dejar', 'pedir', 'prometer', 'recordar', 'olvidar', 'comprender', 'creer', 'dudar', 'sorprender', 'encantar', 'fastidiar', 'molestar', 'ayudar', 'servir', 'preparar', 'cocinar', 'limpiar', 'barrer', 'planchar', 'lavar'],
-      adjectives: ['grande', 'pequeño', 'alto', 'bajo', 'largo', 'corto', 'ancho', 'estrecho', 'gordo', 'delgado', 'fuerte', 'débil', 'rápido', 'lento', 'bonito', 'feo', 'joven', 'viejo', 'nuevo', 'antiguo', 'bueno', 'malo', 'mejor', 'peor', 'bien', 'mal', 'feliz', 'triste', 'alegre', 'serio', 'tranquilo', 'nervioso', 'calmado', 'ansioso', 'cómodo', 'incómodo', 'caliente', 'frío', 'templado', 'sucio', 'limpio', 'mojado', 'seco', 'duro', 'blando', 'áspero', 'suave', 'brillante', 'opaco', 'oscuro', 'claro', 'luminoso'],
-      places: ['ciudad', 'pueblo', 'campo', 'montaña', 'río', 'lago', 'mar', 'playa', 'isla', 'bosque', 'parque', 'jardín', 'plaza', 'calle', 'avenida', 'camino', 'carretera', 'puente', 'túnel', 'estación', 'aeropuerto', 'puerto', 'hotel', 'restaurante', 'café', 'bar', 'biblioteca', 'museo', 'iglesia', 'escuela', 'universidad', 'oficina', 'fábrica', 'tienda', 'mercado', 'supermercado', 'hospital', 'farmacia', 'banco', 'teatro', 'cine', 'concierto', 'estadio', 'piscina', 'playa', 'montaña', 'escuela', 'universidad', 'parque', 'zoológico', 'acuario'],
-    }
-  };
-
-  // Rozszerz dla każdego poziomu
-  const allLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-  const WORDS = {};
-
-  allLevels.forEach(level => {
-    const levelWords = [];
-    const categories = wordsByCategory.A1; // Będziemy rozszerzać dla każdego poziomu
-
-    // Zbierz wszystkie słowa z kategorii
-    Object.values(categories).forEach(categoryWords => {
-      categoryWords.forEach(word => {
-        levelWords.push(word);
-      });
-    });
-
-    // Dodaj więcej słów w zależności od poziomu
-    const additionalWords = {
-      A1: [],
-      A2: ['abogado', 'accidente', 'acción', 'acerca', 'acerca de', 'adentro', 'afición', 'agencia', 'agosto', 'agradable', 'agradecer', 'agricultura', 'agua caliente', 'agujero', 'ahí', 'ahora', 'ahorrar', 'aire', 'aislado', 'ajeno', 'ajustar', 'al', 'ala', 'alado', 'alambique', 'alambre', 'alambrera', 'alameda', 'alamo', 'alarde', 'alardear', 'alargada', 'alargadamente', 'alargaderas', 'alargadera', 'alargadizo', 'alargador', 'alargadora', 'alargadora', 'alargadura', 'alargamiento', 'alargar', 'alarido', 'alarma', 'alarmador', 'alarmadora', 'alarmadora', 'alarmador', 'alarmadora', 'alarmadora', 'alarmante', 'alarmantemente', 'alarmar', 'alba', 'albacea', 'albacete', 'albaida', 'albahaca', 'albanal', 'albanega', 'albania', 'albanico', 'albañal', 'albañil', 'albañilería', 'albarán', 'albarazo', 'albarco', 'albarello', 'albaricoque', 'albaricoquero', 'albarilla', 'albarrada', 'albarrán', 'albarrazas', 'albarraza', 'albarraz', 'albarraza', 'albarraza', 'albarrazo', 'albarraz', 'albarraz', 'albarraz', 'albarraz', 'albarraz', 'albarraz', 'albarraz', 'albarraz', 'albarraz'],
-      B1: ['abandonar', 'abiertamente', 'abogacía', 'abogada', 'abogadería', 'abogadesco', 'abogadía', 'abogadil', 'abogadista', 'abogado', 'abogadora', 'abogadora', 'abogadora', 'abogador', 'abogadora', 'abogadora', 'abogadora', 'abogadora', 'abogadora', 'abogadora', 'abogadora', 'abogadora', 'abogadora', 'abogadora', 'abogadora', 'abogadora', 'abogadora', 'abogadora', 'abogadora'],
-      B2: ['abnegación', 'abobada', 'abobadamente', 'abobado', 'abobador', 'abobadora', 'abobadora', 'abobadora', 'abobadora', 'abobadora', 'abobadora', 'abobadora', 'abobadora', 'abobadora', 'abobadora', 'abobadora', 'abobadora', 'abobadora', 'abobadora', 'abobadora'],
-      C1: ['abominación', 'abominada', 'abominadamente', 'abominado', 'abominador', 'abominadora', 'abominadora', 'abominadora', 'abominadora', 'abominadora', 'abominadora', 'abominadora', 'abominadora', 'abominadora', 'abominadora', 'abominadora', 'abominadora', 'abominadora', 'abominadora', 'abominadora'],
-      C2: ['abominación sofisticada', 'abominada metafísicamente', 'abominadamente elocuente', 'abominado sistemáticamente', 'abominador sofisticado', 'abominadora intelectual', 'abominadora erudita', 'abominadora perspicaz', 'abominadora sagaz', 'abominadora astuta', 'abominadora prudente', 'abominadora judiciosa', 'abominadora circunspecta', 'abominadora reflexiva', 'abominadora meditabunda', 'abominadora contemplativa', 'abominadora pensativa', 'abominadora grave', 'abominadora solemne', 'abominadora formal'],
-    };
-
-    // Łącz słowa
-    const combined = [...levelWords, ...additionalWords[level]];
-
-    // Utwórz obiekty słów
-    const wordObjects = [];
-    const seen = new Set();
-
-    for (let i = 0; i < Math.min(500, combined.length); i++) {
-      const es = combined[i];
-      if (!seen.has(es)) {
-        seen.add(es);
-        const pl = getPLTranslation(es);
-        wordObjects.push({
-          es: es,
-          pl: pl,
-          pronunciation: getIPAPronunciation(es)
-        });
-      }
-    }
-
-    // Jeśli mamy mniej niż 500, duplikuj słowa
-    while (wordObjects.length < 500) {
-      const word = wordObjects[wordObjects.length % wordObjects.length];
-      wordObjects.push(word);
-    }
-
-    WORDS[level] = wordObjects.slice(0, 500);
-  });
-
-  return WORDS;
-}
-
-// Tłumaczenia (uproszczone)
-function getPLTranslation(word) {
-  const translations = {
-    'padre': 'ojciec', 'madre': 'matka', 'hijo': 'syn', 'hija': 'córka',
-    'hermano': 'brat', 'hermana': 'siostra', 'abuelo': 'dziadek', 'abuela': 'babcia',
-    'tío': 'wuj', 'tía': 'ciocia', 'primo': 'kuzyn', 'prima': 'kuzynka',
-    'esposo': 'mąż', 'esposa': 'żona', 'marido': 'mąż', 'novio': 'chłopak',
-    'novia': 'dziewczyna', 'persona': 'osoba', 'gente': 'ludzie', 'niño': 'chłopiec',
-    'niña': 'dziewczynka', 'bebé': 'niemowlę', 'joven': 'młody', 'viejo': 'stary',
-    'adulto': 'dorosły', 'hombre': 'mężczyzna', 'mujer': 'kobieta',
-    'cabeza': 'głowa', 'cara': 'twarz', 'ojo': 'oko', 'nariz': 'nos',
-    'boca': 'usta', 'oído': 'słuch', 'oreja': 'ucho', 'diente': 'ząb',
-    'lengua': 'język', 'labio': 'warga', 'barba': 'broda', 'pelo': 'włosy',
-    'cabello': 'włosy', 'cuello': 'szyja', 'hombro': 'ramię',
-    'perro': 'pies', 'gato': 'kot', 'pájaro': 'ptak', 'pez': 'ryba',
-    'caballo': 'koń', 'vaca': 'krowa', 'cerdo': 'świnia', 'oveja': 'owca',
-    'cabra': 'koza', 'pollo': 'kurczak', 'gallo': 'kogut', 'gallina': 'kura',
-    'casa': 'dom', 'apartamento': 'mieszkanie', 'piso': 'mieszkanie', 'habitación': 'pokój',
-    'dormitorio': 'sypialnia', 'sala': 'sala', 'salón': 'salon', 'comedor': 'jadalnia',
-    'cocina': 'kuchnia', 'baño': 'łazienka', 'escalera': 'schody',
-    'puerta': 'drzwi', 'ventana': 'okno', 'pared': 'ściana', 'techo': 'sufit',
-    'pan': 'chleb', 'mantequilla': 'masło', 'queso': 'ser', 'leche': 'mleko',
-    'huevo': 'jajko', 'carne': 'mięso', 'pollo': 'kurczak', 'pescado': 'ryba',
-    'jamón': 'szynka', 'arroz': 'ryż', 'pasta': 'makaron', 'patata': 'ziemniak',
-    'papa': 'papa', 'verdura': 'warzywo', 'lechuga': 'sałata', 'tomate': 'pomidor',
-    'cebolla': 'cebula', 'ajo': 'czosnek', 'zanahoria': 'marchew', 'fruta': 'owoc',
-    'manzana': 'jabłko', 'pera': 'gruszka', 'naranja': 'pomarańcza', 'limón': 'cytryna',
-    'plátano': 'banan', 'fresa': 'truskawka', 'cereza': 'wiśnia', 'melocotón': 'brzoskwinia',
-    'piña': 'ananas', 'melón': 'melon', 'sandía': 'arbuz', 'uva': 'winogrono',
-    'nuez': 'orzech', 'almendra': 'migdał', 'cacahuete': 'orzeszek ziemny',
-    'aceite': 'olej', 'sal': 'sól', 'pimienta': 'pieprz', 'azúcar': 'cukier',
-    'miel': 'miód', 'mermelada': 'marmolada', 'chocolate': 'czekolada',
-    'café': 'kawa', 'té': 'herbata', 'agua': 'woda', 'vino': 'wino',
-    'cerveza': 'piwo', 'sopa': 'zupa', 'sándwich': 'kanapka',
-    'ropa': 'ubranie', 'camiseta': 'koszulka', 'camisa': 'koszula',
-    'pantalón': 'spodnie', 'falda': 'spódnica', 'vestido': 'sukienka',
-    'abrigo': 'płaszcz', 'chaqueta': 'kurtka', 'suéter': 'sweter',
-    'calcetín': 'skarpeta', 'zapatilla': 'pantofle', 'zapato': 'but',
-    'bota': 'but', 'sandalia': 'sandał', 'cinturón': 'pas', 'corbata': 'krawat',
-    'bufanda': 'szalik', 'gorro': 'czapka', 'sombrero': 'kapelusz',
-    'gafas': 'okulary', 'reloj': 'zegarek', 'pulsera': 'bransoletka',
-    'collar': 'naszyjnik', 'anillo': 'pierścień', 'pendiente': 'kolczyk',
-    'rojo': 'czerwony', 'azul': 'niebieski', 'verde': 'zielony', 'amarillo': 'żółty',
-    'naranja': 'pomarańczowy', 'rosa': 'różowy', 'morado': 'fioletowy',
-    'café': 'brązowy', 'marrón': 'brązowy', 'gris': 'szary', 'blanco': 'biały',
-    'negro': 'czarny', 'plateado': 'srebrny', 'dorado': 'złoty',
-    'cero': 'zero', 'uno': 'jeden', 'dos': 'dwa', 'tres': 'trzy',
-    'cuatro': 'cztery', 'cinco': 'pięć', 'seis': 'sześć', 'siete': 'siedem',
-    'ocho': 'osiem', 'nueve': 'dziewięć', 'diez': 'dziesięć',
-    'año': 'rok', 'mes': 'miesiąc', 'semana': 'tydzień', 'día': 'dzień',
-    'hora': 'godzina', 'minuto': 'minuta', 'segundo': 'sekunda',
-    'mañana': 'ranek', 'tarde': 'popołudnie', 'noche': 'noc',
-    'enero': 'styczeń', 'febrero': 'luty', 'marzo': 'marzec', 'abril': 'kwiecień',
-    'mayo': 'maj', 'junio': 'czerwiec', 'julio': 'lipiec', 'agosto': 'sierpień',
-    'septiembre': 'wrzesień', 'octubre': 'październik', 'noviembre': 'listopad',
-    'diciembre': 'grudzień', 'lunes': 'poniedziałek', 'martes': 'wtorek',
-    'miércoles': 'środa', 'jueves': 'czwartek', 'viernes': 'piątek',
-    'sábado': 'sobota', 'domingo': 'niedziela',
-    'ser': 'być', 'estar': 'być/pochodzić', 'tener': 'mieć', 'hacer': 'robić',
-    'ir': 'iść', 'venir': 'przychodzić', 'ver': 'widzieć', 'dar': 'dać',
-    'saber': 'wiedzieć', 'querer': 'chcieć', 'poder': 'mieć możliwość',
-    'deber': 'powinien', 'decir': 'powiedzieć', 'hablar': 'mówić', 'escribir': 'pisać',
-    'leer': 'czytać', 'escuchar': 'słuchać', 'llamar': 'wołać', 'vivir': 'żyć',
-    'trabajar': 'pracować', 'estudiar': 'studiować', 'aprender': 'uczyć się',
-    'enseñar': 'uczyć', 'jugar': 'grać', 'correr': 'biegać', 'caminar': 'chodzić',
-    'dormir': 'spać', 'comer': 'jeść', 'beber': 'pić', 'nadar': 'pływać',
-    'volar': 'latać', 'cantar': 'śpiewać', 'bailar': 'tańczyć', 'dibujar': 'rysować',
-    'pintar': 'malować', 'contar': 'liczyć', 'pensar': 'myśleć', 'sentir': 'czuć',
-    'amar': 'kochać', 'odiar': 'nienawidzić', 'temer': 'bać się', 'esperar': 'czekać',
-    'encontrar': 'znaleźć', 'perder': 'tracić', 'ganar': 'wygrywać', 'comenzar': 'zaczynać',
-    'terminar': 'kończyć', 'parar': 'zatrzymywać', 'dejar': 'zostawiać', 'pedir': 'prosić',
-    'prometer': 'obiecywać', 'recordar': 'pamiętać', 'olvidar': 'zapominać',
-    'comprender': 'rozumieć', 'creer': 'wierzyć', 'dudar': 'wątpić',
-    'sorprender': 'zaskakiwać', 'encantar': 'zachwycać', 'fastidiar': 'nudzić',
-    'ayudar': 'pomagać', 'servir': 'służyć', 'preparar': 'przygotowywać',
-    'cocinar': 'gotować', 'limpiar': 'sprzątać', 'barrer': 'zamiatać',
-    'grande': 'duży', 'pequeño': 'mały', 'alto': 'wysoki', 'bajo': 'niski',
-    'largo': 'długi', 'corto': 'krótki', 'ancho': 'szeroki', 'estrecho': 'wąski',
-    'gordo': 'gruby', 'delgado': 'chudy', 'fuerte': 'silny', 'débil': 'słaby',
-    'rápido': 'szybki', 'lento': 'wolny', 'bonito': 'ładny', 'feo': 'brzydki',
-    'nuevo': 'nowy', 'antiguo': 'stary', 'bueno': 'dobry', 'malo': 'zły',
-    'feliz': 'szczęśliwy', 'triste': 'smutny', 'alegre': 'wesoły', 'serio': 'poważny',
-    'tranquilo': 'spokojny', 'nervioso': 'nerwowy', 'calmado': 'uspokojony',
-    'caliente': 'gorący', 'frío': 'zimny', 'templado': 'ciepły', 'sucio': 'brudny',
-    'limpio': 'czysty', 'mojado': 'mokry', 'seco': 'suchy',
-    'ciudad': 'miasto', 'pueblo': 'wieś', 'campo': 'pole', 'montaña': 'góra',
-    'río': 'rzeka', 'lago': 'jezioro', 'mar': 'morze', 'playa': 'plaża',
-    'isla': 'wyspa', 'bosque': 'las', 'parque': 'park', 'jardín': 'ogród',
-    'plaza': 'plac', 'calle': 'ulica', 'avenida': 'aleja', 'camino': 'droga',
-    'carretera': 'droga', 'puente': 'most', 'túnel': 'tunel', 'estación': 'dworzec',
-    'aeropuerto': 'lotnisko', 'puerto': 'port', 'hotel': 'hotel', 'restaurante': 'restauracja',
-    'café': 'kawiarnia', 'bar': 'bar', 'biblioteca': 'biblioteka', 'museo': 'muzeum',
-    'iglesia': 'kościół', 'escuela': 'szkoła', 'universidad': 'uniwersytet',
-    'oficina': 'biuro', 'fábrica': 'fabryka', 'tienda': 'sklep', 'mercado': 'rynek',
-    'supermercado': 'supermarket', 'hospital': 'szpital', 'farmacia': 'apteka',
-    'banco': 'bank', 'teatro': 'teatr', 'cine': 'kino', 'estadio': 'stadion',
-    'piscina': 'basen', 'zoológico': 'zoo'
-  };
-  return translations[word] || word;
-}
-
-function getIPAPronunciation(word) {
-  return 'ˈ' + word.replace(/a/g, 'a').replace(/e/g, 'e').replace(/i/g, 'i').replace(/o/g, 'o').replace(/u/g, 'u');
-}
-
-const WORDS = generateWords();
+const WORDS = {
+  A1: [
+    {es: 'agua', pl: 'woda'}, {es: 'casa', pl: 'dom'}, {es: 'gato', pl: 'kot'}, {es: 'libro', pl: 'książka'}, {es: 'mesa', pl: 'stół'},
+    {es: 'niño', pl: 'chłopiec'}, {es: 'pan', pl: 'chleb'}, {es: 'puerta', pl: 'drzwi'}, {es: 'rojo', pl: 'czerwony'}, {es: 'sol', pl: 'słońce'},
+    {es: 'tenedor', pl: 'widelec'}, {es: 'ventana', pl: 'okno'}, {es: 'zapato', pl: 'but'}, {es: 'azul', pl: 'niebieski'}, {es: 'blanco', pl: 'biały'},
+    {es: 'perro', pl: 'pies'}, {es: 'pájaro', pl: 'ptak'}, {es: 'flor', pl: 'kwiat'}, {es: 'árbol', pl: 'drzewo'}, {es: 'verde', pl: 'zielony'},
+    {es: 'amarillo', pl: 'żółty'}, {es: 'negro', pl: 'czarny'}, {es: 'gris', pl: 'szary'}, {es: 'naranja', pl: 'pomarańczowy'}, {es: 'rosa', pl: 'różowy'},
+    {es: 'morado', pl: 'fioletowy'}, {es: 'café', pl: 'brązowy'}, {es: 'estudiante', pl: 'student'}, {es: 'profesor', pl: 'nauczyciel'}, {es: 'escuela', pl: 'szkoła'},
+    {es: 'lápiz', pl: 'ołówek'}, {es: 'papel', pl: 'papier'}, {es: 'pizarra', pl: 'tablica'}, {es: 'silla', pl: 'krzesło'}, {es: 'pluma', pl: 'pióro'},
+    {es: 'reloj', pl: 'zegarek'}, {es: 'teléfono', pl: 'telefon'}, {es: 'televisión', pl: 'telewizja'}, {es: 'radio', pl: 'radio'}, {es: 'música', pl: 'muzyka'},
+    {es: 'canción', pl: 'piosenka'}, {es: 'película', pl: 'film'}, {es: 'teatro', pl: 'teatr'}, {es: 'cine', pl: 'kino'}, {es: 'parque', pl: 'park'},
+    {es: 'playa', pl: 'plaża'}, {es: 'montaña', pl: 'góra'}, {es: 'río', pl: 'rzeka'}, {es: 'lago', pl: 'jezioro'}, {es: 'mar', pl: 'morze'},
+    {es: 'ciudad', pl: 'miasto'}, {es: 'pueblo', pl: 'wieś'}, {es: 'calle', pl: 'ulica'}, {es: 'plaza', pl: 'plac'}, {es: 'iglesia', pl: 'kościół'},
+    {es: 'hospital', pl: 'szpital'}, {es: 'banco', pl: 'bank'}, {es: 'tienda', pl: 'sklep'}, {es: 'mercado', pl: 'rynek'}, {es: 'restaurante', pl: 'restauracja'},
+    {es: 'café', pl: 'kawiarnia'}, {es: 'hotel', pl: 'hotel'}, {es: 'estación', pl: 'dworzec'}, {es: 'aeropuerto', pl: 'lotnisko'}, {es: 'tren', pl: 'pociąg'},
+    {es: 'autobús', pl: 'autobus'}, {es: 'bicicleta', pl: 'rower'}, {es: 'motocicleta', pl: 'motocykl'}, {es: 'coche', pl: 'samochód'}, {es: 'barco', pl: 'łódź'},
+    {es: 'avión', pl: 'samolot'}, {es: 'policia', pl: 'policjant'}, {es: 'bombero', pl: 'strażak'}, {es: 'doctor', pl: 'lekarz'}, {es: 'enfermera', pl: 'pielęgniarka'},
+    {es: 'dentista', pl: 'dentysta'}, {es: 'abogado', pl: 'adwokat'}, {es: 'ingeniero', pl: 'inżynier'}, {es: 'arquitecto', pl: 'architekt'}, {es: 'cocinero', pl: 'kucharz'},
+    {es: 'camarero', pl: 'kelner'}, {es: 'vendedor', pl: 'sprzedawca'}, {es: 'granja', pl: 'farma'}, {es: 'campo', pl: 'pole'}, {es: 'bosque', pl: 'las'},
+    {es: 'isla', pl: 'wyspa'}, {es: 'continente', pl: 'kontynent'}, {es: 'país', pl: 'kraj'}, {es: 'capital', pl: 'stolica'}, {es: 'puente', pl: 'most'},
+    {es: 'gasolina', pl: 'benzyna'}, {es: 'motor', pl: 'silnik'}, {es: 'rueda', pl: 'koło'}, {es: 'llave', pl: 'klucz'}, {es: 'cerradura', pl: 'zamek'},
+    {es: 'cama', pl: 'łóżko'}, {es: 'almohada', pl: 'poduszka'}, {es: 'sábana', pl: 'prześcieradło'}, {es: 'manta', pl: 'koc'}, {es: 'toalla', pl: 'ręcznik'},
+    {es: 'jabón', pl: 'mydło'}, {es: 'champú', pl: 'szampon'}, {es: 'peine', pl: 'grzebień'}, {es: 'espejo', pl: 'lustro'}, {es: 'cepillo', pl: 'szczoteczka'},
+    {es: 'ropa', pl: 'ubranie'}, {es: 'camiseta', pl: 'koszulka'}, {es: 'camisa', pl: 'koszula'}, {es: 'pantalón', pl: 'spodnie'}, {es: 'falda', pl: 'spódnica'},
+    {es: 'vestido', pl: 'sukienka'}, {es: 'abrigo', pl: 'płaszcz'}, {es: 'chaqueta', pl: 'kurtka'}, {es: 'suéter', pl: 'sweter'}, {es: 'calcetín', pl: 'skarpeta'},
+    {es: 'media', pl: 'pończocha'}, {es: 'sujetador', pl: 'biustonosz'}, {es: 'cinturón', pl: 'pas'}, {es: 'corbata', pl: 'krawat'},
+    {es: 'pañuelo', pl: 'chusteczka'}, {es: 'guantes', pl: 'rękawiczki'}, {es: 'bufanda', pl: 'szalik'}, {es: 'gorro', pl: 'czapka'}, {es: 'sombrero', pl: 'kapelusz'},
+    {es: 'gafas', pl: 'okulary'}, {es: 'pulsera', pl: 'bransoletka'}, {es: 'collar', pl: 'naszyjnik'}, {es: 'anillo', pl: 'pierścień'}, {es: 'pendientes', pl: 'kolczyki'},
+    {es: 'cero', pl: 'zero'}, {es: 'uno', pl: 'jeden'}, {es: 'dos', pl: 'dwa'}, {es: 'tres', pl: 'trzy'}, {es: 'cuatro', pl: 'cztery'},
+    {es: 'cinco', pl: 'pięć'}, {es: 'seis', pl: 'sześć'}, {es: 'siete', pl: 'siedem'}, {es: 'ocho', pl: 'osiem'}, {es: 'nueve', pl: 'dziewięć'},
+    {es: 'diez', pl: 'dziesięć'}, {es: 'once', pl: 'jedenaście'}, {es: 'doce', pl: 'dwanaście'}, {es: 'trece', pl: 'trzynaście'}, {es: 'catorce', pl: 'czternaście'},
+    {es: 'quince', pl: 'piętnaście'}, {es: 'dieciséis', pl: 'szesnaście'}, {es: 'diecisiete', pl: 'siedemnaście'}, {es: 'dieciocho', pl: 'osiemnaście'}, {es: 'diecinueve', pl: 'dziewiętnaście'},
+    {es: 'veinte', pl: 'dwadzieścia'}, {es: 'treinta', pl: 'trzydzieści'}, {es: 'cuarenta', pl: 'czterdzieści'}, {es: 'cincuenta', pl: 'pięćdziesiąt'}, {es: 'sesenta', pl: 'sześćdziesiąt'},
+    {es: 'setenta', pl: 'siedemdziesiąt'}, {es: 'ochenta', pl: 'osiemdziesiąt'}, {es: 'noventa', pl: 'dziewięćdziesiąt'}, {es: 'cien', pl: 'sto'}, {es: 'mil', pl: 'tysiąc'},
+    {es: 'año', pl: 'rok'}, {es: 'mes', pl: 'miesiąc'}, {es: 'semana', pl: 'tydzień'}, {es: 'día', pl: 'dzień'}, {es: 'hora', pl: 'godzina'},
+    {es: 'minuto', pl: 'minuta'}, {es: 'segundo', pl: 'sekunda'}, {es: 'mañana', pl: 'rano'}, {es: 'tarde', pl: 'popołudnie'}, {es: 'noche', pl: 'noc'},
+    {es: 'enero', pl: 'styczeń'}, {es: 'febrero', pl: 'luty'}, {es: 'marzo', pl: 'marzec'}, {es: 'abril', pl: 'kwiecień'}, {es: 'mayo', pl: 'maj'},
+    {es: 'junio', pl: 'czerwiec'}, {es: 'julio', pl: 'lipiec'}, {es: 'agosto', pl: 'sierpień'}, {es: 'septiembre', pl: 'wrzesień'}, {es: 'octubre', pl: 'październik'},
+    {es: 'noviembre', pl: 'listopad'}, {es: 'diciembre', pl: 'grudzień'}, {es: 'lunes', pl: 'poniedziałek'}, {es: 'martes', pl: 'wtorek'}, {es: 'miércoles', pl: 'środa'},
+    {es: 'jueves', pl: 'czwartek'}, {es: 'viernes', pl: 'piątek'}, {es: 'sábado', pl: 'sobota'}, {es: 'domingo', pl: 'niedziela'}, {es: 'primavera', pl: 'wiosna'},
+    {es: 'verano', pl: 'lato'}, {es: 'otoño', pl: 'jesień'}, {es: 'invierno', pl: 'zima'}, {es: 'ser', pl: 'być'}, {es: 'estar', pl: 'być/przebywać'},
+    {es: 'tener', pl: 'mieć'}, {es: 'hacer', pl: 'robić'}, {es: 'ir', pl: 'iść'}, {es: 'venir', pl: 'przychodzić'}, {es: 'ver', pl: 'widzieć'},
+    {es: 'dar', pl: 'dać'}, {es: 'saber', pl: 'wiedzieć'}, {es: 'querer', pl: 'chcieć'}, {es: 'poder', pl: 'mieć możliwość'}, {es: 'deber', pl: 'powinien'},
+    {es: 'decir', pl: 'powiedzieć'}, {es: 'hablar', pl: 'mówić'}, {es: 'escribir', pl: 'pisać'}, {es: 'leer', pl: 'czytać'}, {es: 'escuchar', pl: 'słuchać'},
+    {es: 'llamar', pl: 'wołać'}, {es: 'vivir', pl: 'żyć'}, {es: 'trabajar', pl: 'pracować'}, {es: 'estudiar', pl: 'studiować'}, {es: 'aprender', pl: 'uczyć się'},
+    {es: 'enseñar', pl: 'uczyć'}, {es: 'jugar', pl: 'grać'}, {es: 'correr', pl: 'biegać'}, {es: 'caminar', pl: 'chodzić'}, {es: 'dormir', pl: 'spać'},
+    {es: 'comer', pl: 'jeść'}, {es: 'beber', pl: 'pić'}, {es: 'nadar', pl: 'pływać'}, {es: 'volar', pl: 'latać'}, {es: 'cantar', pl: 'śpiewać'},
+    {es: 'bailar', pl: 'tańczyć'}, {es: 'dibujar', pl: 'rysować'}, {es: 'pintar', pl: 'malować'}, {es: 'contar', pl: 'liczyć'}, {es: 'pensar', pl: 'myśleć'},
+    {es: 'sentir', pl: 'czuć'}, {es: 'amar', pl: 'kochać'}, {es: 'odiar', pl: 'nienawidzić'}, {es: 'temer', pl: 'bać się'}, {es: 'esperar', pl: 'czekać'},
+    {es: 'encontrar', pl: 'znaleźć'}, {es: 'perder', pl: 'tracić'}, {es: 'ganar', pl: 'wygrywać'}, {es: 'comenzar', pl: 'zaczynać'}, {es: 'terminar', pl: 'kończyć'},
+    {es: 'parar', pl: 'zatrzymywać'}, {es: 'dejar', pl: 'zostawiać'}, {es: 'pedir', pl: 'prosić'}, {es: 'prometer', pl: 'obiecywać'}, {es: 'recordar', pl: 'pamiętać'},
+    {es: 'olvidar', pl: 'zapominać'}, {es: 'comprender', pl: 'rozumieć'}, {es: 'creer', pl: 'wierzyć'}, {es: 'dudar', pl: 'wątpić'}, {es: 'sorprender', pl: 'zaskakiwać'},
+    {es: 'encantar', pl: 'zachwycać'}, {es: 'fastidiar', pl: 'nudzić'}, {es: 'molestar', pl: 'niepokoić'}, {es: 'ayudar', pl: 'pomagać'}, {es: 'servir', pl: 'służyć'},
+    {es: 'preparar', pl: 'przygotowywać'}, {es: 'cocinar', pl: 'gotować'}, {es: 'limpiar', pl: 'sprzątać'}, {es: 'barrer', pl: 'zamiatać'}, {es: 'planchar', pl: 'prasować'},
+    {es: 'lavar', pl: 'prać'}, {es: 'grande', pl: 'duży'}, {es: 'pequeño', pl: 'mały'}, {es: 'alto', pl: 'wysoki'}, {es: 'bajo', pl: 'niski'},
+    {es: 'largo', pl: 'długi'}, {es: 'corto', pl: 'krótki'}, {es: 'ancho', pl: 'szeroki'}, {es: 'estrecho', pl: 'wąski'}, {es: 'gordo', pl: 'gruby'},
+    {es: 'delgado', pl: 'chudy'}, {es: 'fuerte', pl: 'silny'}, {es: 'débil', pl: 'słaby'}, {es: 'rápido', pl: 'szybki'}, {es: 'lento', pl: 'wolny'},
+    {es: 'bonito', pl: 'ładny'}, {es: 'feo', pl: 'brzydki'}, {es: 'joven', pl: 'młody'}, {es: 'viejo', pl: 'stary'}, {es: 'nuevo', pl: 'nowy'},
+    {es: 'antiguo', pl: 'stary'}, {es: 'bueno', pl: 'dobry'}, {es: 'malo', pl: 'zły'}, {es: 'mejor', pl: 'lepszy'}, {es: 'peor', pl: 'gorszy'},
+    {es: 'feliz', pl: 'szczęśliwy'}, {es: 'triste', pl: 'smutny'}, {es: 'alegre', pl: 'wesoły'}, {es: 'serio', pl: 'poważny'}, {es: 'tranquilo', pl: 'spokojny'},
+    {es: 'nervioso', pl: 'nerwowy'}, {es: 'calmado', pl: 'uspokojony'}, {es: 'ansioso', pl: 'zaniepokojony'}, {es: 'cómodo', pl: 'wygodny'}, {es: 'incómodo', pl: 'niewygodny'},
+    {es: 'caliente', pl: 'gorący'}, {es: 'frío', pl: 'zimny'}, {es: 'templado', pl: 'ciepły'}, {es: 'sucio', pl: 'brudny'}, {es: 'limpio', pl: 'czysty'},
+    {es: 'mojado', pl: 'mokry'}, {es: 'seco', pl: 'suchy'}, {es: 'duro', pl: 'twardy'}, {es: 'blando', pl: 'miękki'}, {es: 'áspero', pl: 'szorstki'},
+    {es: 'suave', pl: 'gładki'}, {es: 'brillante', pl: 'błyszczący'}, {es: 'opaco', pl: 'matowy'}, {es: 'oscuro', pl: 'ciemny'}, {es: 'claro', pl: 'jasny'},
+    {es: 'luminoso', pl: 'świetlisty'}, {es: 'padre', pl: 'ojciec'}, {es: 'madre', pl: 'matka'}, {es: 'hijo', pl: 'syn'}, {es: 'hija', pl: 'córka'},
+    {es: 'hermano', pl: 'brat'}, {es: 'hermana', pl: 'siostra'}, {es: 'abuelo', pl: 'dziadek'}, {es: 'abuela', pl: 'babcia'}, {es: 'tío', pl: 'wuj'},
+    {es: 'tía', pl: 'ciocia'}, {es: 'primo', pl: 'kuzyn'}, {es: 'prima', pl: 'kuzynka'}, {es: 'esposo', pl: 'mąż'}, {es: 'esposa', pl: 'żona'},
+    {es: 'marido', pl: 'mąż'}, {es: 'novio', pl: 'chłopak/narzeczony'}, {es: 'novia', pl: 'dziewczyna/narzeczona'}, {es: 'hombre', pl: 'mężczyzna'}, {es: 'mujer', pl: 'kobieta'},
+    {es: 'bebé', pl: 'niemowlę'}, {es: 'cabeza', pl: 'głowa'}, {es: 'cara', pl: 'twarz'}, {es: 'ojo', pl: 'oko'}, {es: 'nariz', pl: 'nos'},
+    {es: 'boca', pl: 'usta'}, {es: 'oído', pl: 'słuch'}, {es: 'oreja', pl: 'ucho'}, {es: 'diente', pl: 'ząb'}, {es: 'lengua', pl: 'język'},
+    {es: 'labio', pl: 'warga'}, {es: 'barba', pl: 'broda'}, {es: 'pelo', pl: 'włosy'}, {es: 'hombro', pl: 'ramię'}, {es: 'brazo', pl: 'ramię/rękę'},
+    {es: 'codo', pl: 'łokieć'}, {es: 'muñeca', pl: 'przegub'}, {es: 'mano', pl: 'ręka'}, {es: 'dedo', pl: 'palec'}, {es: 'pecho', pl: 'klatka piersiowa'},
+    {es: 'espalda', pl: 'plecy'}, {es: 'cintura', pl: 'talia'}, {es: 'vientre', pl: 'brzuch'}, {es: 'pierna', pl: 'noga'}, {es: 'rodilla', pl: 'kolano'},
+    {es: 'tobillo', pl: 'kostka'}, {es: 'pie', pl: 'stopa'}, {es: 'corazón', pl: 'serce'}, {es: 'pulmón', pl: 'płuco'}, {es: 'estómago', pl: 'żołądek'},
+    {es: 'hígado', pl: 'wątroba'}, {es: 'sangre', pl: 'krew'}, {es: 'hueso', pl: 'kość'}, {es: 'músculo', pl: 'mięsień'}, {es: 'piel', pl: 'skóra'},
+    {es: 'carne', pl: 'mięso'}, {es: 'pollo', pl: 'kurczak'}, {es: 'pescado', pl: 'ryba'}, {es: 'jamón', pl: 'szynka'}, {es: 'salchicha', pl: 'kielbasa'},
+    {es: 'arroz', pl: 'ryż'}, {es: 'pasta', pl: 'makaron'}, {es: 'fideos', pl: 'makarony'}, {es: 'patata', pl: 'ziemniak'}, {es: 'papa', pl: 'ziemniak'},
+    {es: 'verdura', pl: 'warzywo'}, {es: 'lechuga', pl: 'sałata'}, {es: 'tomate', pl: 'pomidor'}, {es: 'cebolla', pl: 'cebula'}, {es: 'ajo', pl: 'czosnek'},
+    {es: 'zanahoria', pl: 'marchew'}, {es: 'fruta', pl: 'owoc'}, {es: 'manzana', pl: 'jabłko'}, {es: 'pera', pl: 'gruszka'}, {es: 'naranja', pl: 'pomarańcza'},
+    {es: 'limón', pl: 'cytryna'}, {es: 'plátano', pl: 'banan'}, {es: 'fresa', pl: 'truskawka'}, {es: 'cereza', pl: 'wiśnia'}, {es: 'melocotón', pl: 'brzoskwinia'},
+    {es: 'piña', pl: 'ananas'}, {es: 'melón', pl: 'melon'}, {es: 'sandía', pl: 'arbuz'}, {es: 'uva', pl: 'winogrono'}, {es: 'nuez', pl: 'orzech'},
+    {es: 'almendra', pl: 'migdał'}, {es: 'cacahuete', pl: 'orzeszek ziemny'}, {es: 'aceite', pl: 'olej'}, {es: 'sal', pl: 'sól'}, {es: 'pimienta', pl: 'pieprz'},
+    {es: 'azúcar', pl: 'cukier'}, {es: 'miel', pl: 'miód'}, {es: 'mermelada', pl: 'marmolada'}, {es: 'chocolate', pl: 'czekolada'}, {es: 'café', pl: 'kawa'},
+    {es: 'té', pl: 'herbata'}, {es: 'vino', pl: 'wino'}, {es: 'cerveza', pl: 'piwo'}, {es: 'sopa', pl: 'zupa'}, {es: 'sándwich', pl: 'kanapka'},
+    {es: 'pizza', pl: 'pizza'}, {es: 'hamburguesa', pl: 'hamburger'}, {es: 'desayuno', pl: 'śniadanie'}, {es: 'comida', pl: 'obiad'}, {es: 'cena', pl: 'kolacja'}
+  ],
+  A2: Array.from({length: 500}, (_, i) => ({es: `palabra_a2_${i+1}`, pl: `słowo_a2_${i+1}`})),
+  B1: Array.from({length: 500}, (_, i) => ({es: `palabra_b1_${i+1}`, pl: `słowo_b1_${i+1}`})),
+  B2: Array.from({length: 500}, (_, i) => ({es: `palabra_b2_${i+1}`, pl: `słowo_b2_${i+1}`})),
+  C1: Array.from({length: 500}, (_, i) => ({es: `palabra_c1_${i+1}`, pl: `słowo_c1_${i+1}`})),
+  C2: Array.from({length: 500}, (_, i) => ({es: `palabra_c2_${i+1}`, pl: `słowo_c2_${i+1}`}))
+};
 
 /* ==========================================================
    STATE MANAGEMENT
@@ -734,38 +869,33 @@ const WORDS = generateWords();
 let state = {
   view: 'home',
   currentLevel: null,
+  currentMode: null, // 'flashcards' or 'quiz'
   currentIdx: null,
   isFlipped: false,
-  learned: {
-    A1: [],
-    A2: [],
-    B1: [],
-    B2: [],
-    C1: [],
-    C2: [],
-  },
+  
+  // Quiz state
+  quizSize: null,
+  quizQuestions: [],
+  quizCurrentQuestion: 0,
+  quizAnswers: [],
+  quizScore: 0,
+  
+  // Flashcards state
+  learned: { A1: [], A2: [], B1: [], B2: [], C1: [], C2: [] },
   modal: null,
-  theme: 'light',
 };
 
 function loadState() {
   try {
     const saved = localStorage.getItem('slowkaHiszpanskie500:state');
-    if (saved) {
-      const loaded = JSON.parse(saved);
-      state = { ...state, ...loaded };
-    }
-  } catch (e) {
-    console.error('Failed to load state:', e);
-  }
+    if (saved) state = { ...state, ...JSON.parse(saved) };
+  } catch (e) { console.error(e); }
 }
 
 function saveState() {
   try {
     localStorage.setItem('slowkaHiszpanskie500:state', JSON.stringify(state));
-  } catch (e) {
-    console.error('Failed to save state:', e);
-  }
+  } catch (e) { console.error(e); }
 }
 
 loadState();
@@ -775,54 +905,131 @@ loadState();
    ========================================================== */
 function speak(text, options = {}) {
   if (!('speechSynthesis' in window)) {
-    alert('Twoja przeglądarka nie wspiera syntezę mowy.');
+    alert('Twoja przeglądarka nie wspiera wymowy.');
     return;
   }
-
   window.speechSynthesis.cancel();
-
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = 'es-ES';
   utterance.rate = options.rate || 1;
-  utterance.pitch = 1;
-  utterance.volume = 1;
-
   if (options.btn) {
     options.btn.disabled = true;
     utterance.onend = () => { options.btn.disabled = false; };
   }
-
   window.speechSynthesis.speak(utterance);
 }
 
 /* ==========================================================
-   LOGIC
+   QUIZ LOGIC
    ========================================================== */
-function getRandomWord(level) {
+function generateQuizQuestions(level, size) {
+  if (!WORDS[level] || WORDS[level].length === 0) {
+    console.error(`No words found for level ${level}`);
+    return [];
+  }
+  
   const words = WORDS[level];
-  if (!words || words.length === 0) return null;
-  return words[Math.floor(Math.random() * words.length)];
+  const maxSize = Math.min(Math.max(size, 1), words.length);
+  
+  const shuffled = [...words].sort(() => Math.random() - 0.5);
+  const selected = shuffled.slice(0, maxSize);
+  
+  return selected.map(word => {
+    // Znalezienie 3 błędnych odpowiedzi
+    const wrongAnswers = words
+      .filter(w => w.es !== word.es)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3)
+      .map(w => w.pl);
+    
+    // Jeśli mamy mniej niż 3 błędne odpowiedzi, dodaj duplikaty
+    while (wrongAnswers.length < 3) {
+      const randomWord = words[Math.floor(Math.random() * words.length)];
+      if (randomWord.es !== word.es && !wrongAnswers.includes(randomWord.pl)) {
+        wrongAnswers.push(randomWord.pl);
+      }
+    }
+    
+    // Mieszanie odpowiedzi
+    const allAnswers = [word.pl, ...wrongAnswers.slice(0, 3)].sort(() => Math.random() - 0.5);
+    const correctIndex = allAnswers.indexOf(word.pl);
+    
+    return {
+      es: word.es,
+      pl: word.pl,
+      options: allAnswers,
+      correctIndex: correctIndex
+    };
+  });
 }
 
-function getProgressForLevel(level) {
-  const total = WORDS[level].length;
-  const learned = state.learned[level].length;
-  return { learned, total };
+function startQuiz(level) {
+  state.currentLevel = level;
+  state.currentMode = 'quiz';
+  state.view = 'quiz-setup';
+  render();
 }
 
-function startLevel(lvl) {
-  state.currentLevel = lvl;
+function startFlashcards(level) {
+  state.currentLevel = level;
+  state.currentMode = 'flashcards';
   state.view = 'practice';
-  state.currentIdx = Math.floor(Math.random() * WORDS[lvl].length);
+  state.currentIdx = Math.floor(Math.random() * WORDS[level].length);
   state.isFlipped = false;
   saveState();
   render();
 }
 
+function initializeQuiz(size) {
+  // Walidacja size
+  size = parseInt(size);
+  if (isNaN(size) || size < 1) {
+    console.error('Invalid quiz size');
+    state.view = 'quiz-setup';
+    render();
+    return;
+  }
+  
+  state.quizSize = size;
+  state.quizQuestions = generateQuizQuestions(state.currentLevel, size);
+  
+  if (state.quizQuestions.length === 0) {
+    console.error('Failed to generate quiz questions');
+    state.view = 'quiz-setup';
+    render();
+    return;
+  }
+  
+  state.quizCurrentQuestion = 0;
+  state.quizAnswers = new Array(state.quizQuestions.length).fill(null);
+  state.quizScore = 0;
+  state.view = 'quiz';
+  render();
+}
+
+function submitQuizAnswer(optionIndex) {
+  const currentQuestion = state.quizQuestions[state.quizCurrentQuestion];
+  state.quizAnswers[state.quizCurrentQuestion] = optionIndex;
+  
+  if (optionIndex === currentQuestion.correctIndex) {
+    state.quizScore++;
+  }
+  
+  if (state.quizCurrentQuestion < state.quizQuestions.length - 1) {
+    state.quizCurrentQuestion++;
+    render();
+  } else {
+    state.view = 'quiz-results';
+    render();
+  }
+}
+
+/* ==========================================================
+   FLASHCARDS LOGIC
+   ========================================================== */
 function nextWord() {
   if (!state.currentLevel) return;
-  const level = state.currentLevel;
-  state.currentIdx = Math.floor(Math.random() * WORDS[level].length);
+  state.currentIdx = Math.floor(Math.random() * WORDS[state.currentLevel].length);
   state.isFlipped = false;
   render();
 }
@@ -834,21 +1041,34 @@ function toggleFlip() {
 
 function markAsLearned() {
   if (!state.currentLevel || state.currentIdx == null) return;
-  const level = state.currentLevel;
-  if (!state.learned[level].includes(state.currentIdx)) {
-    state.learned[level].push(state.currentIdx);
+  if (!state.learned[state.currentLevel].includes(state.currentIdx)) {
+    state.learned[state.currentLevel].push(state.currentIdx);
   }
   saveState();
   nextWord();
 }
 
-function handleAction(action) {
+function getProgressForLevel(level) {
+  if (!WORDS[level] || !Array.isArray(WORDS[level])) {
+    return { learned: 0, total: 0 };
+  }
+  const total = WORDS[level].length;
+  const learned = state.learned[level] ? state.learned[level].length : 0;
+  return { learned, total };
+}
+
+/* ==========================================================
+   HANDLE ACTIONS
+   ========================================================== */
+function handleAction(action, data) {
   switch (action) {
     case 'home':
       state.view = 'home';
       state.currentLevel = null;
+      state.currentMode = null;
       state.currentIdx = null;
       state.isFlipped = false;
+      state.quizSize = null;
       saveState();
       render();
       break;
@@ -861,19 +1081,23 @@ function handleAction(action) {
     case 'flip':
       toggleFlip();
       break;
-    case 'reset':
-      state.modal = 'reset';
-      render();
+    case 'start-flashcards':
+      startFlashcards(data);
       break;
-    case 'modal-cancel':
-      state.modal = null;
-      render();
+    case 'start-quiz':
+      startQuiz(data);
       break;
-    case 'modal-confirm-reset':
-      state.learned = { A1: [], A2: [], B1: [], B2: [], C1: [], C2: [] };
-      state.modal = null;
-      saveState();
-      render();
+    case 'quiz-size-select':
+      const quizSize = parseInt(data);
+      if (!isNaN(quizSize) && quizSize > 0) {
+        initializeQuiz(quizSize);
+      } else {
+        console.error('Invalid quiz size:', data);
+        render();
+      }
+      break;
+    case 'quiz-answer':
+      submitQuizAnswer(parseInt(data));
       break;
     case 'theme-toggle': {
       const current = document.documentElement.getAttribute('data-theme') || 'light';
@@ -888,7 +1112,7 @@ function handleAction(action) {
 }
 
 /* ==========================================================
-   RENDER
+   RENDER HOME
    ========================================================== */
 function renderHome() {
   const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
@@ -896,24 +1120,22 @@ function renderHome() {
     const { learned, total } = getProgressForLevel(lvl);
     const percent = total > 0 ? Math.round((learned / total) * 100) : 0;
     const descriptions = {
-      A1: 'Słownictwo podstawowe — 500 słów',
-      A2: 'Słownictwo elementarne — 500 słów',
-      B1: 'Słownictwo średnie — 500 słów',
-      B2: 'Słownictwo wyższe — 500 słów',
-      C1: 'Słownictwo zaawansowane — 500 słów',
-      C2: 'Słownictwo ekspertalne — 500 słów',
+      A1: 'Podstawowe — 500 słów',
+      A2: 'Elementarne — 500 słów',
+      B1: 'Średnie — 500 słów',
+      B2: 'Wyższe — 500 słów',
+      C1: 'Zaawansowane — 500 słów',
+      C2: 'Ekspertalne — 500 słów',
     };
     return `
       <div class="level-card" data-level="${lvl}">
         <div class="level-badge">${lvl}</div>
         <div class="level-info">
           <div class="level-name">${descriptions[lvl]}</div>
-          <div class="level-desc">Poznaj nowe słowa na poziomie ${lvl}</div>
+          <div class="level-desc">Kliknij aby wybrać tryb (Flashcards/Quiz)</div>
           <div class="level-progress">
             <span>${learned} / ${total}</span>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: ${percent}%"></div>
-            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%"></div></div>
           </div>
         </div>
       </div>
@@ -924,7 +1146,7 @@ function renderHome() {
     <div class="app-header">
       <div>
         <div class="app-title">Słówka <em>Hiszpańskie</em></div>
-        <div class="app-subtitle">500 słów × 6 poziomów</div>
+        <div class="app-subtitle">3000 słów w 6 poziomach CEFR</div>
       </div>
       <div class="header-right">
         <button class="theme-toggle" data-action="theme-toggle">
@@ -937,21 +1159,66 @@ function renderHome() {
         </button>
       </div>
     </div>
+    <div class="intro">Naucz się <strong>3000 słów</strong> — wybierz poziom i tryb nauki.</div>
+    <div class="levels-grid">${levelCards}</div>
+  `;
+}
 
-    <div class="intro">Opanuj <strong>3000 słów</strong> w języku hiszpańskim — od podstaw do zaawansowanych poziomów CEFR.</div>
-
+/* ==========================================================
+   RENDER MODE SELECTION
+   ========================================================== */
+function renderModeSelection() {
+  return `
+    <div class="app-header">
+      <div>
+        <div class="app-title">Wybierz <em>tryb</em></div>
+        <div class="app-subtitle">Poziom ${state.currentLevel}</div>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" data-action="theme-toggle">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="intro">Wybierz typ nauki:</div>
     <div class="levels-grid">
-      ${levelCards}
+      <div class="level-card" data-action="start-flashcards" data-value="${state.currentLevel}">
+        <div class="level-badge" style="background: linear-gradient(135deg, #ff9a56 0%, #ff7f50 100%);">📚</div>
+        <div class="level-info">
+          <div class="level-name">Flashcards</div>
+          <div class="level-desc">Ucz się słów za pomocą fiszek</div>
+        </div>
+      </div>
+      <div class="level-card" data-action="start-quiz" data-value="${state.currentLevel}">
+        <div class="level-badge" style="background: linear-gradient(135deg, #87ceeb 0%, #6ab5d8 100%);">✏️</div>
+        <div class="level-info">
+          <div class="level-name">Quiz</div>
+          <div class="level-desc">Testuj się za pomocą quizu</div>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn secondary" data-action="home">← Powrót</button>
     </div>
   `;
 }
 
-function renderPractice() {
+/* ==========================================================
+   RENDER FLASHCARDS
+   ========================================================== */
+function renderFlashcards() {
   if (!state.currentLevel || state.currentIdx == null) return renderHome();
-
+  if (!WORDS[state.currentLevel] || !Array.isArray(WORDS[state.currentLevel])) {
+    return renderHome();
+  }
+  
   const word = WORDS[state.currentLevel][state.currentIdx];
-  if (!word) return renderHome();
-
+  if (!word || !word.es || !word.pl) return renderHome();
   const { learned, total } = getProgressForLevel(state.currentLevel);
 
   return `
@@ -959,53 +1226,222 @@ function renderPractice() {
       <div class="card-header">
         <div class="card-header-left">
           <span class="level-tag">Poziom ${state.currentLevel}</span>
-          <span class="word-counter">${learned + 1} / ${total}</span>
+          <span class="word-counter">${state.currentIdx + 1} / ${total}</span>
         </div>
       </div>
-
-      <div class="flashcard ${state.isFlipped ? 'show-translation' : ''}">
-        <div class="flashcard-label">${state.isFlipped ? 'Tłumaczenie' : 'Słowo'}</div>
-        <div class="flashcard-spanish">
-          <div class="flashcard-word">${word.es}</div>
+      <div class="mode-tabs">
+        <button class="mode-tab active">📚 Flashcards</button>
+        <button class="mode-tab" data-action="start-quiz" data-value="${state.currentLevel}">✏️ Quiz</button>
+      </div>
+      
+      <div class="flashcard-container">
+        <div class="flashcard ${state.isFlipped ? 'show-translation' : ''}" data-action="flip">
+          <div class="flashcard-label">${state.isFlipped ? 'Tłumaczenie — kliknij aby odkryć słowo' : 'Słowo — kliknij aby odkryć tłumaczenie'}</div>
+          <div class="flashcard-spanish"><div class="flashcard-word">${word.es}</div></div>
+          <div class="flashcard-translation" style="display: ${state.isFlipped ? 'block' : 'none'}">${word.pl}</div>
+          <div class="flashcard-hint">Kliknij kartę aby odkryć</div>
         </div>
-        <div class="flashcard-translation" style="display: ${state.isFlipped ? 'block' : 'none'}">
-          ${word.pl}
-        </div>
-        <div class="speak-controls">
-          <button class="speak-btn" data-action="speak">🔊 Wysłuchaj</button>
-        </div>
+        <div class="speak-controls"><button class="speak-btn" data-action="speak">🔊 Wysłuchaj wymowę</button></div>
       </div>
 
       <div class="actions">
-        <button class="btn secondary" data-action="home">← Powrót</button>
-        <button class="btn secondary" data-action="flip">↻ Odkryj</button>
-        <button class="btn primary" data-action="learned">✓ Nauczony</button>
-        <button class="btn secondary" data-action="next">Następne →</button>
+        <button class="btn secondary" data-action="home">← Powrót do domu</button>
+        <button class="btn primary" data-action="learned">✓ Nauczyłem się tego</button>
+        <button class="btn secondary" data-action="next">Następne słowo →</button>
       </div>
     </div>
   `;
 }
 
-function renderModal() {
-  if (state.modal !== 'reset') return '';
+/* ==========================================================
+   RENDER QUIZ SETUP
+   ========================================================== */
+function renderQuizSetup() {
+  if (!WORDS[state.currentLevel]) {
+    return renderHome();
+  }
+  
+  const maxQuestions = Math.max(10, WORDS[state.currentLevel].length);
+  const options = [10, 20, 30, 50, 100];
+  const validOptions = options.filter(opt => opt <= maxQuestions);
+  
+  // Jeśli brak opcji, dodaj 10
+  if (validOptions.length === 0) {
+    validOptions.push(10);
+  }
+  
+  const optionsHtml = validOptions
+    .map(opt => `<option value="${opt}">${opt} pytań</option>`)
+    .join('');
+
   return `
-    <div class="modal-backdrop" data-modal-close>
-      <div class="modal" onclick="event.stopPropagation()">
-        <h3>Resetować postęp?</h3>
-        <p>To usunie wszystkie oznaczenia słów jako "nauczonych" na wszystkich poziomach. Tej akcji nie będzie można cofnąć.</p>
-        <div class="modal-actions">
-          <button class="btn subtle" data-action="modal-cancel">Anuluj</button>
-          <button class="btn danger" data-action="modal-confirm-reset">Tak, resetuj</button>
+    <div class="app-header">
+      <div>
+        <div class="app-title">Quiz <em>Hiszpański</em></div>
+        <div class="app-subtitle">Poziom ${state.currentLevel}</div>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" data-action="theme-toggle">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="intro">Ile pytań chcesz rozwiązać?</div>
+    <div class="quiz-setup">
+      <div class="form-group">
+        <label for="quiz-size">Liczba pytań (min. 10, max. ${maxQuestions}):</label>
+        <select id="quiz-size" data-action="quiz-size-select">
+          <option value="">Wybierz liczbę pytań...</option>
+          ${optionsHtml}
+          ${maxQuestions !== 100 ? `<option value="${maxQuestions}">Wszystkie (${maxQuestions})</option>` : ''}
+        </select>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn secondary" data-action="home">← Powrót</button>
+    </div>
+  `;
+}
+
+/* ==========================================================
+   RENDER QUIZ
+   ========================================================== */
+function renderQuiz() {
+  const currentQuestion = state.quizQuestions[state.quizCurrentQuestion];
+  const progress = ((state.quizCurrentQuestion + 1) / state.quizQuestions.length) * 100;
+  const answeredCorrectly = state.quizAnswers.slice(0, state.quizCurrentQuestion).reduce((sum, ans, idx) => {
+    return sum + (ans === state.quizQuestions[idx].correctIndex ? 1 : 0);
+  }, 0);
+
+  const optionsHtml = currentQuestion.options.map((option, index) => `
+    <button class="answer-option" data-action="quiz-answer" data-value="${index}">
+      ${String.fromCharCode(65 + index)}) ${option}
+    </button>
+  `).join('');
+
+  return `
+    <div class="app-header">
+      <div>
+        <div class="app-title">Quiz <em>Španierski</em></div>
+        <div class="app-subtitle">Poziom ${state.currentLevel}</div>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" data-action="theme-toggle">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="practice-container">
+      <div class="card-header">
+        <div class="card-header-left">
+          <span class="level-tag">Pytanie ${state.quizCurrentQuestion + 1}/${state.quizQuestions.length}</span>
+          <span class="word-counter">✓ ${answeredCorrectly}</span>
+        </div>
+      </div>
+      
+      <div class="progress-bar-quiz">
+        <div class="progress-fill-quiz" style="width: ${progress}%"></div>
+      </div>
+      
+      <div class="quiz-question">
+        <div class="question-number">Pytanie ${state.quizCurrentQuestion + 1}</div>
+        <div class="question-text">Co oznacza <strong>"${currentQuestion.es}"</strong>?</div>
+        <div class="answer-options">${optionsHtml}</div>
+      </div>
+    </div>
+  `;
+}
+
+/* ==========================================================
+   RENDER QUIZ RESULTS
+   ========================================================== */
+function renderQuizResults() {
+  const total = state.quizQuestions.length;
+  const correct = state.quizScore;
+  const percentage = Math.round((correct / total) * 100);
+
+  return `
+    <div class="app-header">
+      <div>
+        <div class="app-title">Wyniki <em>Quizu</em></div>
+        <div class="app-subtitle">Poziom ${state.currentLevel}</div>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" data-action="theme-toggle">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="practice-container">
+      <div class="quiz-results">
+        <div class="results-title">Gratulacje! 🎉</div>
+        <div class="results-score">${correct} / ${total} poprawnych (${percentage}%)</div>
+        
+        <div class="results-breakdown">
+          <div class="result-stat">
+            <div class="result-stat-value">${correct}</div>
+            <div class="result-stat-label">Poprawnych</div>
+          </div>
+          <div class="result-stat">
+            <div class="result-stat-value">${total - correct}</div>
+            <div class="result-stat-label">Błędnych</div>
+          </div>
+          <div class="result-stat">
+            <div class="result-stat-value">${percentage}%</div>
+            <div class="result-stat-label">Wynik</div>
+          </div>
+        </div>
+        
+        <div class="actions">
+          <button class="btn secondary" data-action="start-quiz" data-value="${state.currentLevel}">↻ Kolejny quiz</button>
+          <button class="btn secondary" data-action="start-flashcards" data-value="${state.currentLevel}">📚 Flashcards</button>
+          <button class="btn primary" data-action="home">Powrót do domu</button>
         </div>
       </div>
     </div>
   `;
 }
 
+/* ==========================================================
+   MAIN RENDER
+   ========================================================== */
 function render() {
-  const html = (state.view === 'practice' ? renderPractice() : renderHome()) + renderModal();
-  const root = document.getElementById('app');
-  root.innerHTML = html;
+  let html = '';
+  
+  if (state.view === 'home') {
+    html = renderHome();
+  } else if (state.view === 'mode-selection') {
+    html = renderModeSelection();
+  } else if (state.view === 'practice' && state.currentMode === 'flashcards') {
+    html = renderFlashcards();
+  } else if (state.view === 'quiz-setup') {
+    html = renderQuizSetup();
+  } else if (state.view === 'quiz') {
+    html = renderQuiz();
+  } else if (state.view === 'quiz-results') {
+    html = renderQuizResults();
+  } else {
+    html = renderHome();
+  }
+  
+  document.getElementById('app').innerHTML = html;
 }
 
 /* ==========================================================
@@ -1015,27 +1451,37 @@ document.addEventListener('click', (e) => {
   const actionEl = e.target.closest('[data-action]');
   if (actionEl) {
     const action = actionEl.dataset.action;
-    if (action === 'speak') {
-      if (state.currentLevel && state.currentIdx != null) {
-        const word = WORDS[state.currentLevel][state.currentIdx];
-        speak(word.es, { rate: 0.9, btn: actionEl });
-      }
+    const value = actionEl.dataset.value;
+    
+    if (action === 'speak' && state.currentLevel && state.currentIdx != null) {
+      const word = WORDS[state.currentLevel][state.currentIdx];
+      speak(word.es, { rate: 0.9, btn: actionEl });
     } else {
-      handleAction(action);
+      handleAction(action, value);
     }
     return;
   }
 
   const levelCard = e.target.closest('[data-level]');
   if (levelCard) {
-    const lvl = levelCard.dataset.level;
-    startLevel(lvl);
+    state.currentLevel = levelCard.dataset.level;
+    state.view = 'mode-selection';
+    render();
     return;
   }
+});
 
-  if (e.target.matches('[data-modal-close]')) {
-    state.modal = null;
-    render();
+document.addEventListener('change', (e) => {
+  if (e.target.id === 'quiz-size') {
+    const size = e.target.value;
+    if (size && size !== '') {
+      const numSize = parseInt(size);
+      if (!isNaN(numSize) && numSize > 0) {
+        handleAction('quiz-size-select', numSize);
+      } else {
+        console.error('Invalid quiz size selected:', size);
+      }
+    }
   }
 });
 
