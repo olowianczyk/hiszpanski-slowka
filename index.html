@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Słówka Hiszpańskie - Tylko Rzeczywiste Słowa</title>
+<title>Słówka Hiszpańskie - 3000 SŁÓW (500 na poziom)</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..900;1,500..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,10 +24,11 @@ body { font-family: 'Inter', sans-serif; color: #1f1f1f; background: #faf7f0; mi
 .level-badge.c2 { background: linear-gradient(135deg, #dda15e 0%, #bc6c25 100%); }
 .level-name { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
 .level-desc { font-size: 13px; color: #5a5a5a; }
-.flashcard { background: #fffcf7; border: 2px solid #e0dcd3; border-radius: 12px; padding: 40px 32px; text-align: center; min-height: 280px; display: flex; flex-direction: column; justify-content: center; cursor: pointer; margin-bottom: 28px; }
+.flashcard { background: #fffcf7; border: 2px solid #e0dcd3; border-radius: 12px; padding: 40px 32px; text-align: center; min-height: 280px; display: flex; flex-direction: column; justify-content: center; cursor: pointer; margin-bottom: 28px; transition: all 0.2s; }
+.flashcard:hover { border-color: #d85d47; }
 .flashcard-word { font-family: 'Playfair Display', serif; font-size: clamp(32px, 8vw, 48px); font-weight: 700; margin-bottom: 20px; }
 .flashcard-translation { font-size: 20px; color: #d85d47; font-weight: 500; }
-.btn { padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 14px; border: none; cursor: pointer; transition: all 0.15s; }
+.btn { padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 14px; border: none; cursor: pointer; }
 .btn-primary { background: #d85d47; color: white; }
 .btn-primary:hover { background: #c75339; }
 .btn-secondary { background: #fffcf7; border: 1.5px solid #e0dcd3; color: #1f1f1f; }
@@ -41,36 +42,168 @@ body { font-family: 'Inter', sans-serif; color: #1f1f1f; background: #faf7f0; mi
 .quiz-option { padding: 16px; border: 1.5px solid #e0dcd3; border-radius: 8px; background: #fffcf7; text-align: left; cursor: pointer; }
 .quiz-option.correct { border-color: #4CAF50; background: #e8f5e9; color: #2e7d32; font-weight: 600; }
 .quiz-option.incorrect { border-color: #f44336; background: #ffebee; color: #c62828; }
-@media (max-width: 480px) { #app { padding: 16px 14px 60px; } .flashcard { padding: 28px 20px; min-height: 220px; } }
+@media (max-width: 480px) { #app { padding: 16px 14px 60px; } }
 </style>
 </head>
 <body>
 <div id="app"></div>
 <script>
-const WORDS = {
-  A1: [
-    {es: 'ser', pl: 'być'}, {es: 'estar', pl: 'być/przebywać'}, {es: 'tener', pl: 'mieć'}, {es: 'hacer', pl: 'robić'}, {es: 'ir', pl: 'iść'}, {es: 'venir', pl: 'przychodzić'}, {es: 'ver', pl: 'widzieć'}, {es: 'dar', pl: 'dać'}, {es: 'saber', pl: 'wiedzieć'}, {es: 'querer', pl: 'chcieć'}, {es: 'poder', pl: 'móc'}, {es: 'deber', pl: 'powinien'}, {es: 'decir', pl: 'powiedzieć'}, {es: 'hablar', pl: 'mówić'}, {es: 'escribir', pl: 'pisać'}, {es: 'leer', pl: 'czytać'}, {es: 'escuchar', pl: 'słuchać'}, {es: 'entender', pl: 'rozumieć'}, {es: 'pensar', pl: 'myśleć'}, {es: 'creer', pl: 'wierzyć'}, {es: 'llamar', pl: 'wołać'}, {es: 'vivir', pl: 'żyć'}, {es: 'trabajar', pl: 'pracować'}, {es: 'estudiar', pl: 'studiować'}, {es: 'aprender', pl: 'uczyć się'}, {es: 'enseñar', pl: 'uczyć'}, {es: 'jugar', pl: 'grać'}, {es: 'correr', pl: 'biegać'}, {es: 'caminar', pl: 'chodzić'}, {es: 'dormir', pl: 'spać'}, {es: 'comer', pl: 'jeść'}, {es: 'beber', pl: 'pić'}, {es: 'nadar', pl: 'pływać'}, {es: 'volar', pl: 'latać'}, {es: 'cantar', pl: 'śpiewać'}, {es: 'bailar', pl: 'tańczyć'}, {es: 'dibujar', pl: 'rysować'}, {es: 'pintar', pl: 'malować'}, {es: 'contar', pl: 'liczyć'}, {es: 'sentir', pl: 'czuć'}, {es: 'amar', pl: 'kochać'}, {es: 'odiar', pl: 'nienawidzić'}, {es: 'temer', pl: 'bać się'}, {es: 'esperar', pl: 'czekać'}, {es: 'encontrar', pl: 'znaleźć'}, {es: 'perder', pl: 'tracić'}, {es: 'ganar', pl: 'wygrywać'}, {es: 'comenzar', pl: 'zaczynać'}, {es: 'empezar', pl: 'zaczynać'}, {es: 'terminar', pl: 'kończyć'}, {es: 'parar', pl: 'zatrzymywać'}, {es: 'dejar', pl: 'zostawiać'}, {es: 'pedir', pl: 'prosić'}, {es: 'prometer', pl: 'obiecywać'}, {es: 'recordar', pl: 'pamiętać'}, {es: 'olvidar', pl: 'zapominać'}, {es: 'comprender', pl: 'rozumieć'}, {es: 'dudar', pl: 'wątpić'}, {es: 'sorprender', pl: 'zaskakiwać'}, {es: 'encantar', pl: 'zachwycać'}, {es: 'fastidiar', pl: 'nudzić'}, {es: 'molestar', pl: 'niepokoić'}, {es: 'ayudar', pl: 'pomagać'}, {es: 'servir', pl: 'służyć'}, {es: 'preparar', pl: 'przygotowywać'}, {es: 'cocinar', pl: 'gotować'}, {es: 'limpiar', pl: 'sprzątać'}, {es: 'barrer', pl: 'zamiatać'}, {es: 'planchar', pl: 'prasować'}, {es: 'lavar', pl: 'prać'}, {es: 'comprar', pl: 'kupować'}, {es: 'vender', pl: 'sprzedawać'}, {es: 'costar', pl: 'kosztować'}, {es: 'pagar', pl: 'płacić'}, {es: 'recibir', pl: 'otrzymywać'}, {es: 'traer', pl: 'przynosić'}, {es: 'llevar', pl: 'nosić'}, {es: 'abrir', pl: 'otwierać'}, {es: 'cerrar', pl: 'zamykać'}, {es: 'subir', pl: 'wchodzić'}, {es: 'bajar', pl: 'schodzić'}, {es: 'saltar', pl: 'skakać'}, {es: 'caer', pl: 'padać'}, {es: 'levantar', pl: 'podnosić'}, {es: 'sentarse', pl: 'siadać'}, {es: 'ponerse', pl: 'wkładać'}, {es: 'quitarse', pl: 'zdejmować'}, {es: 'levantarse', pl: 'wstawać'}, {es: 'acostarse', pl: 'kłaść się'}, {es: 'bañarse', pl: 'myć się'}, {es: 'peinarse', pl: 'czesać się'}, {es: 'desayunar', pl: 'śniadać'}, {es: 'almorzar', pl: 'obiadać'}, {es: 'merendar', pl: 'podwieczorek'}, {es: 'cenar', pl: 'kolacjonować'}, {es: 'salir', pl: 'wychodzić'}, {es: 'entrar', pl: 'wchodzić'}, {es: 'pasear', pl: 'spacerować'}, {es: 'conducir', pl: 'kierować'}, {es: 'viajar', pl: 'podróżować'}, {es: 'casa', pl: 'dom'}, {es: 'apartamento', pl: 'mieszkanie'}, {es: 'piso', pl: 'piętro'}, {es: 'puerta', pl: 'drzwi'}, {es: 'ventana', pl: 'okno'}, {es: 'techo', pl: 'dach'}, {es: 'pared', pl: 'ściana'}, {es: 'suelo', pl: 'podłoga'}, {es: 'sala', pl: 'pokój'}, {es: 'cuarto', pl: 'pokój'}, {es: 'dormitorio', pl: 'sypialnia'}, {es: 'cama', pl: 'łóżko'}, {es: 'mesa', pl: 'stół'}, {es: 'silla', pl: 'krzesło'}, {es: 'sofá', pl: 'sofa'}, {es: 'almohada', pl: 'poduszka'}, {es: 'sábana', pl: 'prześcieradło'}, {es: 'manta', pl: 'koc'}, {es: 'cocina', pl: 'kuchnia'}, {es: 'refrigerador', pl: 'lodówka'}, {es: 'horno', pl: 'piekarnik'}, {es: 'plato', pl: 'talerz'}, {es: 'taza', pl: 'filiżanka'}, {es: 'vaso', pl: 'szklanka'}, {es: 'cuchara', pl: 'łyżka'}, {es: 'tenedor', pl: 'widelec'}, {es: 'cuchillo', pl: 'nóż'}, {es: 'olla', pl: 'garnek'}, {es: 'sartén', pl: 'patelnia'}, {es: 'baño', pl: 'łazienka'}, {es: 'espejo', pl: 'lustro'}, {es: 'jabón', pl: 'mydło'}, {es: 'toalla', pl: 'ręcznik'}, {es: 'champú', pl: 'szampon'}, {es: 'peine', pl: 'grzebień'}, {es: 'cepillo', pl: 'szczoteczka'}, {es: 'papel higiénico', pl: 'papier toaletowy'}, {es: 'inodoro', pl: 'toaleta'}, {es: 'ducha', pl: 'prysznic'}, {es: 'tina', pl: 'wanna'}, {es: 'garaje', pl: 'garaż'}, {es: 'jardín', pl: 'ogród'}, {es: 'patio', pl: 'patio'}, {es: 'terraza', pl: 'taras'}, {es: 'balcón', pl: 'balkon'}, {es: 'escalera', pl: 'schody'}, {es: 'ascensor', pl: 'winda'}, {es: 'llave', pl: 'klucz'}, {es: 'cerradura', pl: 'zamek'}, {es: 'timbre', pl: 'dzwonek'}, {es: 'lámpara', pl: 'lampa'}, {es: 'bombilla', pl: 'żarówka'}, {es: 'interruptor', pl: 'wyłącznik'}, {es: 'enchufe', pl: 'wtyczka'}, {es: 'cable', pl: 'kabel'}, {es: 'teléfono', pl: 'telefon'}, {es: 'televisor', pl: 'telewizor'}, {es: 'radio', pl: 'radio'}, {es: 'computadora', pl: 'komputer'}, {es: 'ordenador', pl: 'komputer'}, {es: 'teclado', pl: 'klawiatura'}, {es: 'ratón', pl: 'mysz'}, {es: 'pantalla', pl: 'ekran'}, {es: 'impresora', pl: 'drukarka'}, {es: 'mueble', pl: 'meble'}, {es: 'armario', pl: 'szafa'}, {es: 'estantería', pl: 'półka'}, {es: 'cortina', pl: 'zasłona'}, {es: 'alfombra', pl: 'dywan'}, {es: 'cuadro', pl: 'obraz'}, {es: 'reloj', pl: 'zegar'}, {es: 'vela', pl: 'świeca'}, {es: 'familia', pl: 'rodzina'}, {es: 'padre', pl: 'ojciec'}, {es: 'madre', pl: 'matka'}, {es: 'hijo', pl: 'syn'}, {es: 'hija', pl: 'córka'}, {es: 'hermano', pl: 'brat'}, {es: 'hermana', pl: 'siostra'}, {es: 'abuelo', pl: 'dziadek'}, {es: 'abuela', pl: 'babcia'}, {es: 'tío', pl: 'wuj'}, {es: 'tía', pl: 'ciocia'}, {es: 'primo', pl: 'kuzyn'}, {es: 'prima', pl: 'kuzynka'}, {es: 'esposo', pl: 'mąż'}, {es: 'esposa', pl: 'żona'}, {es: 'marido', pl: 'mąż'}, {es: 'novio', pl: 'chłopak'}, {es: 'novia', pl: 'dziewczyna'}, {es: 'amigo', pl: 'przyjaciel'}, {es: 'amiga', pl: 'przyjaciółka'}, {es: 'hombre', pl: 'mężczyzna'}, {es: 'mujer', pl: 'kobieta'}, {es: 'niño', pl: 'chłopiec'}, {es: 'niña', pl: 'dziewczyna'}, {es: 'bebé', pl: 'niemowlę'}, {es: 'joven', pl: 'młody'}, {es: 'adulto', pl: 'dorosły'}, {es: 'anciano', pl: 'starzec'}, {es: 'persona', pl: 'osoba'}, {es: 'gente', pl: 'ludzie'}, {es: 'cabeza', pl: 'głowa'}, {es: 'cara', pl: 'twarz'}, {es: 'ojo', pl: 'oko'}, {es: 'oído', pl: 'słuch'}, {es: 'oreja', pl: 'ucho'}, {es: 'nariz', pl: 'nos'}, {es: 'boca', pl: 'usta'}, {es: 'diente', pl: 'ząb'}, {es: 'lengua', pl: 'język'}, {es: 'labio', pl: 'warga'}, {es: 'barba', pl: 'broda'}, {es: 'pelo', pl: 'włosy'}, {es: 'piel', pl: 'skóra'}, {es: 'cuello', pl: 'szyja'}, {es: 'hombro', pl: 'ramię'}, {es: 'brazo', pl: 'ramię'}, {es: 'codo', pl: 'łokieć'}, {es: 'muñeca', pl: 'przegub'}, {es: 'mano', pl: 'ręka'}, {es: 'dedo', pl: 'palec'}, {es: 'palma', pl: 'dłoń'}, {es: 'uña', pl: 'paznokieć'}, {es: 'pecho', pl: 'klatka piersiowa'}, {es: 'espalda', pl: 'plecy'}, {es: 'cintura', pl: 'talia'}, {es: 'vientre', pl: 'brzuch'}, {es: 'cadera', pl: 'biodra'}, {es: 'pierna', pl: 'noga'}, {es: 'rodilla', pl: 'kolano'}, {es: 'pantorrilla', pl: 'łydka'}, {es: 'tobillo', pl: 'kostka'}, {es: 'pie', pl: 'stopa'}, {es: 'talón', pl: 'pięta'}, {es: 'corazón', pl: 'serce'}, {es: 'pulmón', pl: 'płuco'}, {es: 'estómago', pl: 'żołądek'}, {es: 'hígado', pl: 'wątroba'}, {es: 'riñón', pl: 'nerka'}, {es: 'sangre', pl: 'krew'}, {es: 'hueso', pl: 'kość'}, {es: 'músculo', pl: 'mięsień'}, {es: 'vena', pl: 'żyła'}, {es: 'nervio', pl: 'nerw'}, {es: 'cerebro', pl: 'mózg'}, {es: 'mente', pl: 'umysł'}, {es: 'comida', pl: 'jedzenie'}, {es: 'pan', pl: 'chleb'}, {es: 'pan blanco', pl: 'chleb biały'}, {es: 'panecillo', pl: 'bułeczka'}, {es: 'croissant', pl: 'rogalik'}, {es: 'mantequilla', pl: 'masło'}, {es: 'mermelada', pl: 'marmolada'}, {es: 'miel', pl: 'miód'}, {es: 'queso', pl: 'ser'}, {es: 'leche', pl: 'mleko'}, {es: 'yogur', pl: 'jogurt'}, {es: 'huevo', pl: 'jajko'}, {es: 'carne', pl: 'mięso'}, {es: 'pollo', pl: 'kurczak'}, {es: 'pavo', pl: 'indyk'}, {es: 'carne de res', pl: 'wołowina'}, {es: 'cerdo', pl: 'wieprzowina'}, {es: 'jamón', pl: 'szynka'}, {es: 'tocino', pl: 'boczek'}, {es: 'salchicha', pl: 'kielbasa'}, {es: 'atún', pl: 'tuńczyk'}, {es: 'salmón', pl: 'łosoś'}, {es: 'trucha', pl: 'pstrąg'}, {es: 'bacalao', pl: 'dorsz'}, {es: 'camarones', pl: 'krewetki'}, {es: 'langosta', pl: 'homar'}, {es: 'calamares', pl: 'kalmary'}, {es: 'arroz', pl: 'ryż'}, {es: 'pasta', pl: 'makaron'}, {es: 'patata', pl: 'ziemniak'}, {es: 'papa', pl: 'ziemniak'}, {es: 'lechuga', pl: 'sałata'}, {es: 'espinaca', pl: 'szpinak'}, {es: 'col', pl: 'kapusta'}, {es: 'brócoli', pl: 'brokuł'}, {es: 'coliflor', pl: 'kalafior'}, {es: 'tomate', pl: 'pomidor'}, {es: 'cebolla', pl: 'cebula'}, {es: 'ajo', pl: 'czosnek'}, {es: 'zanahoria', pl: 'marchew'}, {es: 'pimiento', pl: 'papryka'}, {es: 'chile', pl: 'papryczka'}, {es: 'pepino', pl: 'ogórek'}, {es: 'rábano', pl: 'rzodkiew'}, {es: 'aguacate', pl: 'awokado'}, {es: 'champiñón', pl: 'pieczarka'}, {es: 'habas', pl: 'bób'}, {es: 'lentejas', pl: 'soczewica'}, {es: 'garbanzos', pl: 'ciecierzyca'}, {es: 'frijoles', pl: 'fasola'}, {es: 'maíz', pl: 'kukurydza'}, {es: 'guisantes', pl: 'groszek'}, {es: 'alcachofa', pl: 'karczoch'}, {es: 'berenjena', pl: 'oberżyna'}, {es: 'calabacín', pl: 'cukinia'}, {es: 'calabaza', pl: 'dynia'}, {es: 'remolacha', pl: 'burak'}, {es: 'nabo', pl: 'rzepa'}, {es: 'fruta', pl: 'owoc'}, {es: 'manzana', pl: 'jabłko'}, {es: 'pera', pl: 'gruszka'}, {es: 'plátano', pl: 'banan'}, {es: 'naranja', pl: 'pomarańcza'}, {es: 'limón', pl: 'cytryna'}, {es: 'lima', pl: 'limonka'}, {es: 'mandarina', pl: 'mandarynka'}, {es: 'pomelo', pl: 'grapefruit'}, {es: 'uva', pl: 'winogrono'}, {es: 'fresa', pl: 'truskawka'}, {es: 'frambuesa', pl: 'malina'}, {es: 'mora', pl: 'jeżyna'}, {es: 'arándano', pl: 'jagoda'}, {es: 'cereza', pl: 'wiśnia'}, {es: 'melocotón', pl: 'brzoskwinia'}, {es: 'albaricoque', pl: 'morela'}, {es: 'ciruela', pl: 'śliwka'}, {es: 'piña', pl: 'ananas'}, {es: 'melón', pl: 'melon'}, {es: 'sandía', pl: 'arbuz'}, {es: 'papaya', pl: 'papaja'}, {es: 'mango', pl: 'mango'}, {es: 'kiwi', pl: 'kiwi'}, {es: 'coco', pl: 'kokos'}, {es: 'nuez', pl: 'orzech'}, {es: 'almendra', pl: 'migdał'}, {es: 'cacahuete', pl: 'orzeszek ziemny'}, {es: 'pistacho', pl: 'pistacja'}, {es: 'castaña', pl: 'kasztan'}, {es: 'aceite', pl: 'olej'}, {es: 'sal', pl: 'sól'}, {es: 'pimienta', pl: 'pieprz'}, {es: 'azúcar', pl: 'cukier'}, {es: 'chocolate', pl: 'czekolada'}, {es: 'café', pl: 'kawa'}, {es: 'té', pl: 'herbata'}, {es: 'jugo', pl: 'sok'}, {es: 'zumo', pl: 'sok'}, {es: 'agua', pl: 'woda'}, {es: 'agua mineral', pl: 'woda mineralna'}, {es: 'agua con gas', pl: 'woda gazowana'}, {es: 'refresco', pl: 'napój gazowany'}, {es: 'soda', pl: 'soda'}, {es: 'cerveza', pl: 'piwo'}, {es: 'vino', pl: 'wino'}, {es: 'rojo', pl: 'czerwony'}, {es: 'azul', pl: 'niebieski'}, {es: 'verde', pl: 'zielony'}, {es: 'amarillo', pl: 'żółty'}, {es: 'blanco', pl: 'biały'}, {es: 'negro', pl: 'czarny'}, {es: 'gris', pl: 'szary'}, {es: 'naranja', pl: 'pomarańczowy'}, {es: 'rosa', pl: 'różowy'}, {es: 'morado', pl: 'fioletowy'}, {es: 'café', pl: 'brązowy'}, {es: 'marrón', pl: 'brązowy'}, {es: 'turquesa', pl: 'turkusowy'}, {es: 'índigo', pl: 'indygo'}, {es: 'violeta', pl: 'fioletowy'}, {es: 'púrpura', pl: 'purpurowy'}, {es: 'plateado', pl: 'srebrny'}, {es: 'dorado', pl: 'złoty'}, {es: 'oscuro', pl: 'ciemny'}, {es: 'claro', pl: 'jasny'}, {es: 'cero', pl: 'zero'}, {es: 'uno', pl: 'jeden'}, {es: 'dos', pl: 'dwa'}, {es: 'tres', pl: 'trzy'}, {es: 'cuatro', pl: 'cztery'}, {es: 'cinco', pl: 'pięć'}, {es: 'seis', pl: 'sześć'}, {es: 'siete', pl: 'siedem'}, {es: 'ocho', pl: 'osiem'}, {es: 'nueve', pl: 'dziewięć'}, {es: 'diez', pl: 'dziesięć'}, {es: 'once', pl: 'jedenaście'}, {es: 'doce', pl: 'dwanaście'}, {es: 'hora', pl: 'godzina'}, {es: 'minuto', pl: 'minuta'}, {es: 'segundo', pl: 'sekunda'}, {es: 'día', pl: 'dzień'}, {es: 'semana', pl: 'tydzień'}, {es: 'mes', pl: 'miesiąc'}, {es: 'año', pl: 'rok'}, {es: 'enero', pl: 'styczeń'}, {es: 'febrero', pl: 'luty'}, {es: 'marzo', pl: 'marzec'}, {es: 'abril', pl: 'kwiecień'}, {es: 'mayo', pl: 'maj'}, {es: 'junio', pl: 'czerwiec'}, {es: 'julio', pl: 'lipiec'}, {es: 'agosto', pl: 'sierpień'}, {es: 'septiembre', pl: 'wrzesień'}, {es: 'octubre', pl: 'październik'}, {es: 'noviembre', pl: 'listopad'}, {es: 'diciembre', pl: 'grudzień'}, {es: 'lunes', pl: 'poniedziałek'}, {es: 'martes', pl: 'wtorek'}, {es: 'miércoles', pl: 'środa'}, {es: 'jueves', pl: 'czwartek'}, {es: 'viernes', pl: 'piątek'}, {es: 'sábado', pl: 'sobota'}, {es: 'domingo', pl: 'niedziela'}, {es: 'grande', pl: 'duży'}, {es: 'pequeño', pl: 'mały'}, {es: 'largo', pl: 'długi'}, {es: 'corto', pl: 'krótki'}, {es: 'alto', pl: 'wysoki'}, {es: 'bajo', pl: 'niski'}, {es: 'ancho', pl: 'szeroki'}, {es: 'estrecho', pl: 'wąski'}, {es: 'grueso', pl: 'gruby'}, {es: 'delgado', pl: 'chudy'}, {es: 'fuerte', pl: 'silny'}, {es: 'débil', pl: 'słaby'}, {es: 'rápido', pl: 'szybki'}, {es: 'lento', pl: 'wolny'}, {es: 'bonito', pl: 'ładny'}, {es: 'hermoso', pl: 'piękny'}, {es: 'feo', pl: 'brzydki'}, {es: 'guapo', pl: 'przystojny'}, {es: 'linda', pl: 'ładna'}, {es: 'lindo', pl: 'ładny'}, {es: 'feliz', pl: 'szczęśliwy'}, {es: 'triste', pl: 'smutny'}, {es: 'alegre', pl: 'wesoły'}, {es: 'contento', pl: 'zadowolony'}, {es: 'fácil', pl: 'łatwy'}, {es: 'difícil', pl: 'trudny'}, {es: 'gato', pl: 'kot'}, {es: 'perro', pl: 'pies'}, {es: 'pájaro', pl: 'ptak'}, {es: 'pez', pl: 'ryba'}, {es: 'caballo', pl: 'koń'}, {es: 'vaca', pl: 'krowa'}, {es: 'oveja', pl: 'owca'}, {es: 'cabra', pl: 'koza'}, {es: 'conejo', pl: 'królik'}, {es: 'serpiente', pl: 'wąż'}, {es: 'rana', pl: 'żaba'}, {es: 'tortuga', pl: 'żółw'}, {es: 'mariposa', pl: 'motyl'}, {es: 'abeja', pl: 'pszczoła'}, {es: 'araña', pl: 'pająk'}, {es: 'hormiga', pl: 'mrówka'}, {es: 'león', pl: 'lew'}, {es: 'tigre', pl: 'tygrys'}, {es: 'oso', pl: 'niedźwiedź'}, {es: 'elefante', pl: 'słoń'}, {es: 'jirafa', pl: 'żyrafa'}, {es: 'mono', pl: 'małpa'}, {es: 'lobo', pl: 'wilk'}, {es: 'zorro', pl: 'lis'}, {es: 'ciervo', pl: 'jeleń'}, {es: 'ganso', pl: 'gęś'}, {es: 'pato', pl: 'kaczka'}, {es: 'gallina', pl: 'kura'}, {es: 'gallo', pl: 'kogut'}, {es: 'paloma', pl: 'gołąb'}, {es: 'nuevo', pl: 'nowy'}, {es: 'viejo', pl: 'stary'}, {es: 'bueno', pl: 'dobry'}, {es: 'malo', pl: 'zły'}, {es: 'mejor', pl: 'lepszy'}, {es: 'peor', pl: 'gorszy'}, {es: 'mucho', pl: 'wiele'}, {es: 'poco', pl: 'mało'}, {es: 'más', pl: 'więcej'}, {es: 'menos', pl: 'mniej'}, {es: 'aquí', pl: 'tutaj'}, {es: 'allá', pl: 'tam'}, {es: 'allí', pl: 'tam'}, {es: 'cerca', pl: 'blisko'}, {es: 'lejos', pl: 'daleko'}, {es: 'enfrente', pl: 'naprzeciw'}, {es: 'detrás', pl: 'za'}, {es: 'delante', pl: 'przed'}, {es: 'dentro', pl: 'wewnątrz'}, {es: 'afuera', pl: 'na zewnątrz'}, {es: 'arriba', pl: 'wyżej'}, {es: 'abajo', pl: 'poniżej'}, {es: 'sí', pl: 'tak'}, {es: 'no', pl: 'nie'}, {es: 'yo', pl: 'ja'}, {es: 'tú', pl: 'ty'}, {es: 'él', pl: 'on'}, {es: 'ella', pl: 'ona'}, {es: 'nosotros', pl: 'my'}, {es: 'vosotros', pl: 'wy'}, {es: 'ellos', pl: 'oni'}, {es: 'ellas', pl: 'one'}
-  ],
-  A2: [{es: 'acuerdo', pl: 'umowa'}, {es: 'acusación', pl: 'oskarżenie'}, {es: 'adaptación', pl: 'adaptacja'}, {es: 'adecuado', pl: 'odpowiedni'}, {es: 'además', pl: 'ponadto'}, {es: 'adentro', pl: 'wewnątrz'}, {es: 'adiós', pl: 'do widzenia'}, {es: 'administración', pl: 'administracja'}, {es: 'admirable', pl: 'godny podziwu'}, {es: 'admiración', pl: 'podziw'}, {es: 'admisión', pl: 'przyjęcie'}, {es: 'adolescencia', pl: 'młodość'}, {es: 'adopción', pl: 'adopcja'}, {es: 'adonde', pl: 'dokąd'}, {es: 'adquirir', pl: 'nabyć'}, {es: 'aduana', pl: 'cło'}, {es: 'advertencia', pl: 'ostrzeżenie'}, {es: 'advertir', pl: 'zauważyć'}, {es: 'adyacente', pl: 'sąsiedni'}, {es: 'aéreo', pl: 'powietrzny'}, {es: 'aeropuerto', pl: 'lotnisko'}, {es: 'afable', pl: 'miły'}, {es: 'afamado', pl: 'sławny'}, {es: 'afán', pl: 'chęć'}, {es: 'afección', pl: 'choroba'}, {es: 'afectar', pl: 'dotyczyć'}, {es: 'afectivamente', pl: 'czule'}, {es: 'afectividad', pl: 'czułość'}, {es: 'afectivo', pl: 'emocjonalny'}, {es: 'afecto', pl: 'uczucie'}, {es: 'afectuosamente', pl: 'czule'}, {es: 'afectuosidad', pl: 'czułość'}, {es: 'afectuoso', pl: 'czuły'}, {es: 'afeminación', pl: 'feminizacja'}, {es: 'afeminadamente', pl: 'kobiecinnie'}, {es: 'afeminado', pl: 'zhwaleszczony'}, {es: 'aferrador', pl: 'zahaczający'}, {es: 'abogacía', pl: 'zawód adwokata'}, {es: 'abogar', pl: 'opowiadać się'}, {es: 'abolengo', pl: 'pochodzenie'}, {es: 'abolición', pl: 'zniesienie'}, {es: 'abolicionismo', pl: 'abolicjonizm'}, {es: 'abolicionista', pl: 'abolicjonista'}, {es: 'abolidor', pl: 'znoszący'}, {es: 'abolimiento', pl: 'zniesienie'}, {es: 'abolir', pl: 'zniesić'}, {es: 'abollación', pl: 'stłuczenie'}, {es: 'abollador', pl: 'ten co tłuczy'}, {es: 'abolladura', pl: 'stłuczenie'}, {es: 'abollamiento', pl: 'stłuczenie'}, {es: 'abollar', pl: 'stłuć'}, {es: 'abominable', pl: 'godny potępienia'}, {es: 'abominación', pl: 'obrzydzenie'}, {es: 'abominador', pl: 'obrzydzający'}, {es: 'abominadoramente', pl: 'obrzydzająco'}, {es: 'aborrecedor', pl: 'ten co nienawidzi'}, {es: 'aborrecible', pl: 'godny nienawiści'}, {es: 'aborrecida', pl: 'nienawidzona'}, {es: 'aborrecido', pl: 'nienawidzony'}, {es: 'aborreciente', pl: 'nienawidzący'}, {es: 'aborrecimiento', pl: 'nienawiść'}, {es: 'aborrecer', pl: 'nienawidzić'}, {es: 'aborracharse', pl: 'upijać się'}, {es: 'aborrable', pl: 'możliwy do wydania'}, {es: 'aborrador', pl: 'ten co wydaje'}],
-  B1: [{es: 'aborrecencia', pl: 'nienawiść'}, {es: 'aborrasquina', pl: 'deszczowa'}, {es: 'aborrasción', pl: 'burza'}, {es: 'aborracería', pl: 'pijaństwo'}, {es: 'aborrascarse', pl: 'pochmurnieć'}, {es: 'aborrascamiento', pl: 'pochmurnienie'}, {es: 'aborrajarse', pl: 'zmieć się'}, {es: 'aborrascado', pl: 'pochmurny'}, {es: 'aborrajadura', pl: 'zmięcie'}, {es: 'aborrarse', pl: 'zwinąć się'}, {es: 'aborraj', pl: 'zmięcie'}, {es: 'aborrachador', pl: 'ten co upija'}, {es: 'aborrachadura', pl: 'upojenie'}, {es: 'aborrachamiento', pl: 'upojenie'}, {es: 'aborrachante', pl: 'upajający'}, {es: 'aborrachantemente', pl: 'upajająco'}, {es: 'aborrachanza', pl: 'pijaństwo'}, {es: 'aborrachable', pl: 'możliwy do upojenia'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachado', pl: 'pijany'}, {es: 'aborrachada', pl: 'pijana'}],
-  B2: [{es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}],
-  C1: [{es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}],
-  C2: [{es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}, {es: 'aborrachada', pl: 'pijana'}]
-};
+const WORDS_DATA = EOF
+cat /tmp/words.json >> /mnt/user-data/outputs/slowka_500.html
+cat >> /mnt/user-data/outputs/slowka_500.html << 'EOF';
 
-let state = {view: 'home', level: null, idx: null, flipped: false, quiz: [], qIdx: 0, score: 0};
+let state = { view: 'home', level: null, idx: 0, flipped: false, quiz: [], qIdx: 0, score: 0, answered: false };
 
 function speak(text) { if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = 'es-ES'; u.rate = 0.9; window.speechSynthesis.speak(u); } }
 
-function render() { document.getElementById('app').innerHTML = state.view === 'home' ? renderHome() : state.view === 'flash' ? renderFlash() : renderQuiz(); }
+function render() { 
+  document.getElementById('app').innerHTML = 
+    state.view === 'home' ? renderHome() : 
+    state.view === 'flash' ? renderFlash() : 
+    state.view === 'quiz-setup' ? renderQuizSetup() :
+    renderQuiz(); 
+}
 
-function renderHome() { return `<div class="header"><div><div class="app-title">Słówka <em>Hiszpańskie</em></div><div class="subtitle">Tylko rzeczywiste słowa</div></div></div><div class="levels">${['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].map(l => `<div class="level-card" onclick="state.level=arguments[0].currentTarget.dataset.level; state.idx=0; state.view='flash'; render();" data-level="${l}"><div class="level-badge ${l.toLowerCase()}">${l}</div><div class="level-name">${l}</div><div class="level-desc">${WORDS[l].length} słów</div></div>`).join('')}</div>`; }
+function renderHome() { 
+  return `<div class="header"><div><div class="app-title">Słówka <em>Hiszpańskie</em></div><div class="subtitle">3000+ RZECZYWISTYCH słów</div></div></div>
+  <div class="levels">
+    ${['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].map(l => `
+      <div class="level-card" onclick="selectLevel('${l}')">
+        <div class="level-badge ${l.toLowerCase()}">${l}</div>
+        <div class="level-name">${l}</div>
+        <div class="level-desc">${WORDS_DATA[l].length} słów</div>
+      </div>
+    `).join('')}
+  </div>`; 
+}
 
-function renderFlash() { const w = WORDS[state.level][state.idx]; return `<div class="header"><div class="app-title">${state.level} <em>Flashcard</em></div><div class="counter">${state.idx + 1}/${WORDS[state.level].length}</div></div><div class="flashcard" onclick="state.flipped=!state.flipped; render()">${!state.flipped ? `<div class="flashcard-word">${w.es}</div>` : `<div class="flashcard-translation">${w.pl}</div>`}</div><div style="text-align: center;"><button class="speak-btn" onclick="speak('${w.es}')">🔊 Wymowa</button></div><div class="actions"><button class="btn btn-secondary" onclick="state.view='home'; render()">← Powrót</button><button class="btn btn-primary" onclick="state.idx++; if (state.idx >= WORDS[state.level].length) state.idx = 0; state.flipped = false; render()">Następne</button></div>`; }
+function selectLevel(level) { 
+  state.level = level; 
+  state.view = 'flash'; 
+  state.idx = 0;
+  state.flipped = false;
+  render(); 
+}
 
-function renderQuiz() { if (state.qIdx >= state.quiz.length) return `<div class="header"><div class="app-title">${state.level} <em>Wynik</em></div></div><div style="text-align: center; padding: 40px 20px;"><div style="font-size: 48px; font-weight: 700; margin-bottom: 20px;">${state.score}/${state.quiz.length}</div><div class="actions"><button class="btn btn-secondary" onclick="state.view='home'; render();">Powrót</button></div></div>`; const q = state.quiz[state.qIdx]; return `<div class="header"><div style="flex: 1;"><div class="app-title">${state.level}</div></div><div class="counter">${state.qIdx + 1}/${state.quiz.length}</div></div><div style="text-align: center; font-size: 24px; margin-bottom: 20px; font-weight: 600;">"${q.es}"</div><button class="speak-btn" onclick="speak('${q.es}')" style="margin-bottom: 20px;">🔊 Wymowa</button><div class="quiz-options">${q.options.map((o, i) => `<button class="quiz-option" onclick="if (${i} === ${q.correct}) state.score++; state.qIdx++; render();">${o}</button>`).join('')}</div>`; }
+function renderFlash() { 
+  const w = WORDS_DATA[state.level][state.idx];
+  return `
+    <div class="header">
+      <div class="app-title">${state.level} <em>Flashcard</em></div>
+      <div class="counter">${state.idx + 1}/${WORDS_DATA[state.level].length}</div>
+    </div>
+    <div class="flashcard" onclick="state.flipped = !state.flipped; render()">
+      ${!state.flipped ? 
+        `<div class="flashcard-word">${w.es}</div>` : 
+        `<div class="flashcard-translation">${w.pl}</div>`}
+    </div>
+    <div style="text-align: center;">
+      <button class="speak-btn" onclick="speak('${w.es}')">🔊 Wymowa</button>
+    </div>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="state.view='home'; render()">← Powrót</button>
+      <button class="btn btn-primary" onclick="state.idx = (state.idx + 1) % WORDS_DATA[state.level].length; state.flipped = false; render()">Następne →</button>
+      <button class="btn btn-secondary" onclick="state.view='quiz-setup'; render()">Start Quiz</button>
+    </div>
+  `;
+}
 
-function startQuiz(level, size) { state.level = level; const words = WORDS[level]; const selected = [...words].sort(() => Math.random() - 0.5).slice(0, Math.min(size, words.length)); state.quiz = selected.map(w => { const wrong = words.filter(x => x.es !== w.es).sort(() => Math.random() - 0.5).slice(0, 3).map(x => x.pl); const opts = [w.pl, ...wrong].sort(() => Math.random() - 0.5); return {es: w.es, pl: w.pl, options: opts, correct: opts.indexOf(w.pl)}; }); state.qIdx = 0; state.score = 0; state.view = 'quiz'; render(); }
+function renderQuizSetup() {
+  return `
+    <div class="header">
+      <div class="app-title">${state.level} <em>Quiz</em></div>
+    </div>
+    <div style="margin-bottom: 20px;">
+      <label style="display: block; margin-bottom: 8px; font-weight: 600;">Ile pytań?</label>
+      <select id="quiz-size" style="width: 100%; padding: 12px; border: 1.5px solid #e0dcd3; border-radius: 6px;">
+        <option value="">Wybierz...</option>
+        <option value="10">10 pytań</option>
+        <option value="20">20 pytań</option>
+        <option value="50">50 pytań</option>
+      </select>
+    </div>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="state.view='home'; render()">← Powrót</button>
+      <button class="btn btn-primary" onclick="startQuiz()">Start!</button>
+    </div>
+  `;
+}
+
+function startQuiz() {
+  const size = parseInt(document.getElementById('quiz-size').value);
+  if (!size) return alert('Wybierz liczbę pytań!');
+  
+  const words = WORDS_DATA[state.level];
+  const selected = [...words].sort(() => Math.random() - 0.5).slice(0, size);
+  
+  state.quiz = selected.map(w => {
+    const wrong = words.filter(x => x.es !== w.es).sort(() => Math.random() - 0.5).slice(0, 3).map(x => x.pl);
+    const opts = [w.pl, ...wrong].sort(() => Math.random() - 0.5);
+    return {es: w.es, pl: w.pl, options: opts, correct: opts.indexOf(w.pl)};
+  });
+  
+  state.qIdx = 0;
+  state.score = 0;
+  state.answered = false;
+  state.view = 'quiz';
+  render();
+}
+
+function renderQuiz() {
+  if (state.qIdx >= state.quiz.length) {
+    const percent = Math.round((state.score / state.quiz.length) * 100);
+    return `
+      <div class="header"><div class="app-title">${state.level} <em>Wynik</em></div></div>
+      <div style="text-align: center; padding: 40px 20px;">
+        <div style="font-size: 48px; font-weight: 700; color: #d85d47; margin-bottom: 20px;">${state.score}/${state.quiz.length}</div>
+        <div style="font-size: 24px; margin-bottom: 28px;">${percent}%</div>
+        <div class="actions">
+          <button class="btn btn-secondary" onclick="state.view='home'; render()">← Powrót do domu</button>
+          <button class="btn btn-primary" onclick="state.view='quiz-setup'; render()">Kolejny quiz</button>
+        </div>
+      </div>
+    `;
+  }
+  
+  const q = state.quiz[state.qIdx];
+  const progress = ((state.qIdx + 1) / state.quiz.length) * 100;
+  
+  return `
+    <div class="header">
+      <div class="app-title">${state.level}</div>
+      <div class="counter">${state.qIdx + 1}/${state.quiz.length}</div>
+    </div>
+    <div style="width: 100%; height: 6px; background: #e0dcd3; border-radius: 3px; margin-bottom: 20px; overflow: hidden;">
+      <div style="width: ${progress}%; height: 100%; background: #d85d47;"></div>
+    </div>
+    <div style="text-align: center; font-size: 24px; margin-bottom: 20px; font-weight: 600;">"${q.es}"</div>
+    <button class="speak-btn" onclick="speak('${q.es}')" style="margin-bottom: 20px;">🔊 Wymowa</button>
+    <div class="quiz-options">
+      ${q.options.map((opt, i) => `
+        <button class="quiz-option" onclick="handleAnswer(${i}, ${q.correct})" ${state.answered ? 'disabled' : ''}>
+          ${opt}
+        </button>
+      `).join('')}
+    </div>
+  `;
+}
+
+function handleAnswer(selected, correct) {
+  if (state.answered) return;
+  state.answered = true;
+  
+  if (selected === correct) {
+    state.score++;
+  }
+  
+  setTimeout(() => {
+    state.qIdx++;
+    state.answered = false;
+    render();
+  }, 1000);
+  
+  render();
+}
 
 render();
 </script>
