@@ -1,211 +1,1118 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Słówka Hiszpańskie - 3000 SŁÓW (500 na poziom)</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..900;1,500..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>🇪🇸 Español — Nauka słówek CEFR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,500&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; color: #1f1f1f; background: #faf7f0; min-height: 100vh; }
-#app { max-width: 820px; margin: 0 auto; padding: 28px 20px 80px; }
-.app-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 40px); font-weight: 700; font-style: italic; margin-bottom: 12px; }
-.app-title em { color: #d85d47; }
-.subtitle { font-size: 13px; color: #5a5a5a; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 32px; font-weight: 600; }
-.levels { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 28px; }
-.level-card { background: #fffcf7; border: 1.5px solid #e0dcd3; border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.2s; }
-.level-card:hover { transform: translateY(-2px); border-color: #d85d47; }
-.level-badge { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 18px; margin-bottom: 12px; }
-.level-badge.a1 { background: linear-gradient(135deg, #ff9a56 0%, #ff7f50 100%); }
-.level-badge.a2 { background: linear-gradient(135deg, #ff8c8c 0%, #ff6b6b 100%); }
-.level-badge.b1 { background: linear-gradient(135deg, #ffb347 0%, #ff9a3d 100%); }
-.level-badge.b2 { background: linear-gradient(135deg, #a8d5ba 0%, #7fbf9f 100%); }
-.level-badge.c1 { background: linear-gradient(135deg, #87ceeb 0%, #6ab5d8 100%); }
-.level-badge.c2 { background: linear-gradient(135deg, #dda15e 0%, #bc6c25 100%); }
-.level-name { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
-.level-desc { font-size: 13px; color: #5a5a5a; }
-.flashcard { background: #fffcf7; border: 2px solid #e0dcd3; border-radius: 12px; padding: 40px 32px; text-align: center; min-height: 280px; display: flex; flex-direction: column; justify-content: center; cursor: pointer; margin-bottom: 28px; transition: all 0.2s; }
-.flashcard:hover { border-color: #d85d47; }
-.flashcard-word { font-family: 'Playfair Display', serif; font-size: clamp(32px, 8vw, 48px); font-weight: 700; margin-bottom: 20px; }
-.flashcard-translation { font-size: 20px; color: #d85d47; font-weight: 500; }
-.btn { padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 14px; border: none; cursor: pointer; }
-.btn-primary { background: #d85d47; color: white; }
-.btn-primary:hover { background: #c75339; }
-.btn-secondary { background: #fffcf7; border: 1.5px solid #e0dcd3; color: #1f1f1f; }
-.btn-secondary:hover { border-color: #d85d47; }
-.actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
-.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
-.counter { font-size: 12px; color: #5a5a5a; font-weight: 600; }
-.speak-btn { padding: 10px 18px; background: #d85d47; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
-.speak-btn:hover { background: #c75339; }
-.quiz-options { display: grid; gap: 12px; margin-bottom: 28px; }
-.quiz-option { padding: 16px; border: 1.5px solid #e0dcd3; border-radius: 8px; background: #fffcf7; text-align: left; cursor: pointer; }
-.quiz-option.correct { border-color: #4CAF50; background: #e8f5e9; color: #2e7d32; font-weight: 600; }
-.quiz-option.incorrect { border-color: #f44336; background: #ffebee; color: #c62828; }
-@media (max-width: 480px) { #app { padding: 16px 14px 60px; } }
+:root{
+  --bg:#FDF6EC;--card:#FFFFFF;--red:#B71C1C;--red2:#8B0000;
+  --gold:#D4891A;--dark:#2C1A0E;--mid:#6B4C30;--muted:#9E7E6A;
+  --border:#E8DDD2;--lite:#F0EAE0;--success:#1B5E20;--sbg:#E8F5E9;
+  --error:#B71C1C;--ebg:#FFEBEE;
+  --lA1:#27AE60;--lA2:#2ECC71;--lB1:#F39C12;--lB2:#E67E22;--lC1:#E74C3C;--lC2:#8E44AD;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh}
+h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+button{font-family:'Nunito',sans-serif;cursor:pointer}
+
+/* Screens */
+.screen{display:none;max-width:600px;margin:0 auto;padding:20px 16px;animation:fadeUp .35s ease both}
+.screen.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+@keyframes pop{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.shake{animation:shake .4s ease}
+.pop{animation:pop .25s ease both}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(253,246,236,.96);backdrop-filter:blur(8px);border-bottom:1.5px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;flex-direction:column}
+.nav-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--red);letter-spacing:-.5px}
+.nav-sub{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
+.btn-back{background:transparent;border:1.5px solid var(--border);border-radius:10px;padding:8px 16px;font-size:13px;font-weight:700;color:var(--mid);transition:all .2s}
+.btn-back:hover{background:var(--lite);border-color:var(--muted)}
+
+/* HOME */
+.home-hero{text-align:center;padding:48px 16px 32px}
+.home-flag{font-size:72px;margin-bottom:16px;display:block}
+.home-title{font-size:46px;font-weight:800;color:var(--red);margin-bottom:8px;line-height:1.1}
+.home-sub{font-size:18px;color:var(--muted);font-weight:600;margin-bottom:6px}
+.home-desc{font-size:14px;color:#C4A882;margin-bottom:36px}
+.home-features{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;max-width:380px;margin:0 auto 36px;background:#FFF5EC;border:1.5px solid var(--border);border-radius:16px;padding:18px}
+.feat{font-size:12px;color:var(--mid);font-weight:600;text-align:center;padding:8px 4px;background:white;border-radius:8px;border:1px solid var(--border)}
+.btn-start{background:var(--red);color:white;border:none;border-radius:14px;padding:16px 48px;font-size:17px;font-weight:800;letter-spacing:.5px;box-shadow:0 4px 20px rgba(183,28,28,.3);transition:all .2s}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(183,28,28,.4)}
+
+/* LEVEL SELECT */
+.screen-title{font-size:26px;font-weight:700;margin-bottom:4px}
+.screen-sub{color:var(--muted);font-size:14px;margin-bottom:22px}
+.level-list{display:grid;gap:10px}
+.level-card{background:white;border:1.5px solid var(--border);border-radius:16px;padding:15px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s;animation:pop .25s ease both}
+.level-card:hover{border-color:var(--muted);transform:translateX(4px);box-shadow:2px 0 12px rgba(0,0,0,.06)}
+.lv-badge{width:52px;height:52px;border-radius:13px;display:flex;align-items:center;justify-content:center;color:white;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;flex-shrink:0}
+.lv-info{flex:1}
+.lv-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px}
+.lv-name{font-size:15px;font-weight:700}
+.lv-desc{font-size:12px;color:var(--muted);margin-left:8px}
+.lv-pct{font-size:12px;font-weight:800;margin-left:6px}
+.lv-bar-bg{background:var(--lite);border-radius:6px;height:6px;overflow:hidden}
+.lv-bar{height:100%;border-radius:6px;transition:width .5s ease}
+.lv-stats{margin-top:4px;font-size:11px;color:#C4A882}
+
+/* MODE SELECT */
+.mode-header{background:white;border:1.5px solid var(--border);border-radius:20px;padding:22px;margin-bottom:20px}
+.mode-badge-row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.mode-big-badge{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:white;font-family:'Playfair Display',serif;font-size:24px;font-weight:800}
+.mode-title{font-size:22px;font-weight:700}
+.mode-subtitle{font-size:13px;color:var(--muted)}
+.mode-stats{background:#FFF5EC;border-radius:12px;padding:12px 16px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;text-align:center}
+.stat-num{font-size:22px;font-weight:800}
+.stat-lbl{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase}
+.mode-section-title{font-size:13px;font-weight:700;color:var(--mid);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
+.mode-cards{display:grid;gap:10px;margin-bottom:14px}
+.mode-btn{color:white;border:none;border-radius:16px;padding:18px 22px;text-align:left;cursor:pointer;transition:all .2s}
+.mode-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.mode-btn-icon{font-size:26px;margin-bottom:6px;display:block}
+.mode-btn-name{font-size:17px;font-weight:800;margin-bottom:3px}
+.mode-btn-desc{font-size:13px;opacity:.85}
+.btn-reset{background:transparent;border:1.5px dashed var(--border);border-radius:12px;padding:10px 18px;font-size:12px;color:var(--muted);font-weight:600;width:100%;transition:all .2s}
+.btn-reset:hover{border-color:var(--red);color:var(--red)}
+
+/* FLASHCARD */
+.fc-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.fc-counter{font-size:13px;font-weight:600;color:var(--muted)}
+.fc-badge{color:white;border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700}
+.fc-known{font-size:13px;font-weight:700}
+.fc-progress-bg{background:var(--lite);border-radius:8px;height:6px;margin-bottom:22px;overflow:hidden}
+.fc-progress{height:100%;border-radius:8px;transition:width .4s ease}
+.flip-card{height:240px;margin-bottom:18px;perspective:1200px;cursor:pointer}
+.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.flip-inner.flipped{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;top:0;left:0;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:28px;text-align:center}
+.flip-front{background:white;border:2px solid var(--border)}
+.flip-back{background:linear-gradient(135deg,var(--red),var(--red2));transform:rotateY(180deg)}
+.flip-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.flip-word{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;line-height:1.2}
+.flip-hint{font-size:12px;opacity:.5}
+.flip-front .flip-label{color:var(--muted)}
+.flip-front .flip-word{color:var(--dark)}
+.flip-back .flip-label{color:rgba(255,255,255,.65)}
+.flip-back .flip-word{color:white}
+.fc-speak-row{display:flex;justify-content:center;margin-bottom:14px}
+.btn-speak{background:transparent;border:1.5px solid var(--border);border-radius:10px;padding:8px 18px;font-size:13px;color:var(--mid);font-weight:600;transition:all .2s;display:flex;align-items:center;gap:6px}
+.btn-speak:hover{background:var(--lite)}
+.fc-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn-dont-know{background:white;border:2px solid var(--border);border-radius:14px;padding:14px;font-size:14px;font-weight:700;color:#C45C0A;transition:all .2s}
+.btn-dont-know:hover{border-color:#C45C0A;background:#FFF5EC}
+.btn-know{background:#27AE60;border:none;border-radius:14px;padding:14px;font-size:14px;font-weight:700;color:white;transition:all .2s;box-shadow:0 3px 10px rgba(39,174,96,.3)}
+.btn-know:hover{background:#219653;transform:translateY(-1px)}
+.fc-tip{text-align:center;font-size:11px;color:#C4A882;margin-top:10px}
+
+/* QUIZ */
+.quiz-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.quiz-badge{color:white;border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700}
+.quiz-remaining{background:#FFF5EC;border-radius:10px;padding:6px 12px;display:flex;align-items:center;gap:5px}
+.quiz-remaining-lbl{font-size:12px;font-weight:600;color:var(--muted)}
+.quiz-remaining-num{font-size:16px;font-weight:800;color:#E67E22}
+.quiz-card{background:white;border:2px solid var(--border);border-radius:22px;padding:26px;text-align:center;margin-bottom:18px;transition:border-color .3s}
+.quiz-card.correct{border-color:#27AE60;background:#FAFFF9}
+.quiz-card.wrong{border-color:var(--red);background:#FFF9F9}
+.quiz-q-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.quiz-word{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--dark);margin-bottom:16px;line-height:1.2}
+.quiz-opts{display:grid;gap:9px;margin-bottom:14px}
+.opt-btn{background:white;border:2px solid var(--border);border-radius:14px;padding:13px 16px;font-size:15px;font-weight:600;color:var(--dark);text-align:left;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px}
+.opt-btn:not(.answered):hover{border-color:var(--muted);background:#FAFAF8}
+.opt-btn.answered{cursor:default}
+.opt-btn.correct-ans{background:var(--sbg);border-color:#27AE60;color:var(--success)}
+.opt-btn.wrong-ans{background:var(--ebg);border-color:var(--red);color:var(--red)}
+.opt-btn.neutral-ans{opacity:.45}
+.opt-key{display:inline-flex;width:26px;height:26px;border-radius:7px;background:var(--lite);align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0}
+.opt-btn.correct-ans .opt-key{background:#C8E6C9;color:var(--success)}
+.opt-btn.wrong-ans .opt-key{background:#FFCDD2;color:var(--red)}
+.quiz-feedback{border-radius:12px;padding:12px 16px;margin-bottom:10px;font-size:13px;font-weight:700;text-align:center}
+.quiz-feedback.ok{background:var(--sbg);border:1.5px solid #27AE60;color:var(--success)}
+.quiz-feedback.err{background:var(--ebg);border:1.5px solid var(--red);color:var(--red)}
+.btn-next{width:100%;background:var(--dark);color:white;border:none;border-radius:14px;padding:15px;font-size:15px;font-weight:700;transition:all .2s}
+.btn-next:hover{background:#1a0a00;transform:translateY(-1px)}
+
+/* DONE */
+.done-screen{text-align:center;padding:48px 16px}
+.done-emoji{font-size:72px;margin-bottom:16px;display:block}
+.done-title{font-size:28px;font-weight:700;margin-bottom:8px}
+.done-sub{color:var(--muted);margin-bottom:30px;font-size:15px}
+.done-card{background:white;border:1.5px solid var(--border);border-radius:20px;padding:26px;margin-bottom:30px}
+.done-pct{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;margin-bottom:4px}
+.done-pct-label{font-size:14px;color:var(--muted);margin-bottom:16px}
+.done-bar-bg{background:var(--lite);border-radius:8px;height:10px;overflow:hidden;margin-bottom:12px}
+.done-bar{height:100%;border-radius:8px;transition:width .6s ease}
+.done-stats{font-size:13px;color:var(--mid);font-weight:600}
+.btn-done-back{background:var(--red);color:white;border:none;border-radius:14px;padding:15px 40px;font-size:15px;font-weight:700;transition:all .2s}
+.btn-done-back:hover{background:var(--red2);transform:translateY(-2px)}
+
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#C4A882;border-radius:3px}
 </style>
 </head>
 <body>
-<div id="app"></div>
+
+<nav id="navbar">
+  <div class="nav-brand">
+    <span class="nav-title">🇪🇸 Español</span>
+    <span class="nav-sub">Nauka słówek CEFR</span>
+  </div>
+  <button class="btn-back" id="navBack" style="display:none" onclick="goBack()">← Wróć</button>
+</nav>
+
+<!-- HOME -->
+<div class="screen active" id="scHome">
+  <div class="home-hero">
+    <span class="home-flag">🇪🇸</span>
+    <h1 class="home-title">Español</h1>
+    <p class="home-sub">Nauka słownictwa CEFR</p>
+    <p class="home-desc">3000+ słówek &middot; Poziomy A1–C2 &middot; Fiszki i Quizy</p>
+    <div class="home-features">
+      <div class="feat">📚 500 słów</div>
+      <div class="feat">🎯 6 poziomów</div>
+      <div class="feat">🔊 Wymowa</div>
+      <div class="feat">✅ Fiszki</div>
+      <div class="feat">🧩 Quiz 4-opt.</div>
+      <div class="feat">📊 Postęp</div>
+    </div>
+    <button class="btn-start" onclick="showScreen('scLevels')">Rozpocznij naukę →</button>
+  </div>
+</div>
+
+<!-- LEVEL SELECT -->
+<div class="screen" id="scLevels">
+  <h2 class="screen-title serif">Wybierz poziom</h2>
+  <p class="screen-sub">Kliknij poziom, aby rozpocząć naukę</p>
+  <div class="level-list" id="levelList"></div>
+</div>
+
+<!-- MODE SELECT -->
+<div class="screen" id="scMode">
+  <div class="mode-header">
+    <div class="mode-badge-row">
+      <div class="mode-big-badge" id="modeBadge"></div>
+      <div>
+        <div class="mode-title serif" id="modeTitle"></div>
+        <div class="mode-subtitle" id="modeSubtitle"></div>
+      </div>
+    </div>
+    <div class="mode-stats" id="modeStats"></div>
+  </div>
+  <p class="mode-section-title">Wybierz tryb nauki</p>
+  <div class="mode-cards">
+    <button class="mode-btn" style="background:#B71C1C;box-shadow:0 4px 16px rgba(183,28,28,.25)" onclick="startFC()">
+      <span class="mode-btn-icon">📚</span>
+      <div class="mode-btn-name">Fiszki</div>
+      <div class="mode-btn-desc">Przeglądaj słówka, obracaj kartę, oznaczaj jako znane</div>
+    </button>
+    <button class="mode-btn" style="background:#C45C0A;box-shadow:0 4px 16px rgba(196,92,10,.25)" onclick="startQuiz()">
+      <span class="mode-btn-icon">🧩</span>
+      <div class="mode-btn-name">Quiz</div>
+      <div class="mode-btn-desc">4 opcje odpowiedzi &middot; błędne słowa wracają do puli</div>
+    </button>
+  </div>
+  <button class="btn-reset" onclick="resetLevel()">🔄 Zresetuj postęp dla tego poziomu</button>
+</div>
+
+<!-- FLASHCARD -->
+<div class="screen" id="scFC">
+  <div class="fc-topbar">
+    <span class="fc-counter" id="fcCounter"></span>
+    <span class="fc-badge" id="fcBadge"></span>
+    <span class="fc-known" id="fcKnown"></span>
+  </div>
+  <div class="fc-progress-bg"><div class="fc-progress" id="fcProgress"></div></div>
+  <div class="flip-card" id="flipCard" onclick="flipCard()">
+    <div class="flip-inner" id="flipInner">
+      <div class="flip-front">
+        <span class="flip-label">Hiszpański</span>
+        <span class="flip-word" id="fcWord"></span>
+        <span class="flip-hint">Dotknij, aby obrócić</span>
+      </div>
+      <div class="flip-back">
+        <span class="flip-label">Polskie tłumaczenie</span>
+        <span class="flip-word" id="fcTrans"></span>
+      </div>
+    </div>
+  </div>
+  <div class="fc-speak-row">
+    <button class="btn-speak" onclick="speakWord()">🔊 Wymów po hiszpańsku</button>
+  </div>
+  <div class="fc-btns">
+    <button class="btn-dont-know" onclick="fcAnswer(false)">✗ Nie znam</button>
+    <button class="btn-know" onclick="fcAnswer(true)">✓ Znam!</button>
+  </div>
+  <p class="fc-tip" id="fcTip">Obróć kartę, żeby zobaczyć tłumaczenie</p>
+</div>
+
+<!-- QUIZ -->
+<div class="screen" id="scQuiz">
+  <div class="quiz-topbar">
+    <span class="quiz-badge" id="quizBadge"></span>
+    <div class="quiz-remaining">
+      <span class="quiz-remaining-lbl">Do nauki:</span>
+      <span class="quiz-remaining-num" id="quizRemaining">0</span>
+      <span class="quiz-remaining-lbl">słów</span>
+    </div>
+  </div>
+  <div class="quiz-card" id="quizCard">
+    <div class="quiz-q-label">Jak to się tłumaczy?</div>
+    <div class="quiz-word" id="quizWord"></div>
+    <button class="btn-speak" style="margin:0 auto" onclick="speakQuizWord()">🔊 Wymów</button>
+  </div>
+  <div class="quiz-opts" id="quizOpts"></div>
+  <div id="quizFeedback" style="display:none"></div>
+  <button class="btn-next" id="btnNext" style="display:none" onclick="nextQuestion()">Następne słówko →</button>
+</div>
+
+<!-- DONE -->
+<div class="screen" id="scDone">
+  <div class="done-screen">
+    <span class="done-emoji">🎉</span>
+    <h2 class="done-title serif">Sesja zakończona!</h2>
+    <p class="done-sub" id="doneSub"></p>
+    <div class="done-card">
+      <div class="done-pct serif" id="donePct"></div>
+      <div class="done-pct-label">ukończone</div>
+      <div class="done-bar-bg"><div class="done-bar" id="doneBar"></div></div>
+      <div class="done-stats" id="doneStats"></div>
+    </div>
+    <button class="btn-done-back" onclick="showScreen('scMode')">← Powrót do wyboru trybu</button>
+  </div>
+</div>
+
 <script>
-const WORDS_DATA = EOF
-cat /tmp/words.json >> /mnt/user-data/outputs/slowka_500.html
-cat >> /mnt/user-data/outputs/slowka_500.html << 'EOF';
+const VOCAB = {
+A1:[
+["hola","cześć / hej"],["adiós","do widzenia"],["por favor","proszę"],["gracias","dziękuję"],["de nada","nie ma za co"],["sí","tak"],["no","nie"],["buenos días","dzień dobry (rano)"],["buenas tardes","dzień dobry (po południu)"],["buenas noches","dobranoc"],["lo siento","przepraszam / przykro mi"],["perdón","przepraszam"],["con permiso","z przeproszeniem"],["bienvenido","witaj / witamy"],["hasta luego","do zobaczenia"],["hasta mañana","do jutra"],["mucho gusto","miło mi / miło poznać"],["encantado","zachwycony / miło mi"],["bien","dobrze"],["mal","źle"],
+["yo","ja"],["tú","ty"],["él","on"],["ella","ona"],["nosotros","my"],["vosotros","wy"],["ellos","oni"],["ellas","one"],["usted","pan / pani (formalnie)"],["ustedes","państwo (formalnie)"],
+["uno","jeden"],["dos","dwa"],["tres","trzy"],["cuatro","cztery"],["cinco","pięć"],["seis","sześć"],["siete","siedem"],["ocho","osiem"],["nueve","dziewięć"],["diez","dziesięć"],["once","jedenaście"],["doce","dwanaście"],["trece","trzynaście"],["catorce","czternaście"],["quince","piętnaście"],["veinte","dwadzieścia"],["treinta","trzydzieści"],["cuarenta","czterdzieści"],["cincuenta","pięćdziesiąt"],["sesenta","sześćdziesiąt"],["setenta","siedemdziesiąt"],["ochenta","osiemdziesiąt"],["noventa","dziewięćdziesiąt"],["cien","sto"],["mil","tysiąc"],
+["lunes","poniedziałek"],["martes","wtorek"],["miércoles","środa"],["jueves","czwartek"],["viernes","piątek"],["sábado","sobota"],["domingo","niedziela"],
+["enero","styczeń"],["febrero","luty"],["marzo","marzec"],["abril","kwiecień"],["mayo","maj"],["junio","czerwiec"],["julio","lipiec"],["agosto","sierpień"],["septiembre","wrzesień"],["octubre","październik"],["noviembre","listopad"],["diciembre","grudzień"],
+["primavera","wiosna"],["verano","lato"],["otoño","jesień"],["invierno","zima"],
+["rojo","czerwony"],["azul","niebieski"],["verde","zielony"],["amarillo","żółty"],["naranja","pomarańczowy"],["morado","fioletowy"],["rosa","różowy"],["negro","czarny"],["blanco","biały"],["gris","szary"],["marrón","brązowy"],["beige","beżowy"],
+["ser","być (cecha stała)"],["estar","być (stan / miejsce)"],["tener","mieć"],["hacer","robić"],["ir","iść / jechać"],["venir","przychodzić"],["querer","chcieć / kochać"],["poder","móc"],["saber","wiedzieć / umieć"],["hablar","mówić"],["comer","jeść"],["beber","pić"],["vivir","żyć / mieszkać"],["trabajar","pracować"],["estudiar","uczyć się"],["leer","czytać"],["escribir","pisać"],["escuchar","słuchać"],["ver","widzieć"],["mirar","patrzeć / oglądać"],["comprar","kupować"],["vender","sprzedawać"],["abrir","otwierać"],["cerrar","zamykać"],["dar","dawać"],["tomar","brać"],["llevar","nosić / zabrać"],["traer","przynosić"],["volver","wracać"],["salir","wychodzić"],["entrar","wchodzić"],["llegar","docierać / przyjeżdżać"],["poner","stawiać / kłaść"],["dormir","spać"],["despertar","budzić się"],["cocinar","gotować"],["limpiar","sprzątać"],["ayudar","pomagać"],["llamar","dzwonić / nazywać"],["necesitar","potrzebować"],["buscar","szukać"],["encontrar","znajdować"],["usar","używać"],["jugar","grać / bawić się"],["pagar","płacić"],["esperar","czekać"],["preguntar","pytać"],["contestar","odpowiadać"],["pensar","myśleć"],["creer","wierzyć / uważać"],["conocer","znać (osobę)"],["amar","kochać"],["gustar","lubić / podobać się"],["reír","śmiać się"],["llorar","płakać"],
+["madre","matka"],["padre","ojciec"],["hermano","brat"],["hermana","siostra"],["abuelo","dziadek"],["abuela","babcia"],["hijo","syn"],["hija","córka"],["tío","wujek"],["tía","ciotka"],["primo","kuzyn"],["prima","kuzynka"],["esposo","mąż"],["esposa","żona"],["bebé","niemowlę"],["familia","rodzina"],["niño","dziecko / chłopiec"],["niña","dziewczynka"],["chico","chłopak"],["chica","dziewczyna"],["padrino","ojciec chrzestny"],["madrina","matka chrzestna"],["sobrino","siostrzeniec"],["sobrina","siostrzenica"],["cuñado","szwagier"],
+["cabeza","głowa"],["cara","twarz"],["ojo","oko"],["oreja","ucho"],["nariz","nos"],["boca","usta"],["diente","ząb"],["pelo","włosy"],["cuello","szyja"],["hombro","ramię"],["brazo","ręka (ramię)"],["mano","dłoń"],["dedo","palec"],["pecho","klatka piersiowa"],["espalda","plecy"],["estómago","żołądek"],["pierna","noga"],["rodilla","kolano"],["pie","stopa"],["corazón","serce"],
+["pan","chleb"],["leche","mleko"],["agua","woda"],["café","kawa"],["té","herbata"],["zumo","sok"],["vino","wino"],["cerveza","piwo"],["carne","mięso"],["pollo","kurczak"],["pescado","ryba (do jedzenia)"],["arroz","ryż"],["pasta","makaron"],["ensalada","sałatka"],["fruta","owoce"],["manzana","jabłko"],["naranja","pomarańcza"],["plátano","banan"],["uva","winogrono"],["tomate","pomidor"],["lechuga","sałata"],["zanahoria","marchewka"],["cebolla","cebula"],["ajo","czosnek"],["patata","ziemniak"],["queso","ser"],["huevo","jajko"],["azúcar","cukier"],["sal","sól"],["aceite","oliwa / olej"],["mantequilla","masło"],["sopa","zupa"],["bocadillo","kanapka"],["sandía","arbuz"],["fresa","truskawka"],["pera","gruszka"],["limón","cytryna"],["piña","ananas"],["melocotón","brzoskwinia"],["cereza","wiśnia"],["yogur","jogurt"],["jamón","szynka"],["tortilla","tortilla / omlet"],
+["casa","dom"],["apartamento","mieszkanie"],["habitación","pokój"],["cocina","kuchnia"],["baño","łazienka"],["sala","salon"],["dormitorio","sypialnia"],["jardín","ogród"],["ventana","okno"],["puerta","drzwi"],["techo","sufit / dach"],["suelo","podłoga"],["pared","ściana"],["mesa","stół"],["silla","krzesło"],["sofá","sofa"],["cama","łóżko"],["armario","szafa"],["lámpara","lampa"],["televisor","telewizor"],["nevera","lodówka"],["ducha","prysznic"],["escalera","schody"],["balcón","balkon"],["garaje","garaż"],
+["perro","pies"],["gato","kot"],["pájaro","ptak"],["pez","ryba (akwariowa)"],["caballo","koń"],["vaca","krowa"],["cerdo","świnia"],["oveja","owca"],["conejo","królik"],["ratón","mysz"],["elefante","słoń"],["león","lew"],["tigre","tygrys"],["oso","niedźwiedź"],["mono","małpa"],["jirafa","żyrafa"],["delfín","delfin"],["serpiente","wąż"],["mariposa","motyl"],["araña","pająk"],
+["coche","samochód"],["autobús","autobus"],["tren","pociąg"],["avión","samolot"],["barco","statek"],["bicicleta","rower"],["moto","motocykl"],["taxi","taksówka"],["metro","metro"],["billete","bilet"],["estación","stacja"],["aeropuerto","lotnisko"],["parada","przystanek"],["conducir","prowadzić auto"],["puerto","port"],
+["ciudad","miasto"],["pueblo","wioska / miasteczko"],["país","kraj"],["calle","ulica"],["plaza","plac"],["parque","park"],["tienda","sklep"],["supermercado","supermarket"],["hospital","szpital"],["escuela","szkoła"],["universidad","uniwersytet"],["biblioteca","biblioteka"],["restaurante","restauracja"],["hotel","hotel"],["iglesia","kościół"],["banco","bank"],["farmacia","apteka"],["mercado","targ / rynek"],["museo","muzeum"],["teatro","teatr"],["oficina","biuro"],["bar","bar"],["cafetería","kawiarnia"],["playa","plaża"],["montaña","góra"],
+["grande","duży"],["pequeño","mały"],["bueno","dobry"],["malo","zły"],["bonito","ładny / piękny"],["feo","brzydki"],["nuevo","nowy"],["viejo","stary"],["joven","młody"],["alto","wysoki"],["bajo","niski"],["gordo","gruby / otyły"],["delgado","chudy / szczupły"],["fuerte","silny"],["débil","słaby"],["rápido","szybki"],["lento","wolny"],["caro","drogi"],["barato","tani"],["fácil","łatwy"],["difícil","trudny"],["frío","zimny"],["caliente","gorący"],["limpio","czysty"],["sucio","brudny"],["lleno","pełny"],["vacío","pusty"],["feliz","szczęśliwy"],["triste","smutny"],["cansado","zmęczony"],["enfermo","chory"],["sano","zdrowy"],["rico","bogaty / smaczny"],["pobre","biedny"],["abierto","otwarty"],["cerrado","zamknięty"],["corto","krótki"],["largo","długi"],["oscuro","ciemny"],["claro","jasny"],
+["día","dzień"],["noche","noc"],["mañana","jutro / ranek"],["tarde","popołudnie"],["año","rok"],["mes","miesiąc"],["semana","tydzień"],["hora","godzina"],["minuto","minuta"],["tiempo","czas / pogoda"],["trabajo","praca"],["dinero","pieniądze"],["libro","książka"],["palabra","słowo"],["nombre","imię / nazwa"],["número","numer / liczba"],["mundo","świat"],["vida","życie"],["gente","ludzie"],["amigo","przyjaciel"],["hombre","mężczyzna"],["mujer","kobieta"],["persona","osoba"],["teléfono","telefon"],["ordenador","komputer"],["problema","problem"],["cosa","rzecz"],["lugar","miejsce"],["vez","raz"],["momento","moment"],["luz","światło"],
+["qué","co"],["quién","kto"],["dónde","gdzie"],["cuándo","kiedy"],["cómo","jak"],["por qué","dlaczego"],["cuánto","ile"],["cuál","który"],
+["ropa","ubranie"],["camisa","koszula"],["pantalón","spodnie"],["vestido","sukienka"],["falda","spódnica"],["zapatos","buty"],["calcetines","skarpety"],["abrigo","płaszcz"],["chaqueta","kurtka / marynarka"],["jersey","sweter"],["sombrero","kapelusz"],["bolso","torebka"],["cinturón","pasek"],["gorro","czapka"],["bufanda","szalik"],
+["sol","słońce"],["lluvia","deszcz"],["nieve","śnieg"],["viento","wiatr"],["nublado","pochmurno"],["temperatura","temperatura"],["niebla","mgła"],["tormenta","burza"],["calor","gorąco / upał"],
+["muy","bardzo"],["mucho","dużo"],["poco","mało / trochę"],["aquí","tutaj"],["allí","tam"],["ahora","teraz"],["hoy","dzisiaj"],["ayer","wczoraj"],["siempre","zawsze"],["nunca","nigdy"],["también","też / również"],["ya","już"],["todavía","jeszcze / nadal"],["más","więcej / bardziej"],["menos","mniej"],["solo","sam / tylko"],["quizás","może"],
+["árbol","drzewo"],["flor","kwiat"],["río","rzeka"],["mar","morze"],["lago","jezioro"],["tierra","ziemia"],["cielo","niebo"],["luna","księżyc"],["estrella","gwiazda"],["bosque","las"],
+["lápiz","ołówek"],["bolígrafo","długopis"],["cuaderno","zeszyt"],["mochila","plecak"],["papel","papier"],["tijeras","nożyczki"],["regla","linijka"],["goma","gumka"],
+["fútbol","piłka nożna"],["baloncesto","koszykówka"],["tenis","tenis"],["natación","pływanie"],["deporte","sport"],["pelota","piłka"],["equipo","drużyna / zespół"],["música","muzyka"],["película","film"],["canción","piosenka"],["foto","zdjęcie"],["color","kolor"],
+["derecha","prawo (kierunek)"],["izquierda","lewo"],["lejos","daleko"],["cerca","blisko"],["arriba","w górę / na górze"],["abajo","w dół / na dole"],["dentro","w środku"],["fuera","na zewnątrz"],["antes","przed / wcześniej"],["después","po / potem"],
+["con","z"],["sin","bez"],["para","dla / żeby"],["sobre","na / o"],["debajo","pod"],["entre","między"],["pero","ale"],["porque","ponieważ"],["si","jeśli"],["cuando","kiedy"],["también","również"],["o","lub / albo"],["y","i"],["ni","ani"],["todo","wszystko / każdy"],["nada","nic"],["alguien","ktoś"],["nadie","nikt"],["algo","coś"],["primero","pierwszy"],["segundo","drugi"],["último","ostatni"],["próximo","następny / najbliższy"],["mismo","ten sam"],["otro","inny"],["cada","każdy"],["algunos","kilka / niektóre"],["todos","wszyscy"],["ambos","oboje / obydwa"]
+],
 
-let state = { view: 'home', level: null, idx: 0, flipped: false, quiz: [], qIdx: 0, score: 0, answered: false };
+A2:[
+["aprender","uczyć się"],["enseñar","uczyć (kogoś)"],["explicar","wyjaśniać"],["entender","rozumieć"],["recordar","pamiętać"],["olvidar","zapominać"],["cambiar","zmieniać"],["ganar","wygrywać / zarabiać"],["perder","przegrywać / tracić"],["terminar","kończyć"],["empezar","zaczynać"],["continuar","kontynuować"],["parar","zatrzymywać się"],["visitar","odwiedzać"],["parecer","wydawać się"],["quedar","zostawać / umawiać się"],["costar","kosztować"],["funcionar","działać"],["conseguir","zdobywać / osiągać"],["intentar","próbować"],["decidir","decydować"],["preferir","woleć"],["elegir","wybierać"],["viajar","podróżować"],["descansar","odpoczywać"],["divertirse","dobrze się bawić"],["aburrirse","nudzić się"],["enfadarse","złościć się"],["mejorar","poprawiać się"],["construir","budować"],["romper","łamać / zrywać"],["arreglar","naprawiać"],["preparar","przygotowywać"],["crear","tworzyć"],["compartir","dzielić się"],["enviar","wysyłar"],["recibir","otrzymywać"],["reservar","rezerwować"],["invitar","zapraszać"],["celebrar","świętować"],["planear","planować"],["resolver","rozwiązywać"],["proteger","chronić"],["cuidar","dbać / opiekować się"],["crecer","rosnąć"],["cargar","ładować"],["instalar","instalować"],["conectar","łączyć / podłączać"],["descargar","pobierać"],["cantar","śpiewać"],["bailar","tańczyć"],["pintar","malować"],["dibujar","rysować"],["alquilar","wynajmować"],["ahorrar","oszczędzać"],["gastar","wydawać (pieniądze)"],["prestar","pożyczać"],["robar","kraść"],["perdonar","przebaczać"],["agradecer","dziękować / być wdzięcznym"],["felicitar","gratulować"],["saludar","witać / pozdrawiać"],
+["lavadora","pralka"],["lavavajillas","zmywarka"],["microondas","kuchenka mikrofalowa"],["horno","piekarnik"],["aspiradora","odkurzacz"],["plancha","żelazko"],["toalla","ręcznik"],["almohada","poduszka"],["sábana","prześcieradło"],["manta","koc"],["cortina","zasłona"],["alfombra","dywan"],["cuadro","obraz"],["estantería","półka"],["cajón","szuflada"],["caja","pudełko"],["llave","klucz"],["cerradura","zamek (w drzwiach)"],["espejo","lustro"],["cojín","poduszka dekoracyjna"],
+["médico","lekarz"],["enfermero","pielęgniarz"],["medicina","lekarstwo"],["pastilla","tabletka"],["dolor","ból"],["fiebre","gorączka"],["resfriado","przeziębienie"],["gripe","grypa"],["herida","rana"],["sangre","krew"],["operación","operacja"],["cita","wizyta / randka"],["seguro","ubezpieczenie"],["receta","recepta / przepis"],["inyección","zastrzyk"],["alergia","alergia"],["salud","zdrowie"],["embarazo","ciąża"],["dieta","dieta"],["dentista","dentysta"],
+["amor","miłość"],["odio","nienawiść"],["miedo","strach"],["alegría","radość"],["tristeza","smutek"],["sorpresa","niespodzianka"],["vergüenza","wstyd"],["orgullo","duma"],["envidia","zawiść"],["celos","zazdrość o partnera"],["esperanza","nadzieja"],["emoción","emocja"],["sentimiento","uczucie"],["humor","humor / nastrój"],["estrés","stres"],["ansiedad","lęk / niepokój"],["felicidad","szczęście"],["soledad","samotność"],["aburrimiento","nuda"],["ira","gniew"],
+["precio","cena"],["descuento","zniżka"],["oferta","oferta / promocja"],["tarjeta","karta"],["efectivo","gotówka"],["recibo","paragon"],["talla","rozmiar ubrania"],["devolución","zwrot"],["marca","marka"],["calidad","jakość"],["cliente","klient"],["vendedor","sprzedawca"],["escaparate","witryna sklepowa"],["compra","zakup"],["cobrar","pobierać / zarabiać"],
+["viaje","podróż"],["destino","cel podróży"],["turista","turysta"],["mapa","mapa"],["ruta","trasa"],["excursión","wycieczka"],["maleta","walizka"],["pasaporte","paszport"],["visado","wiza"],["reserva","rezerwacja"],["recepción","recepcja"],["guía","przewodnik"],["monumento","zabytek / pomnik"],["paisaje","krajobraz"],["souvenirs","pamiątki"],["aduana","urząd celny"],["frontera","granica"],["vuelo","lot"],["equipaje","bagaż"],["alojamiento","zakwaterowanie"],
+["trabajo","praca"],["jefe","szef"],["empleado","pracownik"],["empresa","firma"],["oficina","biuro"],["reunión","spotkanie / zebranie"],["proyecto","proyecto"],["sueldo","wynagrodzenie"],["contrato","umowa"],["vacaciones","urlop / wakacje"],["horario","harmonogram"],["profesión","zawód"],["abogado","prawnik"],["profesor","nauczyciel"],["ingeniero","inżynier"],["arquitecto","architekt"],["cocinero","kucharz"],["periodista","dziennikarz"],["actor","aktor"],["músico","muzyk"],["artista","artysta"],["científico","naukowiec"],["policía","policjant"],["bombero","strażak"],["conductor","kierowca"],
+["menú","menu"],["plato","danie / talerz"],["postre","deser"],["entrante","przystawka"],["cuenta","rachunek"],["camarero","kelner"],["propina","napiwek"],["carta","karta dań"],["especialidad","specjalność"],["receta","przepis kulinarny"],["sabor","smak"],["dulce","słodki"],["salado","słony"],["picante","ostry / pikantny"],["amargo","gorzki"],["ácido","kwaśny"],["frito","smażony"],["asado","pieczony"],["hervido","gotowany"],["crudo","surowy"],
+["inteligente","inteligentny"],["tonto","głupi"],["simpático","miły / sympatyczny"],["antipático","antypatyczny"],["amable","uprzejmy"],["grosero","grubiański"],["serio","poważny"],["gracioso","śmieszny"],["nervioso","zdenerwowany"],["tranquilo","spokojny"],["activo","aktywny"],["perezoso","leniwy"],["generoso","hojny"],["egoísta","egoistyczny"],["honesto","uczciwy"],["mentiroso","kłamliwy"],["peligroso","niebezpieczny"],["posible","możliwy"],["imposible","niemożliwy"],["necesario","konieczny"],["importante","ważny"],["interesante","interesujący"],["aburrido","nudny"],["sencillo","prosty"],["moderno","nowoczesny"],["antiguo","stary / starożytny"],["famoso","sławny"],["útil","użyteczny"],["libre","wolny"],["ocupado","zajęty"],["cómodo","wygodny"],["pesado","ciężki"],["ligero","lekki"],["duro","twardy"],["blando","miękki"],["suave","delikatny / miękki"],["húmedo","wilgotny"],["seco","suchy"],["mojado","mokry"],["fresco","świeży / chłodny"],
+["colegio","szkoła (podstawowa/średnia)"],["instituto","liceum"],["clase","klasa / lekcja"],["alumno","uczeń"],["asignatura","przedmiot szkolny"],["examen","egzamin"],["nota","ocena"],["aprobar","zdać egzamin"],["suspender","oblać egzamin"],["deberes","zadanie domowe"],["recreo","przerwa szkolna"],["diploma","dyplom"],["beca","stypendium"],["conocimiento","wiedza"],["lección","lekcja"],
+["amistad","przyjaźń"],["pareja","para"],["boda","ślub / wesele"],["divorcio","rozwód"],["enamorarse","zakochiwać się"],["casarse","żenić się"],["separarse","rozstawać się"],["confianza","zaufanie"],["respeto","szacunek"],["cariño","czułość"],["novio","chłopak / narzeczony"],["novia","dziewczyna / narzeczona"],["soltero","kawaler"],["soltera","niezamężna"],["viudo","wdowiec"],
+["aplicación","aplikacja"],["red","sieć"],["contraseña","hasło"],["pantalla","ekran"],["teclado","klawiatura"],["impresora","drukarka"],["archivo","plik"],["correo electrónico","e-mail"],["mensaje","wiadomość"],["llamada","połączenie telefoniczne"],["batería","bateria"],["cargador","ładowarka"],["Wi-Fi","Wi-Fi"],["internet","internet"],["página web","strona internetowa"],["usuario","użytkownik"],["actualizar","aktualizować"],["guardar","zapisywać"],["borrar","usuwać"],["programa","program"],
+["campo","wieś / pole"],["desierto","pustynia"],["isla","wyspa"],["costa","wybrzeże"],["norte","północ"],["sur","południe"],["este","wschód"],["oeste","zachód"],["centro","centrum"],["barrio","dzielnica"],["edificio","budynek"],["ascensor","winda"],["piso","piętro / mieszkanie"],["zona","strefa / obszar"],["carretera","droga / szosa"],["autopista","autostrada"],["kilómetro","kilometr"],["distancia","odległość"],["velocidad","prędkość"],["accidente","wypadek"],
+["éxito","sukces"],["fracaso","porażka"],["error","błąd"],["decisión","decyzja"],["opción","opcja"],["oportunidad","okazja"],["ventaja","zaleta / przewaga"],["desventaja","wada"],["diferencia","różnica"],["solución","rozwiązanie"],["duda","wątpliwość"],["noticia","wiadomość (news)"],["opinión","opinia"],["consejo","rada"],["promesa","obietnica"],
+["segundo","sekunda"],["mediodía","południe (godzina)"],["medianoche","północ (godzina)"],["amanecer","wschód słońca"],["atardecer","zachód słońca"],["plazo","termin"],["fecha","data"],["calendario","kalendarz"],["mientras","podczas gdy"],["durante","podczas"],["desde","od (czasu)"],["hasta","do (czasu)"],
+["concierto","koncert"],["espectáculo","spektakl"],["entrada","wejście / bilet"],["cine","kino"],["exposición","wystawa"],["evento","wydarzenie"],["actuación","występ"],["videojuego","gra wideo"],["pasatiempo","hobby"],
+["hambre","głód"],["sed","pragnienie"],["sueño","senność"],["cansancio","zmęczenie"],["dolor de cabeza","ból głowy"],["dolor de estómago","ból żołądka"],["mareo","zawroty głowy"],["náuseas","mdłości"],
+["cuenta bancaria","konto bankowe"],["cajero automático","bankomat"],["transferencia","przelew"],["préstamo","pożyczka"],["factura","faktura"],["moneda","moneta / waluta"],["ahorros","oszczędności"],
+["cumpleaños","urodziny"],["aniversario","rocznica"],["Navidad","Boże Narodzenie"],["fiesta","impreza / święto"],["regalo","prezent"],
+["soleado","słoneczny"],["lluvioso","deszczowy"],["nevado","zaśnieżony"],["tormentoso","burzowy"],["ventoso","wietrzny"],["caluroso","upalny"],["nublado","pochmurny"],
+["redondo","okrągły"],["cuadrado","kwadratowy"],["ancho","szeroki"],["estrecho","wąski"],["profundo","głęboki"],["plano","płaski"],["recto","prosty"],["brillante","błyszczący"],["opaco","matowy"],["transparente","przezroczysty"],
+["correcto","poprawny"],["incorrecto","niepoprawny"],["verdadero","prawdziwy"],["falso","fałszywy"],["posible","możliwy"],["urgente","pilny"],["listo","gotowy / mądry"],["especial","specjalny"],["extraño","dziwny"],["perfecto","idealny"],["terrible","straszny"],
+["semáforo","sygnalizacja świetlna"],["señal","znak / sygnał"],["dirección","kierunek / adres"],["derecho","prawy / prosto"],["cruce","skrzyżowanie"],["acera","chodnik"],["aparcamiento","parking"],["gasolina","benzyna"],["multa","mandat"],
+["alergia al gluten","alergia na gluten"],["picadura","ukąszenie"],["hinchazón","obrzęk"],["cicatriz","blizna"],["presión arterial","ciśnienie krwi"],["pulso","puls"],["desmayo","zemdlenie"],["quemadura","oparzenie"],["fractura","złamanie"],["esguince","skręcenie"],
+["descafeinado","bezkofeinowy"],["almendra","migdał"],["nuez","orzech włoski"],["miel","miód"],["mermelada","dżem"],["vinagre","ocet"],["mostaza","musztarda"],["mayonesa","majonez"],["ketchup","ketchup"],["especias","przyprawy"],
+["bisabuelo","pradziadek"],["bisabuela","prababcia"],["cuñada","szwagierka"],["suegro","teść"],["suegra","teściowa"],["yerno","zięć"],["nuera","synowa"],["gemelos","bliźniacy"],["adoptado","adoptowany"],["guardería","żłobek / przedszkole"],
+["luna de miel","miesiąc miodowy"],["compromiso","zaręczyny / zobowiązanie"],["separación","separacja"],["convivir","mieszkać razem"],["adoptar","adoptować"],["heredar","dziedziczyć"],["mediación","mediacja"],["custodia","opieka nad dzieckiem"],["pensión alimenticia","alimenty"],
+["idioma","język (obcy)"],["gramática","gramatyka"],["vocabulario","słownictwo"],["pronunciación","wymowa"],["acento","akcent / akcent obcy"],["traducción","tłumaczenie"],["bilingüe","dwujęzyczny"],["nativo","rdzenny / tubylczy"],["extranjero","obcokrajowiec / zagraniczny"],["intercambio","wymiana językowa"],
+["madera","drewno"],["piedra","kamień"],["metal","metal"],["plástico","plastik"],["vidrio","szkło"],["tela","tkanina"],["cuero","skóra (materiał)"],["lana","wełna"],["algodón","bawełna"],["seda","jedwab"],
+["vacío","pusty"],["lleno","pełny"],["mezclado","zmieszany"],["separado","oddzielony"],["doblado","złożony / zgięty"],["roto","zepsuty / złamany"],["limpio","czysty"],["sucio","brudny"],["fresco","świeży"],["congelado","mrożony"],
+["préstamo bancario","pożyczka bankowa"],["hipoteca","kredyt hipoteczny"],["seguro de vida","ubezpieczenie na życie"],["pensión","emerytura"],["subsidio","zasiłek"],["impuesto","podatek"],["declaración","deklaracja podatkowa"],["IVA","VAT"],["bolsa de valores","giełda papierów wartościowych"],
+["descubierto","debet"],["reclamación","roszczenie / reklamacja"],["garantía","gwarancja"],["reembolso","zwrot pieniędzy"],["saldo","saldo"],,
+["peluquero","fryzjer"],
+["carpintero","stolarz / ciesla"],
+["fontanero","hydraulik"],
+["electricista","elektryk"],
+["mecánico","mechanik"],
+["veterinario","weterynarz"],
+["farmacéutico","farmaceuta"],
+["taxista","taksówkarz"],
+["recepcionista","recepcjonista"],
+["electricidad","elektrycznosc"],
+["fontanería","hydraulika"],
+["carpintería","stolarstwo"]
+],
 
-function speak(text) { if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = 'es-ES'; u.rate = 0.9; window.speechSynthesis.speak(u); } }
+B1:[
+["desarrollar","rozwijać"],["establecer","ustanawiać / zakładać"],["mantener","utrzymywać"],["obtener","uzyskiwać"],["proponer","proponować"],["realizar","realizować / wykonywać"],["reconocer","rozpoznawać / uznawać"],["reducir","zmniejszać"],["afectar","wpływać na"],["aplicar","stosować"],["aumentar","zwiększać"],["causar","powodować"],["comparar","porównywać"],["confirmar","potwierdzać"],["considerar","uważać / rozważać"],["contribuir","przyczyniać się"],["depender","zależeć"],["distinguir","rozróżniać"],["exigir","wymagać"],["existir","istnieć"],["expresar","wyrażać"],["facilitar","ułatwiać"],["imaginar","wyobrażać sobie"],["implicar","oznaczać / angażować"],["indicar","wskazywać"],["influir","wpływać"],["introducir","wprowadzać"],["lograr","osiągać"],["mostrar","pokazywać"],["permitir","pozwalać"],["presentar","przedstawiać"],["producir","produkować"],["relacionar","łączyć / wiązać"],["señalar","wskazywać / oznaczać"],["servir","służyć / nadawać się"],["significar","znaczyć"],["surgir","pojawiać się"],["suponer","zakładar"],["tratar","traktować / leczyć"],["utilizar","używać / wykorzystywać"],["analizar","analizować"],["interpretar","interpretować"],["demostrar","udowadniać"],["definir","definiować"],["observar","obserwować"],["controlar","kontrolować"],["aportar","wnosić / dostarczać"],["debatir","debatować"],["destacar","wyróżniać się"],["prevenir","zapobiegać"],["promover","promować"],
+["sociedad","społeczeństwo"],["cultura","kultura"],["gobierno","rząd"],["política","polityka"],["democracia","demokracja"],["ley","prawo / ustawa"],["derecho","prawo (uprawnienie)"],["ciudadano","obywatel"],["elección","wybory"],["partido","partia polityczna"],["libertad","wolność"],["igualdad","równość"],["justicia","sprawiedliwość"],["paz","pokój"],["guerra","wojna"],["conflicto","konflikt"],["crisis","kryzys"],["reforma","reforma"],["revolución","rewolucja"],["constitución","konstytucja"],["nación","naród"],["territorio","terytorium"],["emigración","emigracja"],["inmigración","imigracja"],["refugiado","uchodźca"],["solidaridad","solidarność"],["tolerancia","tolerancja"],["discriminación","dyskryminacja"],["pobreza","ubóstwo"],["desigualdad","nierówność"],["violencia","przemoc"],["protección","ochrona"],["seguridad","bezpieczeństwo"],["economía","gospodarka"],["industria","przemysł"],["comercio","handel"],["mercado","rynek"],["inflación","inflacja"],["desempleo","bezrobocie"],["inversión","inwestycja"],["globalización","globalizacja"],["desarrollo","rozwój"],["tecnología","tecnologia"],["innovación","innowacja"],["ciencia","nauka"],["investigación","badania"],["educación","edukacja"],["población","ludność"],["movimiento","ruch (społeczny)"],["campaña","kampania"],
+["medio ambiente","środowisko naturalne"],["contaminación","zanieczyszczenie"],["reciclaje","recykling"],["energía renovable","energia odnawialna"],["cambio climático","zmiana klimatu"],["calentamiento global","globalne ocieplenie"],["biodiversidad","bioróżnorodność"],["ecosistema","ekosystem"],["especie","gatunek"],["extinción","wyginięcie"],["conservación","ochrona / konserwacja"],["deforestación","wylesianie"],["huella de carbono","ślad węglowy"],["sostenibilidad","zrównoważony rozwój"],["residuos","odpady"],["emisiones","emisje"],["sequía","susza"],["inundación","powódź"],["desastre natural","katastrofa naturalna"],["agua potable","woda pitna"],
+["diagnóstico","diagnoza"],["tratamiento","leczenie"],["síntoma","objaw"],["enfermedad","choroba"],["crónico","chroniczny"],["infección","infekcja"],["virus","wirus"],["bacteria","bakteria"],["antibiótico","antybiotyk"],["vacuna","szczepionka"],["cirugía","chirurgia"],["radiografía","prześwietlenie rentgenowskie"],["urgencias","izba przyjęć"],["ambulancia","karetka"],["emergencia","nagły przypadek"],["nutrición","odżywianie"],["vitamina","witamina"],["proteína","białko"],["calorías","kalorie"],["ejercicio","ćwiczenie"],
+["gestión","zarządzanie"],["liderazgo","przywództwo"],["negociación","negocjacja"],["acuerdo","porozumienie / umowa"],["presupuesto","budżet"],["beneficio","zysk / korzyść"],["pérdida","strata"],["crecimiento","wzrost"],["competencia","konkurencja / kompetencja"],["estrategia","strategia"],["objetivo","cel"],["resultado","wynik"],["evaluación","ocena / ewaluacja"],["entrevista de trabajo","rozmowa kwalifikacyjna"],["currículum","CV / życiorys"],["ascenso","awans"],["formación","szkolenie"],["habilidad","umiejętność"],["responsabilidad","odpowiedzialność"],["iniciativa","inicjatywa"],
+["novela","powieść"],["poema","wiersz / poemat"],["cuento","opowiadanie"],["obra de teatro","sztuka teatralna"],["personaje","postać literacka"],["trama","fabuła"],["símbolo","symbol"],["metáfora","metafora"],["comedia","komedia"],["tragedia","tragedia"],["autobiografía","autobiografia"],["ensayo","esej"],["artículo","artykuł"],["reportaje","reportaż"],["entrevista","wywiad"],["pintura","malarstwo / obraz"],["escultura","rzeźba"],["arquitectura","architektura"],["danza","taniec"],["ópera","opera"],["literatura","literatura"],["patrimonio","dziedzictwo"],["tradición","tradycja"],["costumbre","zwyczaj"],["folclore","folklor"],["artesanía","rzemiosło"],["gastronomía","gastronomia"],["festividad","uroczystość / święto"],["celebración","uroczystość"],["música clásica","muzyka klasyczna"],
+["concepto","pojęcie"],["teoría","teoria"],["hipótesis","hipoteza"],["evidencia","dowód"],["argumento","argument"],["conclusión","wniosek"],["análisis","analiza"],["perspectiva","perspektywa"],["contexto","kontekst"],["consecuencia","konsekwencja"],["causa","przyczyna"],["efecto","efekt"],["condición","warunek"],["factor","czynnik"],["proceso","proces"],["sistema","system"],["estructura","struktura"],["modelo","model"],["principio","zasada"],["función","funkcja"],["valor","wartość"],["norma","norma"],["método","metoda"],["técnica","technika"],["dato","dane / fakt"],["estadística","statystyka"],["nivel","poziom"],["medida","miara / środek"],
+["comportamiento","zachowanie"],["personalidad","osobowość"],["carácter","charakter"],["actitud","postawa / nastawienie"],["motivación","motivacja"],["autoestima","poczucie własnej wartości"],["confianza en sí mismo","pewność siebie"],["depresión","depresja"],["ansiedad","niepokój / lęk"],["bienestar","dobre samopoczucie"],["identidad","tożsamość"],["valores","wartości moralne"],["creencia","przekonanie"],["prejuicio","uprzedzenie"],["estereotipo","stereotyp"],["empatía","empatia"],["compasión","współczucie"],["altruismo","altruizm"],
+["tribunal","sąd / trybunał"],["juez","sędzia"],["abogado","prawnik"],["acusado","oskarżony"],["testigo","świadek"],["juicio","rozprawa / osąd"],["sentencia","wyrok"],["culpable","winny"],["inocente","niewinny"],["delito","przestępstwo"],["crimen","zbrodnia"],["arresto","areszt"],["prisión","więzienie"],["multa","mandat / grzywna"],["denuncia","doniesienie / skarga"],["apelación","apelacja"],["reglamento","regulamin"],["infracción","naruszenie prawa"],["derechos humanos","prawa człowieka"],
+["átomo","atom"],["molécula","cząsteczka"],["elemento","pierwiastek"],["energía","energia"],["gravedad","grawitacja"],["presión","ciśnienie"],["masa","masa"],["electricidad","elektryczność"],["laboratorio","laboratorium"],["experimento","eksperyment"],["microscopio","mikroskop"],["telescopio","teleskop"],["planeta","planeta"],["galaxia","galaktyka"],["universo","wszechświat"],["evolución","ewolucja"],
+["aprendizaje","nauka / uczenie się"],["comprensión","zrozumienie"],["comunicación","komunikacja"],["creatividad","kreatywność"],["imaginación","wyobraźnia"],["inteligencia","inteligencja"],["sabiduría","mądrość"],["talento","talent"],["pasión","pasja"],["vocación","powołanie"],["disciplina","dyscyplina"],["concentración","koncentracja"],["memoria","pamięć"],["recuerdo","wspomnienie"],["nostalgia","nostalgia"],["ilusión","złudzenie / marzenie"],["esperanza","nadzieja"],["fe","wiara"],["conciencia","świadomość / sumienie"],["reflexión","refleksja"],
+["historia","historia"],["pasado","przeszłość"],["presente","teraźniejszość"],["futuro","przyszłość"],["cambio","zmiana"],["progreso","postęp"],["tendencia","tendencja / trend"],["influencia","wpływ"],["transformación","transformacja"],["comunidad","społeczność"],["individuo","jednostka"],["minoría","mniejszość"],["mayoría","większość"],["clase social","klasa społeczna"],["debate","debata"],["diálogo","dialog"],["compromiso","kompromis"],["cooperación","współpraca"],["apoyo","wsparcie"],["colectivo","zbiorowość"],
+["atleta","atleta"],["competición","zawody"],["campeonato","mistrzostwa"],["medalla","medal"],["récord","rekord"],["árbitro","sędzia sportowy"],["portero","bramkarz"],["entrenamiento","trening"],["rendimiento","wydajność / wyniki"],["maratón","maraton"],["gimnasio","siłownia"],["equipo deportivo","drużyna sportowa"],["aficionado","kibic / miłośnik"],
+["abogar","opowiadać się za / bronić"],["aclarar","wyjaśniać / rozjaśniać"],["acordar","uzgadniać / pamiętać"],["adaptar","dostosowywać"],["admitir","przyznawać / dopuszczać"],["alertar","ostrzegać"],["ampliar","poszerzać"],["anticipar","przewidywać"],["asegurar","zapewniać / ubezpieczać"],["atender","obsługiwar / dbać o"],["combinar","łączyć / kombinować"],["comprometer","zobowiązywać"],["concentrar","koncentrować"],["concluir","kończyć / wnioskować"],["consolidar","konsolidować"],["consultar","konsultować"],["coordinar","koordynować"],["cumplir","spełniać / przestrzegać"],["dedicar","poświęcać"],["diseñar","projektować"],
+["aspecto","aspekt / wygląd"],["base","podstawa"],["capacidad","zdolność / pojemność"],["característica","cecha charakterystyczna"],["circunstancia","okoliczność"],["conocimiento","wiedza"],["documento","dokument"],["experiencia","doświadczenie"],["hecho","fakt"],["impacto","wpływ"],["institución","instytucja"],["lenguaje","język / mowa"],["límite","granica / ograniczenie"],["organización","organizacja"],["programa","program"],["relación","związek / relacja"],["situación","sytuacja"],["término","termin / koniec"],["tema","temat"],["visión","wizja / widok"],
+["campaña política","kampania polityczna"],["elecciones generales","wybory ogólne"],["partido político","partia polityczna"],["votación","głosowanie"],["referéndum","referendum"],["ministro","minister"],["presidente","prezydent / przewodniczący"],["parlamento","parlament"],["senado","senat"],["ayuntamiento","urząd miejski / ratusz"],["alcalde","burmistrz"],["diputado","poseł / deputowany"],["debate parlamentario","debata parlamentarna"],["oposición","opozycja"],
+["calidad de vida","jakość życia"],["nivel de vida","poziom życia"],["clase media","klasa średnia"],["brecha social","przepaść społeczna"],["exclusión social","wykluczenie społeczne"],["cohesión","spójność"],["integración","integracja"],["multiculturalismo","wielokulturowość"],["urbanización","urbanizacja"],["migración","migracja"],["refugio","schronienie / azyl"],["asilo","azyl"],["xenofobia","ksenofobia"],
+["revolución industrial","rewolucja przemysłowa"],["era digital","era cyfrowa"],["siglo XXI","XXI wiek"],["medieval","średniowieczny"],["contemporáneo","współczesny"],["antigüedad","starożytność"],["Edad Media","średniowiecze"],["Renacimiento","renesans"],["Ilustración","oświecenie"],["colonización","kolonizacja"],["independencia","niepodległość"],["globalización","globalizacja"],
+["planta","roślina"],["semilla","nasienie"],["raíz","korzeń"],["rama","gałąź"],["hoja","liść"],["fruto","owoc (botaniczny)"],["corteza","kora"],["arbusto","krzew"],["palmera","palma"],["cactus","kaktus"],
+["ballena","wieloryb"],["tiburón","rekin"],["cocodrilo","krokodyl"],["rana","żaba"],["tortuga","żółw"],["águila","orzeł"],["loro","papuga"],["pingüino","pingwin"],["avestruz","struś"],["pato","kaczka"],
+["trueno","grzmot"],["relámpago","błyskawica"],["granizo","grad"],["arcoíris","tęcza"],["humedad","wilgotność"],["presión atmosférica","ciśnienie atmosferyczne"],["tifón","tajfun"],["monzón","monsun"],
+["disco","dysk / album"],["galería","galeria"],["escultor","rzeźbiarz"],["cineasta","filmowiec"],["coreógrafo","choreograf"],["director","reżyser"],["guionista","scenarzysta"],["actuación","gra aktorska"],["estreno","premiera"],["crítica cinematográfica","recenzja filmowa"],
+["disciplina","dyscyplina"],["concentración","koncentracja"],["ambición","ambicja"],["perseverancia","wytrwałość"],["esfuerzo","wysiłek"],["sacrificio","poświęcenie / ofiara"],["recompensa","nagroda"],["fracaso","porażka"],["superación","przezwyciężenie / samokształcenie"],["logro","osiągnięcie"],["progreso","postęp"],["potencial","potencjał"],["talento","talent"],["habilidad blanda","umiejętność miękka"],
+["aritmética","arytmetika"],["álgebra","algebra"],["geometría","geometria"],["probabilidad","prawdopodobieństwo"],["estadística","statystyka"],["ecuación","równanie"],["variable","zmienna"],["función matemática","funkcja matematyczna"],["gráfica","wykres"],["cálculo","rachunek / obliczenie"],
+["derecho civil","prawo cywilne"],["derecho penal","prawo karne"],["derecho laboral","prawo pracy"],["contrato laboral","umowa o pracę"],["huelga","strajk"],["sindicato","związek zawodowy"],["negociación colectiva","rokowania zbiorowe"],["despido","zwolnienie z pracy"],["prestación por desempleo","zasiłek dla bezrobotnych"],
+["abordar un tema","podchodzic do tematu"],
+["aclarar un punto","wyjasniać kwestie"],
+["estar de acuerdo","zgadzac sie"],
+["en cuanto a","jesli chodzi o"],
+["a pesar de","pomimo"],
+["dado que","poniewaz / skoro"],
+["sin embargo","niemniej jednak"],
+["por lo tanto","zatem"],
+["en conclusión","podsumowujac"],
+["en primer lugar","po pierwsze"],
+["por otra parte","z drugiej strony"],
+["cabe destacar","warto podkreslic"],
+["no obstante","jednak / niemniej"],
+["en definitiva","ostatecznie / w sumie"],
+["así pues","zatem"],
+["es decir","to znaczy / czyli"],
+["a fin de cuentas","w ostatecznym rozrachunku"],
+["desde el punto de vista","z punktu widzenia"],
+["hay que tener en cuenta","nalezy wziac pod uwage"],
+["vale la pena","warto"],
+["lo que es más","co wiecej"],
+["tanto como","zarówno jak i"],
+["aunque sea","chocby"],
+["a propósito","nawiasem mówiąc / celowo"],
+["al fin y al cabo","w koncu / ostatecznie"]
+],
 
-function render() { 
-  document.getElementById('app').innerHTML = 
-    state.view === 'home' ? renderHome() : 
-    state.view === 'flash' ? renderFlash() : 
-    state.view === 'quiz-setup' ? renderQuizSetup() :
-    renderQuiz(); 
+B2:[
+["abordar","podchodzić do / zajmować się"],["adquirir","nabywać / zdobywać"],["atribuir","przypisywać"],["consolidar","konsolidować / umacniać"],["contemplar","kontemplować / rozważać"],["contrastar","kontrastować / zestawiać"],["derivar","wynikać / pochodzi"],["deteriorar","pogarszać"],["ejercer","wykonywać zawód / sprawować"],["elaborar","opracowywać / rozwijać"],["emprender","podejmować działanie"],["erradicar","zwalczać / wykorzenić"],["evidenciar","ujawniać / dowodzić"],["exceder","przekraczać"],["fomentar","sprzyjać / promować"],["fundamentar","uzasadniać / opierać"],["incidir","mieć wpływ"],["inferir","wnioskować"],["instaurar","ustanawiać / wprowadzar"],["matizar","niuansować"],["mitigar","łagodzić"],["plantear","stawiać kwestię / proponować"],["precisar","precyzować / potrzebować"],["profundizar","pogłębiać"],["respaldar","popierać / wspierać"],["restringir","ograniczać"],["suscitar","wzbudzać / wywoływać"],["sustituir","zastępować"],["trascender","przekraczać / wykraczać"],["vulnerar","naruszać / łamać prawo"],["articular","artykułować / łączyć"],["dilucidar","wyjaśniać / rozstrzygać"],["estipular","stipulować / ustalać"],["reformular","przeformułowywać"],["desencadenar","wywoływać / wyzwalać"],["culminar","kulminować / kończyć się"],["propiciar","sprzyjać / umożliwiać"],["reivindicar","domagać się / postulować"],
+["abstracción","abstrakcja"],["ambigüedad","niejednoznaczność"],["analogía","analogia"],["axioma","aksjomat"],["coherencia","spójność"],["connotación","konotacja"],["contradicción","sprzeczność"],["correlación","korelacja"],["criterio","kryterium"],["deducción","dedukcja"],["dicotomía","dychotomia"],["discrepancia","rozbieżność"],["énfasis","nacisk / podkreślenie"],["epistemología","epistemologia"],["generalización","uogólnienie"],["inducción","indukcja"],["inferencia","wnioskowanie"],["ontología","ontologia"],["paradigma","paradygmat"],["premisa","przesłanka"],["proposición","twierdzenie"],["razonamiento","rozumowanie"],["relativismo","relatywizm"],["rigor","rygor / dokładność"],["supuesto","założenie"],["tesis","teza"],["validez","ważność / trafność"],["verificación","weryfikacja"],["síntesis","synteza"],["dialéctica","dialektyka"],
+["accionista","akcjonariusz"],["apalancamiento","dźwignia finansowa"],["aranceles","cła"],["capital","kapitał"],["deflación","deflacja"],["deuda","dług"],["divisas","waluty / dewizy"],["emprendedor","przedsiębiorca"],["especulación","spekulacja"],["exportación","eksport"],["financiación","finansowanie"],["flujo de caja","przepływ gotówki"],["fusión","fuzja"],["hipoteca","hipoteka"],["importación","import"],["liquidez","płynność"],["oferta y demanda","podaż i popyt"],["política fiscal","polityka fiskalna"],["política monetaria","polityka monetarna"],["prima de riesgo","premia za ryzyko"],["rendimiento","rentowność"],["rentabilidad","rentowność inwestycji"],["subvención","dotacja / subwencja"],["tasa de interés","stopa procentowa"],["tipo de cambio","kurs wymiany"],["volatilidad","zmienność"],["quiebra","bankructwo"],["PIB","PKB (produkt krajowy brutto)"],
+["asimilación","asymilacja"],["cohesión social","spójność społeczna"],["cosmopolitismo","kosmopolityzm"],["derechos fundamentales","prawa podstawowe"],["diáspora","diaspora"],["estado de derecho","państwo prawa"],["etnocentrismo","etnocentryzm"],["geopolítica","geopolityka"],["hegemonía","hegemonia"],["identidad cultural","tożsamość kulturowa"],["institucionalización","instytucjonalizacja"],["laicismo","laicyzm"],["legitimidad","legitymizacja / prawomocność"],["meritocracia","merytokracja"],["movilidad social","mobilność społeczna"],["multiculturalismo","multikulturalizm"],["populismo","populizm"],["secularización","sekularyzacja"],["segregación","segregacja"],["soberanía","suwerenność"],["xenofobia","ksenofobia"],["totalitarismo","totalitaryzm"],["federalismo","federalizm"],["anarquismo","anarchizm"],
+["algoritmo","algorytm"],["automatización","automatyzacja"],["biotecnología","biotechnologia"],["ciberseguridad","cyberbezpieczeństwo"],["clonación","klonowanie"],["epigenética","epigenetyka"],["genoma","genom"],["ingeniería genética","inżynieria genetyczna"],["inteligencia artificial","sztuczna inteligencja"],["machine learning","uczenie maszynowe"],["nanotecnología","nanotechnologia"],["neurociencia","neuronauka"],["realidad aumentada","rzeczywistość rozszerzona"],["realidad virtual","rzeczywistość wirtualna"],["robótica","robotyka"],["computación cuántica","obliczenia kwantowe"],["criptografía","kryptografia"],["big data","wielkie zbiory danych"],
+["acidificación oceánica","zakwaszenie oceanu"],["biocombustible","biopaliwo"],["capa de ozono","warstwa ozonowa"],["economía circular","gospodarka o obiegu zamkniętym"],["energía solar","energia słoneczna"],["energía eólica","energia wiatrowa"],["humedal","mokradło"],["microplásticos","mikroplastik"],["permafrost","wieczna zmarzlina"],["reforestación","zalesianie"],["servicios ecosistémicos","usługi ekosystemowe"],["geoingeniería","geoinżynieria"],
+["epidemiología","epidemiologia"],["factor de riesgo","czynnik ryzyka"],["inmunidad colectiva","odporność zbiorowiskowa"],["morbilidad","zachorowalność"],["mortalidad","śmiertelność"],["pandemia","pandemia"],["patología","patologia"],["prevalencia","częstość występowania"],["profilaxis","profilaktyka"],["psicosomático","psychosomatyczny"],["salud pública","zdrowie publiczne"],["neurológico","neurologiczny"],
+["censura","cenzura"],["desinformación","dezinformacja"],["discurso","dyskurs / przemówienie"],["fake news","fałszywe wiadomości"],["libertad de prensa","wolność prasy"],["manipulación mediática","manipulacja medialna"],["narrativa","narracja"],["opinión pública","opinia publiczna"],["propaganda","propaganda"],["redes sociales","media społecznościowe"],["retroalimentación","informacja zwrotna"],["sesgo mediático","stronniczość medialna"],
+["alienación","alienacja"],["determinismo","determinizm"],["dualismo","dualizm"],["empirismo","empiryzm"],["existencialismo","egzystencjalizm"],["libre albedrío","wolna wola"],["materialismo","materializm"],["nihilismo","nihilizm"],["pragmatismo","pragmatyzm"],["racionalismo","racjonalizm"],["subjetividad","subiektywność"],["utopía","utopia"],["fenomenología","fenomenologia"],
+["amnistía","amnestia"],["dictadura","dyktatura"],["extradición","ekstradycja"],["impunidad","bezkarność"],["jurisprudencia","orzecznictwo sądowe"],["nepotismo","nepotyzm"],["parlamento","parlament"],["poder judicial","władza sądownicza"],["poder legislativo","władza ustawodawcza"],["tiranía","tyrania"],["veto","weto"],["corrupción","korupcja"],["burocracia","biurokracja"],
+["arquetipo","archetyp"],["cognición","poznanie"],["condicionamiento","warunkowanie"],["disonancia cognitiva","dysonans poznawczy"],["mecanismo de defensa","mechanizm obronny"],["neuroplasticidad","neuroplastyczność"],["percepción","percepcja"],["psicopatología","psychopatologia"],["sesgo cognitivo","błąd poznawczy"],["trauma","trauma"],["vínculo afectivo","więź emocjonalna"],["trastorno","zaburzenie"],["resiliencia","odporność / resilience"],
+["gobernanza","zarządzanie / rządzenie"],["pensamiento crítico","myślenie krytyczne"],["responsabilidad social","odpowiedzialność społeczna"],["sociedad civil","społeczeństwo obywatelskie"],["transparencia","przejrzystość"],["urbanismo","urbanizacja / urbanistyka"],["ciudadanía","obywatelstwo"],["consenso","konsensus"],["intervencionismo","interwencjonizm"],["modelo de negocio","model biznesowy"],["capital social","kapitał społeczny"],["globalización cultural","globalizacja kulturowa"],["brecha digital","przepaść cyfrowa"],["agenda oculta","ukryta agenda"],
+["alegoría","alegoria"],["alusión","aluzja"],["antítesis","antyteza"],["catarsis","katharsis"],["ironía dramática","ironia dramatyczna"],["leit-motiv","leitmotyw"],["lirismo","liryzm"],["metonimia","metonimia"],["oxímoron","oksymoron"],["paráfrasis","parafraza"],["parodia","parodia"],["retórica","retoryka"],["sinécdoque","synekdocha"],["silogismo","sylogizm"],["intertextualidad","intertekstualność"],["mimesis","mimesis"],["narración omnisciente","narracja wszechwiedzącego narratora"],
+["acatar","stosować się do / respektować"],["acometer","podejmować się / atakować"],["acotar","ograniczać / opatrywać przypisami"],["acreditar","akredytować / udowadniać"],["activar","aktywować"],["adjudicar","przyznawać / udzielać"],["agravar","pogorszyć"],["alentar","zachęcać / dodawać otuchy"],["allegar","gromadzić / przynosić"],["anhelar","pragnąć / tęsknić za"],["anteponer","stawiać ponad"],["apercibir","ostrzegać / spostrzegać"],["arbitrar","arbitrować / ustalać zasady"],["arrogar","przywłaszczać sobie"],["aseverar","twierdzić z przekonaniem"],["atestiguar","zaświadczać / zeznawać"],
+["acotación","uwaga / ograniczenie"],["adendum","addendum / aneks"],["agenda","agend / terminarz"],["alcance","zasięg / zakres"],["amenaza","groźba / zagrożenie"],["amplitud","rozległość / amplituda"],["anchura","szerokość"],["antagonismo","antagonizm"],["apertura","otwarcie / liberalizacja"],["aportación","wkład / wniesienie"],["apreciación","ocena / docenienie"],["aptitud","zdolność / uzdolnienie"],["arancel","cło / taryfa"],["área de influencia","strefa wpływów"],["argucia","wybieg / sophizmat"],["articulación","artykuacja / połączenie"],
+["balanza comercial","bilans handlowy"],["banco central","bank centralny"],["bono","obligacja / bonus"],["cámara de comercio","izba handlowa"],["ciclo económico","cykl koniunkturalny"],["coste de oportunidad","koszt alternatywny"],["cuenta corriente","rachunek bieżący"],["dumping","dumping"],["economía mixta","gospodarka mieszana"],["efecto multiplicador","efekt mnożnikowy"],["elasticidad","elastyczność"],["empresa multinacional","przedsiębiorstwo wielonarodowe"],["escasez","niedobór / niedobór zasobów"],["externalidad","efekt zewnętrzny"],["filial","filia / spółka zależna"],["fondo de inversión","fundusz inwestycyjny"],
+["globalización financiera","globalizacja finansowa"],["impuesto de renta","podatek dochodowy"],["índice bursátil","indeks giełdowy"],["libre mercado","wolny rynek"],["mercado emergente","rynek wschodzący"],["monopolio","monopol"],["oligopolio","oligopol"],["pacto social","kontrakt społeczny"],["paridad","parytet"],["proteccionismo","protekcjonizm"],["sector financiero","sektor finansowy"],["sistema tributario","system podatkowy"],["sindicato financiero","konsorcjum finansowe"],
+["aprendizaje automático","uczenie maszynowe"],["arquitectura de datos","architektura danych"],["cloud computing","przetwarzanie w chmurze"],["código abierto","otwarty kod źródłowy"],["datos personales","dane osobowe"],["digitalización","cyfryzacja"],["disrupción tecnológica","zakłócenie technologiczne"],["ecosistema digital","ekosystem cyfrowy"],["encriptación","szyfrowanie"],["hacker ético","etyczny haker"],["infraestructura digital","infrastruktura cyfrowa"],["Internet de las cosas","Internet rzeczy (IoT)"],["privacidad de datos","prywatność danych"],["programación","programowanie"],["red neuronal","sieć neuronowa"],["seguridad informática","bezpieczeństwo informatyczne"],
+["biomimética","biomimetyka"],["cambio de paradigma","zmiana paradygmatu"],["catálisis","kataliza"],["ciclo biogeoquímico","cykl biogeochemiczny"],["dinámica de sistemas","dynamika systemów"],["energía cinética","energia kinetyczna"],["energía potencial","energia potencjalna"],["fisión nuclear","rozszczepienie jądrowe"],["fusión nuclear","synteza jądrowa"],["homeostasis","homeostaza"],["magnetosfera","magnetosfera"],["osmosis","osmoza"],["radioactividad","promieniotwórczość"],["resonancia magnética","rezonans magnetyczny"],["simbiosis","symbioza"],["termodinámica","termodynamika"],
+["activismo","aktywizm"],["cohesión comunitaria","spójność wspólnotowa"],["derechos reproductivos","prawa reprodukcyjne"],["empoderamiento","upodmiotowienie"],["feminismo","feminizm"],["igualdad de género","równość płci"],["interseccionalidad","interseksjonalność"],["justicia restaurativa","sprawiedliwość naprawcza"],["laicidad","świeckość"],["memoria histórica","pamięć historyczna"],["movimiento social","ruch społeczny"],["participación ciudadana","partycypacja obywatelska"],["patrimonio cultural","dziedzictwo kulturowe"],["progresismo","progresywizm"],["protesta social","protest społeczny"],["reconocimiento identitario","uznanie tożsamości"],
+["agnosticismo","agnostycyzm"],["antropología","antropologia"],["apatía política","apatia polityczna"],["cinismo","cynizm"],["colectivismo","kolektywizm"],["comunitarismo","komunitaryzm"],["conservadurismo","konserwatyzm"],["critica social","krytyka społeczna"],["despotismo","despotyzm"],["ética aplicada","etyka stosowana"],["ideario","idearium"],["individualismo","indywidualizm"],["liberalismo clásico","klasyczny liberalizm"],["libertarianismo","libertarianizm"],["neoconservadurismo","neokonserwatyzm"],["posibilismo","posybilizm"],["progresismo","progresywizm"],
+["acontecimiento","zdarzenie / wydarzenie"],["afirmación","twierdzenie / potwierdzenie"],["apreciación","ocena / wartościowanie"],["argumento sólido","mocny argument"],["carácter polisémico","charakter polisemiczny"],["certidumbre","pewność"],["clarificación","wyjaśnienie"],["coherencia interna","wewnętrzna spójność"],["complejidad sistémica","złożoność systemowa"],["cuestión de fondo","kwestia zasadnicza"],["dilema ético","dylemat etyczny"],["distinción conceptual","rozróżnienie pojęciowe"],["enfoque holístico","podejście holistyczne"],["formulación teórica","sformułowanie teoretyczne"],["marco analítico","ramy analityczne"],["perspectiva crítica","perspektywa krytyczna"],
+["aforismo","aforyzm"],["alegoría visual","alegoria wizualna"],["composición literaria","kompozycja literacka"],["concepto estético","pojęcie estetyczne"],["corriente artística","nurt artystyczny"],["crítica cultural","krytyka kulturowa"],["ekfrasis","ekfraza"],["estética filosófica","estetyka filozoficzna"],["expresionismo","ekspresjonizm"],["impresionismo","impresjonizm"],["modernismo","modernizm"],["narrativa cultural","narracja kulturowa"],["posmodernismo","postmodernizm"],["surrealismo","surrealizm"],["vanguardismo","awangardyzm"],
+["adyacente","sasiedni / przylegly"],
+["aglomeración","aglomeracja"],
+["aislamiento","izolacja"],
+["ajuste estructural","dostosowanie strukturalne"],
+["alianza estratégica","sojusz strategiczny"],
+["alternativa sostenible","zrównowazona alternatywa"],
+["ambivalente","ambiwalentny"],
+["análisis comparativo","analiza porównawcza"],
+["antecedente","poprzednik / precedens"],
+["arbitraje internacional","arbitraz miedzynarodowy"],
+["asimetría informativa","asymetria informacji"],
+["balance de poder","równowaga sil"],
+["barrera comercial","bariera handlowa"],
+["bien público","dobro publiczne"],
+["brecha salarial","luka placowa"],
+["campo semántico","pole semantyczne"],
+["capital humano","kapital ludzki"],
+["causa estructural","przyczyna strukturalna"],
+["ciudadanía digital","obywatelstwo cyfrowe"],
+["coalición","koalicja"],
+["código ético","kodeks etyczny"],
+["componente cultural","komponent kulturowy"],
+["concepto clave","kluczowe pojecie"],
+["condicionamiento social","uwarunkowanie spoleczne"],
+["conflicto armado","konflikt zbrojny"],
+["conocimiento tácito","wiedza ukryta"],
+["consecuencia no deseada","niezamierzona konsekwencja"],
+["contrapeso","przeciwwaga"],
+["corriente de pensamiento","nurt myslowy"],
+["cosmovisión","swiatopoglad"],
+["crecimiento inclusivo","wzrost inkluzywny"],
+["crisis de representación","kryzys reprezentacji"],
+["cultura de masas","kultura masowa"],
+["dato empírico","dane empiryczne"],
+["decisor","decydent"],
+["déficit informativo","deficyt informacyjny"],
+["demanda agregada","popyt zagregowany"],
+["democracia deliberativa","demokracja deliberatywna"],
+["desequilibrio","nierównowaga"],
+["deuda ecológica","dług ekologiczny"],
+["dinámicas de exclusión","dynamika wykluczenia"],
+["disrupción social","zaklocenie spoleczne"],
+["distribución del ingreso","podzial dochodów"],
+["dominio público","domena publiczna"],
+["economía del conocimiento","gospodarka oparta na wiedzy"],
+["efecto dominó","efekt domina"],
+["efecto invernadero","efekt cieplarniany"],
+["enfoque metodológico","podejscie metodologiczne"],
+["equilibrio dinámico","równowaga dynamiczna"],
+["estado del bienestar","panstwo dobrobytu"],
+["ética empresarial","etyka biznesu"],
+["exclusión política","wykluczenie polityczne"],
+["falla del mercado","zawodnosc rynku"],
+["fragmentación política","fragmentacja polityczna"],
+["globalidad","globalnos"],
+["gobernanza democrática","zarzadzanie demokratyczne"],
+["hipótesis de trabajo","hipoteza robocza"],
+["igualdad de oportunidades","równosc szans"],
+["incertidumbre sistémica","niepewnosc systemowa"],
+["indicador social","wskaznik spoleczny"],
+["injusticia estructural","niesprawiedliwosc strukturalna"],
+["innovación disruptiva","innowacja przelomowa"],
+["integración vertical","integracja pionowa"],
+["jerarquía de necesidades","hierarchia potrzeb"],
+["justicia distributiva","sprawiedliwosc dystrybutywna"],
+["legado histórico","dziedzictwo historyczne"],
+["límite ecológico","granica ekologiczna"],
+["lucha de clases","walka klas"],
+["marco institucional","ramy instytucjonalne"],
+["mecanismo redistributivo","mechanizm redystrybucji"],
+["modelo de desarrollo","model rozwoju"],
+["narrativa hegemónica","narracja hegemoniczna"],
+["nexo causal","powiazanie przyczynowe"],
+["norma social","norma spoleczna"],
+["objetivo estratégico","cel strategiczny"],
+["pacto social","kontrakt spoleczny"],
+["parámetro de evaluación","parametr oceny"],
+["pensamiento sistémico","myslenie systemowe"],
+["poder adquisitivo","sila nabywcza"],
+["política redistributiva","polityka redystrybucyjna"],
+["proceso deliberativo","proces deliberatywny"],
+["red de influencia","siec wplywów"],
+["régimen político","ustrój polityczny"],
+["relación causal","zwiazek przyczynowy"],
+["representación política","reprezentacja polityczna"],
+["riesgo sistémico","ryzyko systemowe"],
+["ruptura paradigmática","przeom paradygmatyczny"],
+["sesgo de confirmación","blad potwierdzenia"],
+["sociedad del conocimiento","spoleczenstwo wiedzy"],
+["statu quo","status quo"],
+["superación personal","rozwój osobisty"],
+["toma de decisiones","podejmowanie decyzji"],
+["trampa de la pobreza","pulapka ubóstwa"],
+["transición democrática","transformacja demokratyczna"],
+["umbral de sostenibilidad","próg zrównowazonosci"],
+["valor de uso","wartocs uzytkowa"],
+["ventaja comparativa","przewaga komparatywna"],
+["vinculo social","wiezy spoleczne"],
+["viabilidad","wykonalnosc / realinosc"]
+],
+
+C1:[
+["acuciar","naglić / dokuczać"],["adolecer","cierpieć na brak / mieć wadę"],["apelar","apelować / odwoływać się"],["auspiciar","patronować / sprzyjać"],["avalar","poręczać / gwarantować"],["cimentar","fundamentować / ugruntowywać"],["cohesionar","scalać / spajać"],["concatenar","łączyć w łańcuch / zestawiać"],["conciliar","godzić / pojednać"],["contravenir","naruszać / sprzeciwiać się"],["corroborar","potwierdzać / korroborować"],["cuestionar","kwestionować"],["desarticular","rozkładać / unieszkodliwiać"],["desestimar","odrzucać / lekceważyć"],["diluir","rozcieńczać / osłabiać"],["dirimir","rozstrzygać / rozsądzać"],["disipar","rozpraszać"],["enunciar","formułować / wyrażać"],["escrutar","badać dokładnie / analizować"],["evadir","unikać / uchylać się"],["exacerbar","zaostrzać / drażnić"],["eximir","zwalniać / eksimować"],["formular","formułować"],["instar","nakłaniać / nalegać"],["mermar","zmniejszać / uszczuplać"],["obstaculizar","utrudniać / blokować"],["postular","postulować / ubiegać się"],["prescindir","rezygnować z / pomijać"],["propiciar","sprzyjać / umożliwiać"],["reivindicar","domagać się / dochodzić praw"],["retractarse","odwoływać swoje słowa"],["subyacer","leżeć u podstaw"],["suscribir","subskrybować / podpisywać"],["transgredir","przekraczać / naruszać"],["velar","czuwać / dbać o"],["impugnar","zaskarżać / oprotestowywać"],["dimanar","wynikać / wypływać z"],["meritar","zasługiwać"],["comulgar","zgadzać się / komunia"],["discernir","rozeznawać / odróżniać"],
+["abstención","wstrzymanie się"],["ambivalencia","ambiwalencja"],["anacronismo","anachronizm"],["antinomia","antynomia"],["arbitrariedad","arbitralność"],["asimetría","asymetria"],["atribución","atrybucja / przypisanie"],["axiología","aksjologia"],["catalizador","katalizator"],["condicionante","uwarunkowanie"],["coyuntura","koniunktura / sytuacja"],["derogación","uchylenie / derogacja"],["discernimiento","rozeznanie / rozróżnienie"],["disidencia","dysydencja"],["doctrina","doktryna"],["dogma","dogmat"],["eclecticismo","eklektyzm"],["estigma","stygmat / piętno"],["estipulación","stipulacja / zastrzeżenie"],["hegemonía","hegemonia"],["idiosincrasia","idiosynkrazja"],["imperativo","imperatyw / nakaz"],["inmanencia","immanencja"],["metacognición","metapoznanie"],["nexo","związek / powiązanie"],["nominación","nominacja"],["objeción","sprzeciw / zastrzeżenie"],["obsolescencia","przestarzałość"],["paradoja","paradoks"],["parsimonia","oszczędność / lapidarność"],["prerrogativa","prerogatywa"],["primacía","prymat / pierwszeństwo"],["autonomía","autonomia"],["coacción","przymus"],["contingencia","przygodność / przypadkowość"],["falacia","błąd logiczny / fałsz"],["holismo","holizm"],["ideología","ideologia"],
+["anacoluto","anakolut"],["anáfora","anafora"],["bathos","bathos / banał po wzniosłości"],["circunloquio","peryfrazowanie"],["clímax","punkt kulminacyjny"],["écfrasis","ekfraza"],["elipsis","elipsa"],["epifanía","epifania"],["epílogo","epilog"],["eufemismo","eufemizm"],["filología","filologia"],["hipérbole","hiperbola"],["logomaquia","spór o słowa"],["metalepsis","metalepsa"],["paráfrasis","parafraza"],["pastiche","pastisz"],["prosopopeya","prozopopeja"],["soliloquio","monolog wewnętrzny"],["verosimilitud","prawdopodobieństwo / wiarygodność"],["subjetivismo","subiektywizm"],["alegoría","alegoria"],
+["aculturación","akulturacja"],["aporía","aporia"],["causalidad","przyczynowość"],["circularidad","kolistość / cyrkularność"],["deconstrucción","dekonstrukcja"],["dinámica social","dynamika społeczna"],["discursividad","dyskursywność"],["estructuralismo","strukturalizm"],["funcionalismo","funkcjonalizm"],["gnoseología","gnoseologia"],["hermenéutica","hermeneutyka"],["intersubjetividad","intersubiektywność"],["logocentrismo","logocentryzm"],["narratología","narratologia"],["nominalismo","nominalizm"],["praxis","praxis / praktyka"],["reificación","reifikacja"],["relativismo cultural","relatywizm kulturowy"],["semiótica","semiotyka"],["signo lingüístico","znak językowy"],["teleología","teleologia"],["trascendentalismo","transcendentalizm"],["universalismo","uniwersalizm"],["utilitarismo","utylitaryzm"],
+["neocolonialismo","neokolonializm"],["neoliberalismo","neoliberalizm"],["postcolonialismo","postkolonializm"],["soberanismo","suwerenizm"],["tecnocracia","technokracja"],["transnacionalismo","transnacjonalizm"],["etnonacionalismo","etnonacjonalizm"],["euroscepticismo","eurosceptycyzm"],["colonialismo","kolonializm"],["decolonialidad","dekolonialność"],["estado fallido","państwo upadłe"],
+["bioética","bioetyka"],["ciencias cognitivas","nauki kognitywne"],["cognitivismo","kognitywizm"],["conductismo","behawioryzm"],["geomorfología","geomorfologia"],["mecánica cuántica","mechanika kwantowa"],["neurolingüística","neurolingwistyka"],["sociolingüística","socjolingwistyka"],["termodinámica","termodynamika"],["paleoclimatología","paleoklimatologia"],
+["diglosia","dyglosja"],["deixis","deixis"],["deíctico","deiktyczny"],["hiperónimo","hiperonim"],["hipónimo","hiponim"],["homonimia","homonimia"],["lexicalización","leksykalizacja"],["morfema","morfem"],["neologismo","neologizm"],["polisemia","polisemia"],["polifonía","polifonia"],["pragmática","pragmatyka"],["registro lingüístico","rejestr językowy"],["sinonimia","synonimia"],["sintagma","syntagma"],["variante dialectal","wariant dialektalny"],["lexema","leksem"],["semántica","semantyka"],
+["abnegar","wyrzekać się / poświęcać"],["acometer","atakować / podejmować się"],["acrisolar","oczyszczać / doskonalić"],["aguijonear","pobudzać / zachęcać"],["albergar","dawać schronienie / żywić uczucia"],["alentar","dodawać odwagi / zachęcać"],["amalgamar","amalgamować / łączyć"],["amonestar","strofować / upominać"],["amortiguar","tłumić / amortyzować"],["anidar","gniazdować / tkwić"],["anteponer","stawiać ponad / stawiać na pierwszym miejscu"],
+["cernir","zagrażać / wisieć (nad)"],["colmar","nasycać / obdarzać obficie"],["confiscar","konfiskować"],["conminar","grozić / zobowiązywać"],["corroer","rozżerać / niszczyć"],["colapsar","zapaść się / paraliżować"],["decantar","dekantować / preferować"],["decaer","podupadać / słabnąć"],["denigrar","oczerniać / denigrować"],["destituir","odwoływać ze stanowiska"],
+["audacia","śmiałość / zuchwałość"],["candor","szczerość / naiwność"],["circunspección","powściągliwość / ostrożność"],["concisión","zwięzłość"],["conmoción","poruszenie / wstrząs"],["connivencia","zmowa / współudział"],["coquetería","kokieteria"],["desdén","pogarda / wyniosłość"],["discreción","dyskrecja"],["displicencia","niechęć / lekceważenie"],["divagación","dywagacja / odchodzenie od tematu"],["efusividad","wylewność"],["elocuencia","elokwencja"],["empeño","determinacja / zaangażowanie"],["encanto","czar / urok"],["hazaña","czyn bohaterski"],["hechizo","czar / urok"],["humildad","pokora / skromność"],["impudor","bezwstydność"],["indiferencia","obojętność"],["ingenuidad","naiwność"],["integridad","integralność / uczciwość"],["lucidez","jasność umysłu / przenikliwość"],["melancolía","melancholia"],["mezquindad","skąpstwo / małoduszność"],["mordacidad","sarkazm / złośliwość"],["narcisismo","narcyzm"],["nobleza","szlachetność / szlachta"],["obstinación","upór"],["ostentación","ostentacja / przechwałki"],["pedantería","pedanteria"],["perfidia","perfidia"],["perspicacia","przenikliwość"],["petulancia","zarozumiałość"],["pudor","wstyd / skromność"],["sagacidad","przebiegłość / bystrość"],["sarcasmo","sarkazm"],["soberbia","wyniosłość / pycha"],["tenacidad","wytrwałość / upór"],["timidez","nieśmiałość"],["vanidad","próżność"],
+["abjurar","wyrzekać się / odwoływać"],["absolver","rozgrzeszać / uniewinniać"],["acaparar","monopolizować / gromadzić"],["acercar","przybliżać"],["achacar","przypisywar (winę)"],["acometer","zabrać się do"],["acompañar","towarzyszyć"],["aconsejar","doradzać"],["acreditar","poświadczać"],["actuar","działać / zachowywać się"],["adentrarse","zagłębiać się"],["adjudicar","przyznawać"],["adscribir","przypisywać / przynależeć"],["aducir","przywoływać / przytaczać"],["agudizar","zaostrzać / nasilać"],["ahondar","pogłębiać"],["alegar","powoływać się / twierdzić"],["allanar","wyrównywać / ułatwiać"],["amparar","chronić / osłaniać"],["anular","unieważniać"],
+["abstenerse","powstrzymywać się"],["acatamiento","posłuszeństwo / podporządkowanie"],["acervo","zasób / dorobek"],["acometida","napad / atak"],["acopio","gromadzenie / zapas"],["acotación","ograniczenie / didaskalia"],["acreditación","akredytacja"],["acrimonia","zjadliwość / ostrość"],["activo","aktywa / aktywny"],["acuciante","naglący / pilny"],["acumulación","akumulacja"],["adalid","przywódca / czempion"],["adaptabilidad","zdolność adaptacji"],["adecuación","dostosowanie"],["adherencia","przyleganie / adherencja"],["adscripción","przynależność"],["adversidad","przeciwność / trudność"],["afán","chęć / zapał"],["afinidad","powinowactwo / pokrewieństwo"],["aforismo","aforyzm"],
+["amplitud semántica","zakres semantyczny"],["análisis discursivo","analiza dyskursywna"],["coherencia textual","spójność tekstowa"],["cohesión discursiva","spójność dyskursywna"],["competencia comunicativa","kompetencja komunikatywna"],["comprensión lectora","rozumienie ze słuchu / czytanie ze zrozumieniem"],["conectores textuales","spójniki tekstowe"],["connotación cultural","konotacja kulturowa"],["contexto pragmático","kontekst pragmatyczny"],["cortesía lingüística","grzeczność językowa"],["doble sentido","dwuznaczność"],["estructura argumentativa","struktura argumentacyjna"],["forma y fondo","forma i treść"],["función comunicativa","funkcja komunikatywna"],["género discursivo","gatunek dyskursywny"],["idiolecto","idiolekt"],["lectura crítica","czytanie krytyczne"],["lingüística aplicada","lingwistyka stosowana"],["marcadores del discurso","markery dyskursu"],
+["abdicar","abdicować / zrzekać się"],["abulia","apatia / brak woli"],["acendrar","czyścić / doskonalić"],["acerbo","gorzki / cierpki"],["acíbar","gorycz / aloes"],["acierto","trafność / powodzenie"],["acometividad","agresywność / zapał"],["acopio","zapas / gromadzenie"],["acuciosidad","pilność / sumienność"],["acumen","przenikliwość / akumen"],["adalid","herold / przywódca"],["adarga","tarcza"],["admonición","upomnienie / admonicja"],["afinamiento","subtelność / doskonalenie"],["aforar","szacować / mierzyć pojemność"],["agasajar","podejmować gościnnie"],["agio","agio / lichwa"],["agobio","przytłoczenie / ciężar"],["agravante","zaostrzenie / czynnik obciążający"],["ahínco","zapał / wytrwałość"],
+["inercia social","inercja społeczna"],["legitimación democrática","legitymizacja demokratyczna"],["liderazgo transformacional","przywództwo transformacyjne"],["marcos cognitivos","ramy kognitywne"],["mecanismos de control","mechanizmy kontroli"],["modelo deliberativo","model deliberatywny"],["movilización colectiva","mobilizacja zbiorowa"],["narrativa dominante","narracja dominująca"],["negación institucional","zaprzeczenie instytucjonalne"],["normatividad","normatywność"],["orden simbólico","porządek symboliczny"],["poder blando","soft power"],["praxis política","praktyka polityczna"],["reconocimiento social","uznanie społeczne"],["relaciones de poder","stosunki władzy"],["resistencia simbólica","opór symboliczny"],
+["acción colectiva","działanie zbiorowe"],["agencia","sprawczość"],["alienación laboral","alienacja pracy"],["burocracia weberiana","biurokracja Weberowska"],["capital cultural","kapitał kulturowy"],["clases sociales","klasy społeczne"],["conflicto de intereses","konflikt interesów"],["contrato social","umowa społeczna"],["cultura organizacional","kultura organizacyjna"],["desviación social","dewiacaja społeczna"],["disonancia normativa","dysonans normatywny"],["eficacia simbólica","skuteczność symboliczna"],["estructura social","struktura społeczna"],["habitus","habitus"],["institución social","instytucja społeczna"],["interacción simbólica","interakcja symboliczna"],
+["aceptación crítica","akceptacja krytyczna"],["actitud contemplativa","postawa kontemplacyjna"],["autoconocimiento","samowiedza / samopoznanie"],["catarsis emocional","katharsis emocjonalna"],["coherencia vital","spójność życiowa"],["conciencia crítica","świadomość krytyczna"],["desarrollo personal","rozwój osobisty"],["diálogo interior","wewnętrzny dialog"],["ecuanimidad","równowaga ducha"],["estado de flujo","stan przepływu (flow)"],["ética personal","etyka osobista"],["gestión emocional","zarządzanie emocjami"],["gratitud","wdzięczność"],["mindfulness","uważność / mindfulness"],["narrativa personal","narracja osobista"],["propósito de vida","sens życia / cel życiowy"],
+["abscisa","odcięta"],["actuarial","aktuarialny"],["álgebra lineal","algebra liniowa"],["análisis de datos","analiza danych"],["análisis factorial","analiza czynnikowa"],["cadena de Markov","łańcuch Markova"],["cálculo diferencial","rachunek różniczkowy"],["cálculo integral","rachunek całkowy"],["convergencia","zbieżność"],["covarianza","kowariancja"],["derivada","pochodna"],["distribución normal","rozkład normalny"],["espacio vectorial","przestrzeń wektorowa"],["estadística inferencial","statystyka wnioskująca"],["función inversa","funkcja odwrotna"],["hipótesis nula","hipoteza zerowa"],["integral definida","całka oznaczona"],["límite matemático","granica (matematyczna)"],["matriz","macierz"],["probabilidad condicional","prawdopodobieństwo warunkowe"],
+["abocarse a","poswiecac sie / zmierzac do"],
+["aflorar","wyplywac / pojawiac sie na powierzchni"],
+["aglutinar","aglutynowac / skupiac"],
+["agudizar una crisis","zaostrzac kryzys"],
+["allanar el camino","torowac droge"],
+["amoldar","dostosowywac / przyzwyczajac"],
+["amplificar","wzmacniac / amplifikowac"],
+["anteponer los principios","stawiac zasady ponad wszystko"],
+["apuntalar","podbudowywac / wspierac"],
+["arraigar","zakorzenic"],
+["atesorar","gromadzic / posiadac skarby"],
+["aunar","jednoczyc / laczyc"],
+["avanzar tesis","wysuwac teze"],
+["acunar un término","ukuc termin"],
+["adolecer de vicio","cierpiec na wade"],
+["alentar expectativas","zywic oczekiwania"],
+["armar un argumento","konstruowac argument"],
+["asentar las bases","klac fundamenty"],
+["ablación","ablacja / odciecie"],
+["abnegación","wyrzeczenie / poswiecenie"],
+["abrumador","przytlaczajacy"],
+["abstraccionismo","abstrakcjonizm"],
+["acendrado valor","nieskalana wartosc"],
+["acepción técnica","znaczenie techniczne"],
+["acopio de datos","gromadzenie danych"],
+["acuciante necesidad","naglaca potrzeba"],
+["adscripción ideológica","przynaleznosc ideologiczna"],
+["afán de saber","zadza wiedzy"],
+["afinidad ideológica","powinowactwo ideologiczne"],
+["agotamiento conceptual","wyczerpanie konceptualne"],
+["alcance interpretativo","zakres interpretacyjny"],
+["alteridad","innosc / obcosc"],
+["ambigüedad semántica","niejednoznacznosc semantyczna"],
+["análisis exhaustivo","wyczerpujaca analiza"],
+["antagonismo conceptual","antagonizm konceptualny"],
+["anticipación reflexiva","refleksyjna antycypacja"],
+["apreciación matizada","niuansowana ocena"],
+["arquitectura conceptual","architektura konceptualna"],
+["argumentación sólida","solidna argumentacja"],
+["artificio retórico","chwyt retoryczny"],
+["aserto epistemológico","twierdzenie epistemologiczne"],
+["asimilación cognitiva","asymilacja poznawcza"],
+["auto-cuestionamiento","samo-kwestionowanie"],
+["axiología práctica","aksjologia praktyczna"],
+["bagaje cultural","bagaz kulturowy"],
+["base empírica","podstawa empiryczna"],
+["bifurcación conceptual","rozwidlenie konceptualne"],
+["búsqueda de sentido","poszukiwanie sensu"],
+["capacidad metacognitiva","zdolnosc metapoznawcza"],
+["caudal de conocimientos","zasob wiedzy"],
+["ciclo hermenéutico","krag hermeneutyczny"],
+["clarividencia","jasnowidzenie / przenikliwosc"],
+["coherencia interna","wewnetrzna spojnosc"],
+["coerción epistémica","przymus epistemiczny"],
+["complejidad emergente","zlozenosc emergentna"],
+["comprensión empática","empatyczne rozumienie"],
+["concepto nodal","wezlowe pojecie"],
+["conciencia histórica","swiadomosc historyczna"],
+["condicionamiento cultural","uwarunkowanie kulturowe"],
+["confluencia de ideas","zbieznosc idei"],
+["constructo teórico","konstrukt teoretyczny"],
+["contextualización","kontekstualizacja"],
+["contingencia histórica","historyczna przygodnosc"],
+["convergencia epistemológica","zbieznosc epistemologiczna"],
+["cosmovisión alternativa","alternatywny swiatopoglad"],
+["criterio de demarcación","kryterium demarkacji"],
+["cuestión axial","kwestia kluczowa"],
+["deconstrucción crítica","krytyczna dekonstrukcja"],
+["deliberación moral","deliberacja moralna"],
+["densidad conceptual","gесtosc konceptualna"],
+["desplazamiento semántico","przesuniecie semantyczne"],
+["dispositivo retórico","urzadzenie retoryczne"],
+["dominio cognitivo","domena poznawcza"],
+["efecto halo","efekt halo"],
+["eje temático","os tematyczna"],
+["emergencia del sentido","emergencja sensu"],
+["encuadre conceptual","ramowanie konceptualne"],
+["epistemología crítica","epistemologia krytyczna"],
+["equívoco categorial","blad kategorialny"],
+["estructura narrativa","struktura narracyjna"],
+["evaluación crítica","ocena krytyczna"],
+["focalización narrativa","fokalizacja narracyjna"],
+["función ideológica","funkcja ideologiczna"],
+["horizonte de expectativas","horyzont oczekiwan"],
+["identidad narrativa","tozsamosc narracyjna"],
+["imaginario colectivo","wyobraznia zbiorowa"],
+["implicatura conversacional","implikatura konwersacyjna"],
+["inferencia pragmática","wnioskowanie pragmatyczne"],
+["instancia enunciativa","instancja enuncjacyjna"],
+["intencionalidad","intencjonalnosc"],
+["interpretación contextual","interpretacja kontekstualna"],
+["isomorfismo","izomorfizm"],
+["jactarse","chwalipiec / chelbic sie"],
+["júbilo","radosc / egzaltacja"],
+["laceración","laceracja / ból wewnetrzny"],
+["lacónico","lakoniczny"],
+["laudatorio","pochwalny"],
+["laxismo","laksyzm / poblazczanosc"],
+["locus of control","miejsce kontroli"],
+["logomaquia","spor o slowa"],
+["macabro","makabryczny"],
+["malévolo","zlosliwy / nikczemny"],
+["manquedad","kalectwo / brak czegos"],
+["marginación","marginalizacja"],
+["mecanismo cognitivo","mechanizm poznawczy"],
+["mediación simbólica","mediacja symboliczna"],
+["memoria colectiva","pamiec zbiorowa"],
+["metarrelato","metanarracja"],
+["microagresión","mikroagresja"],
+["modelización","modelowanie"],
+["monismo","monizm"],
+["motivación intrínseca","motywacja wewnetrzna"],
+["mutualidad","wzajemnosc"],
+["negación del ego","zaprzeczenie ego"],
+["nexo argumentativo","powiazanie argumentacyjne"],
+["nodo conceptual","wezel konceptualny"],
+["normativismo","normatywizm"],
+["objetividad epistemológica","obiektywnosc epistemologiczna"],
+["objeción de conciencia","sprzeciw sumienia"],
+["operacionalización","operacjonalizacja"],
+["paráfrasis activa","aktywna parafraza"],
+["postulado axiomático","postulat aksjomatyczny"],
+["pragmatismo filosófico","pragmatyzm filozoficzny"],
+["praxis reflexiva","refleksyjna praxis"],
+["racionalización","racjonalizacja"],
+["reificación social","reifikacja spoleczna"],
+["representación mental","reprezentacja mentalna"],
+["resistencia cognitiva","opor poznawczy"],
+["retroalimentación cognitiva","spruzenie zwrotne poznawcze"]
+],
+
+C2:[
+["acrimonia","złośliwość / ostrość"],["adular","pochlebiać"],["agasajo","upominek / gościnność"],["agudeza","ostroumność / bystrość"],["ajenidad","obcość / dystans"],["albor","brzask / jasność"],["alcurnia","arystokratyczne pochodzenie"],["algarabía","wrzawa / zgiełk"],["aliteración","aliteracja"],["altivez","wyniosłość"],["ambage","okrężność / zawiłość"],["añoranza","tęsknota / nostalgia"],["apotegma","apoftegmat"],["aprehensión","pojmanie / obawy"],["arbitrio","arbitraż / wolna wola"],["arrobamiento","zachwyt / ekstaza"],["aseveración","twierdzenie z przekonaniem"],["atávico","atawistyczny"],["atavismo","atawizm"],["atisbo","przebłysk / ślad"],
+["balbuceo","bełkotanie / jąkanie"],["baldío","nieużytek / próżny"],["banalidad","banalność"],["barroquismo","barokizm / przesada"],["barrunto","przeczucie / domysł"],["belicosidad","agresywność / wojowniczość"],["berenjenal","gąszcz / kłopot"],["bizarría","dzielność / wspaniałomyślność"],["boceto","szkic / zarys"],["bonhomía","prostoduszność / serdeczność"],["bufón","błazen / szyderczy"],["bulo","plotka / fałszywa wiadomość"],["burla","kpina / drwina"],
+["cacofonia","kakofonia"],["cacique","kacyk / miejscowy despota"],["cadalso","szafot"],["caducidad","wygaśnięcie / zgrzybiałość"],["caquexia","wyniszczenie / kacheksja"],["carencia","niedobór / brak"],["caudal","zasób / bogactwo / nurt"],["celeridad","szybkość / pośpiech"],["cénit","zenit / szczyt"],["chachara","paplanina / gadanina"],["chanza","żart / dowcip"],["chascarrillo","kawał / anegdota"],["cicatería","skąpstwo"],["claroscuro","chiaroscuro / kontrast"],["cohibición","zahamowanie / skrępowanie"],["colofón","kolofon / zwieńczenie"],["complejidad","złożoność"],["connivencia","zmowa / współudział"],
+["dandismo","dandyzm"],["desvergüenza","bezczelność / bezwstyd"],["diligencia","pilność / staranność"],["discreción","dyskrecja"],["disfemismo","dysfemizm"],["doblez","fałszywość / obłuda"],["dogmatismo","dogmatyzm"],
+["écfrasis","ekfraza"],["efusividad","wylewność"],["elenco","obsada / lista"],["embrollo","kłopot / plątanina"],["embuste","kłamstwo / podstęp"],["eminencia","wybitność / eminencja"],["empaque","opanowanie / elegancja"],["ensimismamiento","zamyślenie / skupienie w sobie"],["entelequia","entelechia"],["epifonema","epifonema"],["epopéya","epos / epopeja"],["equivocidad","wieloznaczność"],["escarnio","szyderstwo / drwina"],["esotérico","ezoteryczny"],["esplín","melancholia / znudzenie"],["estoicismo","stoicyzm"],["estribillo","refren"],["excelso","wzniosły"],["expiación","ekspiacja / pokuta"],
+["fanatismo","fanatyzm"],["fatalismo","fatalizm"],["fausto","przepych / zbytek"],["feroz","dziki / okrutny"],["fervor","żarliwość / zapał"],["filantropía","filantropia"],["flemático","flegmatyczny"],["floritura","ozdobnik / kwiat"],["fogosidad","ognistość / żarliwość"],["fragilidad","kruchość"],["frugalidad","powściągliwość / umiarkowanie"],["fruición","radość / zadowolenie"],["fulgurante","błyskotliwy / świetlisty"],["funesto","zgubny / fatalny"],
+["galantería","galanteria / kurtuazja"],["gallardía","dzielność / stature"],["garlito","sidła / pułapka"],["garrulería","gadatliwość"],["gravedad","powaga / ciężkość"],["grima","dreszcz / niesmak"],["habladuría","pogłoska / plotka"],["hilaridad","wesołość / rozbawienie"],["hipocresía","obłuda / hipokryzja"],["holgura","obszerność / swoboda"],["honradez","uczciwość / rzetelność"],
+["ignominia","hańba / niesława"],["impertinencia","impertynencja / bezczelność"],["impostación","pozowanie / sztuczność"],["impudor","bezwstydność"],["indolencia","bezczynność / lenistwo"],["inquina","nienawiść / uraza"],["insulsez","mdłość / banalność"],
+["jactancia","chwalipięctwo / przechwałki"],["lascivia","lubieżność"],["laxitud","rozluźnienie / brak dyscypliny"],["llaneza","prostota / bezpośredniość"],["lozanía","krzepkość / świeżość"],
+["maledicencia","obmowa / złe mówienie o innych"],["malicia","złośliwość / podstęp"],["mansedumbre","łagodność / spokój"],["marrullería","przebiegłość"],["misantropía","mizantropia"],["mojigatería","świętoszkowatość"],["mutilación","okaleczenie"],
+["necedad","głupota"],["notoriedad","rozgłos"],
+["oblicuidad","ukośność / zawiłość"],["obstinación","upór"],["ofensa","obraza / uraza"],["oportunismo","oportunizm"],["oprobio","hańba / wstyd"],
+["parsimonia","powolność / oszczędność"],["petulancia","zarozumiałość"],["placidez","spokój / pogoda ducha"],["pleitesía","hołd / uniżoność"],["postración","prostacja / przybicie"],["presunción","zarozumiałość / domniemanie"],["procacidad","bezczelność / rubaszność"],["prodigalidad","rozrzutność"],["pugnacidad","bojowość / zaczepność"],["pundonor","honor / poczucie godności"],
+["renuncia","rezygnacja / zrzeczenie"],["repudio","odrzucenie / repudiacja"],
+["sandez","głupstwo"],["serenidad","spokój / pogoda"],["solemnidad","uroczystość / powaga"],
+["taciturnidad","małomówność / milczliwość"],["temeridad","zuchwalstwo / lekkomyślność"],["terquedad","upór / zawziętość"],["torpeza","niezdarność / tępota"],["trascendencia","doniosłość / transcendencja"],["treta","chwyt / fortel"],["trivialidad","trywialność"],["truculencia","okrucieństwo / makabryczność"],
+["ubiquidad","wszechobecność"],["ultrajante","obrażający / hańbiący"],
+["vaguedad","nieokreśloność / mglistość"],["vesania","obłęd / szaleństwo"],["vicisitud","perypetia / zmiany losu"],["vileza","podłość"],["virtud","cnota / zaleta"],["vituperio","obelga / potępienie"],["voluptuosidad","zmysłowość"],
+["zalamería","pochlebstwo / przymilność"],["zozobra","niepokój / zatonięcie"],["abnegación","wyrzeczenie / abnegacja"],["acerbidad","cierpkość / surowość"],["acendrado","czysty / oczyszczony"],["advenedizo","parweniusz / przybysz"],["afectación","afektacja / sztuczność"],["afrenta","zniewaga / hańba"],["aforismo","aforyzm"],["agasajar","traktować serdecznie"],["ahínco","zapał / wytrwałość"],["alevosía","zdradzieckie działanie"],["alharaca","hałas / zamieszanie"],["almibarado","słodkawty / mdły"],["alocución","przemówienie / homilia"],["altercado","sprzeczka / kłótnia"],["altruismo","altruizm"],["ambages","ogródki / dookolne wyrazy"],["amenidad","przyjemność / uroda miejsca"],["amorfismo","amorfizm"],["anacronismo","anachronizm"],["anonimato","anonimowość"],["antaño","dawniej / niegdyś"],["antesala","przedpokój / okres oczekiwania"],["añagaza","przynęta / podstęp"],["apelativo","przydomek / epitet"],["apocamiento","nieśmiałość / małoduszność"],["apostasía","apostazja"],["apotegma","apoftegmat"],["aquiescencia","przyzwolenie / akceptacja"],["ardid","fortel / wybieg"],["ardor","żar / gorliwość"],["arenga","mowa bojowa / tyrada"],["artimaña","wybieg / podstęp"],["astucia","przebiegłość / spryt"],["atribulado","udręczony / stroskany"],["aversión","awersja / niechęć"],["avieso","przewrotny / nieprawy"],["azaroso","ryzykowny / przypadkowy"],["bagatela","bagatela / drobiazg"],["bajeza","podłość / nikczemność"],["baladi","błahy / trywialny"],["barbarie","barbarzyństwo"],["beatería","świętoszkowatość"],["beldad","piękność / uroda"],["beneplácito","aprobata / błogosławieństwo"],
+["abismal","przepaściowy / ogromny"],["abnegado","wyrzekający się / poświęcający"],["abstruso","zawiły / trudny do zrozumienia"],["acedo","kwaśny / cierpki"],["acémila","muł / tępak (przen.)"],["acendrado","czysty / szlachetny"],["acerbo","gorzki / surowy"],["acético","octowy"],["aciago","feralny / pechowy"],["acibarado","gorzki / przygnębiający"],["acicalar","stroić / szlifować"],["acierto","trafność / sukces"],["acoquinar","zastraszyć / sparaliżować strachem"],["acorralado","osaczony / przyparty do muru"],["acostumbrado","przyzwyczajony / zwykły"],["acriminar","oskarżać / zarzucać zbrodnię"],
+["adehala","gratyfikacja / darmowy dodatek"],["adelantado","gubernator / pionier"],["admonestación","nagana / upomnienie"],["afectación","afektacja / sztuczność"],["aflicción","udręka / ból"],["agasajador","gościnny / uprzejmy"],["agraviante","obrażający / krzywdzący"],["agudeza visual","ostrość wzroku"],["aguerrido","zahartowany / doświadczony bojowo"],["ahijado","chrześniak"],["ajado","sfatygowany / więdnący"],["alambicado","zbyt wyrafinowany / zawiły"],["alarde","popis / chełpienie się"],["alardes","fajerwierki / szpan"],["alborozado","rozradowany"],["alcahuete","stręczyciel / donosiciel"],
+["alcurnia noble","szlachetne pochodzenie"],["aldea global","globalna wioska"],["alegar ignorancia","zasłaniać się niewiedzą"],["alentar esperanzas","żywić nadzieje"],["alevoso","zdradziecki / podstępny"],["alfeñique","wiotki / chuderlawy"],["algarabía","wrzawa / niezrozumiały gwar"],["alharaca","hałas / ośmieszające zachowanie"],["alhajero","szkatułka na biżuterię"],["alienar","alienować / wyobcowywać"],["aliviadero","przelew / zawór bezpieczeństwa"],["almibarado","nadmiernie słodkawy"],["alquitrán","smoła"],["altercado","sprzeczka / utarczka"],["altruista","altruistyczny"],["alucinante","halucynujący / niesamowity"],
+["amancebamiento","konkubinat"],["amargado","zgorzkniały"],["amargura","gorycz"],["ambiguo","niejednoznaczny / dwuznaczny"],["ambladura","chód taneczny (konia)"],["amenidad","urokliwość / atrakcyjność"],["amistad sincera","szczera przyjaźń"],["amojamado","wychudzony / wysuszony"],["amordazar","zakneblować / uciszyć"],["amortajado","zawinięty w całun"],["ampulosidad","nadęcie / pompatyczność"],["anacardino","dotyczący nerkowca"],["anagnórisis","anagnoryzis / rozpoznanie"],["análisis pormenorizado","szczegółowa analiza"],["anatema","anatema / klątwa"],["ancestral","odwieczny / ancestralny"],
+["baldón","hańba / potwarza"],["baluarte","bastion / twierdza"],["bambolear","chwiać się / kołysać"],["banalización","banalizacja"],["barbecho","ugór"],["barboquejo","podgardek / rzemień pod brodą"],["barcaza","barka"],["barullo","zamieszanie / wrzawa"],["batacazo","upadek / klęska"],["báthos","bathos"],["beatitud","błogość / szczęście"],["bellaquería","podłość / łotrzostwo"],["berenjena","bakłażan (tu: kłopot)"],["berrinche","napad złości"],["bienandanza","pomyślność / szczęśliwy los"],["bisoño","nowicjusz / niedoświadczony"],["bizco","zezowaty / krzywy"],["blandir","wymachiwać / władać"],["blasfemia","bluźnierstwo"],["bochorno","skwar / wstyd"],
+["cachondeo","żarty / drwiny"],["cadalso","szafot / rusztowanie"],["calambre","skurcz"],["calumnia","oszczerstwo / kalumnia"],["camelista","pochlebca / przymilny"],["campiña","kraj / okolica wiejska"],["canonjía","ciepła posadka"],["cantinela","powtarzana śpiewka / stale te same słowa"],["capcioso","podchwytliwy / podstępny"],["capricho","kaprys"],["carcajada","głośny śmiech"],["carcomido","stoczony przez korniki / zgniły"],["carencia afectiva","deprywacja emocjonalna"],["cariñoso","czuły / serdeczny"],["carroña","padlina / gnilizna"],["casquivano","lekkomyślny / trzpiotowaty"],["cautiverio","niewola"],["cegador","oślepiający"],["ceguera","ślepota"],["celosía","żaluzja / krata okienna"],
+["chivateo","donosicielstwo"],["chistoso","żartowniś / dowcipny"],["chochear","zramolec"],["chorrada","głupstwo / bzdura"],["chulería","zarozumiałość / bezczelność"],["clamor","krzyk / wołanie"],["cleptomanía","kleptomania"],["cobardía","tchórzostwo"],["cólera","gniew / cholera"],["complaciente","ugrzeczniony / pobłażliwy"],["compunción","skrucha / żal"],["congoja","ból / udręka"],["connubio","związek małżeński"],["consunción","wyniszczenie"],["contemplativo","kontemplacyjny"],["contumacia","zatwardziałość / upór"],["convicción","przekonanie"],["convulsión","drgawki / wstrząs"],["coplero","rymokleta"],["corrupción moral","korupcja moralna"],
+["desdichado","nieszczęsny / pechowy"],["desengaño","rozczarowanie"],["desertor","dezerter"],["deshonra","hańba / niesława"],["deslealtad","nielojalność"],["desmesura","nadmiar / brak umiaru"],["desolación","spustoszenie / rozpacz"],["despecho","złośliwość / mimo woli"],["despilfarro","rozrzutność / marnotrawstwo"],["despotismo ilustrado","oświecony despotyzm"],["desvarío","majaczenie / urojenie"],["diatribe","diatriba / napaść słowna"],["dictum","powiedzenie / maksyma"],["didáctica","dydaktyka"],["difamación","zniesławienie"],["dipsomanía","alkoholizm napadowy"],["disquisición","dysertacja / roztrząsanie"],["distinción fina","subtelne rozróżnienie"],["ditirambo","dytyramb / przesadna pochwała"],["docilidad","uległość / pojętność"],
+["ebullición","wrzenie / buzowanie"],["egolatría","egolatria / bałwochwalcze uwielbienie siebie"],["embelesamiento","zachwyt / urzeczenie"],["emboscada","zasadzka"],["embrollo","plątanina / zamieszanie"],["empirismo vulgar","pospolity empiryzm"],["enajenamiento","wyobcowanie / stan zachwycenia"],["encallado","osiadły na mieliźnie / utknięty"],["encomienda","pochwała / encomienda (hist.)"],["endemoniado","opętany / diabelski"],["envilecido","poniżony / zbeszczeszczony"],["epígono","epigon / naśladowca"],["equívoco","dwuznaczny / błąd"],["eruditismo","pedantyczna erudycja"],["esclerótico","sklerotyczny / usztywniały"],["espadachín","szermierz"],["esperpento","potwór / absurd teatralny"],["estrambótico","ekscentryczny / dziwaczny"],["estulticia","głupota"],["etología","etologia"],
+["fatuidad","zarozumiałość / głupkowata pycha"],["faz","oblicze / twarz"],["ferocidad","dzikość / okrucieństwo"],["fetichismo","fetyszyzm"],["filibustero","korsarz / filibuster"],["filípica","filipika / napaść słowna"],["fingimiento","udawanie / symulowanie"],["flaccidez","wiotkość / ospałość"],["flagrante","jaskrawy / oczywisty"],["flaqueza moral","słabość moralna"],["frenético","frenetyczny / szaleńczy"],["frivolidad","płochość / frywolność"],["fugacidad","ulotność / przemijanie"],
+["garrulería exaltada","podekscytowana gadatliwość"],["gazmoñería","świętoszkowatość"],["gárrulo","gadatliwy"],["genio irascible","porywczy charakter"],["gentileza","grzeczność / elegancja"],["gozo","radość / rozkosz"],["grandeza de ánimo","wielkoduszność"],["grandilocuencia","pompatyczność"],["groserías","wulgaryzmy / grubianizmy"],["guisa","sposób / maniera"],
+["haragán","leń / próżniak"],["hartazgo","przesyt / przejedzenie"],["hastío","znudzenie / wstręt"],["hilarante","rozbawiony / śmieszny"],["hipocondría","hipochondria"],["hipérbaton","hiperbaton"],["hito","kamień milowy"],["hojarasca","suche liście / zbędna gadanina"],["holgazanería","lenistwo / próżniactwo"],["hosco","mrukliwy / ponury"],
+["iconoclasta","ikonoklasta"],["imbricación","nakładanie się / splatanie"],["impávido","nieustraszony / obojętny"],["impudicia","bezwstydność"],["inconstancia","niekonsekwentność / zmienność"],["indolente","obojętny / niefrasobliwy"],["infatuado","zarozumiały / zadurzony w sobie"],["ingratitud","niewdzięczność"],["iniquidad","nieprawość / niesprawiedliwość"],["insidioso","podstępny / przemyślny"],["insulsez","mdłość / banalność"],["intransigencia","nieustępliwość"],["ira contenida","powstrzymywany gniew"],["irrisorio","śmieszny / żałosny / groszowy"],
+["jactancioso","chełpliwy / zarozumiały"],["jerga","żargon / slang"],["jocoso","żartobliwy / śmieszny"],["jovialidad","wesołość / jowialność"],
+["lacónico","lakoniczny / zwiezly"],
+["lánguido","ospalny / mdly"],
+["laudable","chwalebny"],
+["laxo","luzny / rozwiazly"],
+["letal","smiertelny"],
+["letargo","letarg / otepienie"],
+["levedad","lekkost / ulotnosc"],
+["lisonja","pochlebstwo"],
+["lívido","blady / siny"],
+["locuaz","gadatliwy"],
+["lóbrego","mroczny / posepny"],
+["luctuoso","zalobny / smutny"],
+["magnánimo","wielkoduszny"],
+["mancillar","zbrukac / splamiac"],
+["manido","wyswiechtany / oklepany"],
+["maquiavélico","makiaweliczny"],
+["masoquismo","masochizm"],
+["melifluo","miodowy / przesadnie slodki"],
+["menoscabo","uszczuplenie / uszkodzenie"],
+["mesura","umiarkowanie / rozwaga"],
+["meticuloso","skrupulatny / drobiazgowy"],
+["mísero","nedzny / oplakaný"],
+["mistificación","mistyfikacja"],
+["monstruosidad","potwornosc"],
+["morriña","tesknota za ojczyzna"],
+["morosidad","opiesza³osc / zaleglosci"],
+["necio","glupiec / glupi"],
+["nefasto","katastrofalny / fatalny"],
+["nugatorio","blahy / nic nie wart"],
+["oblación","ofiara / oblacja"],
+["oblivión","zapomnienie"],
+["odiosidad","ohydnosc"],
+["ofuscación","zaslepienie"],
+["ominoso","zlowrogi / zlowieszczy"],
+["oneroso","uciazliwy / obciazajacy"],
+["opresión","ucisk / opresja"],
+["palmario","oczywisty / wyrany"],
+["palurdo","prostak / gbur"],
+["pánfilo","gluptas / nieudacznik"],
+["parco","oszczedny w slowach"],
+["pavor","przerazenie / groza"],
+["penuria","niedostatek / bieda"],
+["perjurio","krzywoprzysiestwo"],
+["pernicioso","szkodliwy / niszczycielski"],
+["perplejidad","konsternacja / zaklopotanie"],
+["plañir","lamentowac / biadolic"],
+["pleonasmo","pleonazm"],
+["poltronería","lenistwo / próznactwo"],
+["polución verbal","zanieczyszczenie jezyka"],
+["pomposidad","pompatycznosc"],
+["porfiado","uparty / zawziety"],
+["prosáico","prozaiczny / banalny"],
+["pudibundo","wstydliwy / pruderyiny"],
+["pugnaz","bojowy / zaczepny"],
+["quimérico","chimeryczny / nierealny"],
+["quisquilloso","drobiazgowy / dokladniácy"],
+["rancio","stary / skwasnialy"],
+["rapacidad","zachlannosc / drapieznosc"],
+["raquítico","rachityczny / blichy"],
+["rencor","uraza / zlosc"],
+["renegado","renegat / odstepca"],
+["reticente","powsciagliwy / niechety"],
+["rimombante","brzmiacý / napuszony"],
+["risible","smiechu wart"],
+["romo","tepý / bezwyrazny"],
+["ruin","nikczemny / podly"],
+["rutilante","blyszczacy / swietlisty"],
+["sagaz","przenikliwy / sprytny"],
+["saña","zawzietost / okrucienstwo"],
+["severo","surowy / ostry"],
+["sibilino","zawiły / tajemniczy"],
+["simulacro","pozory / symulacja"],
+["socarrón","szyderca / przebiegly"],
+["solecismo","soloecyzm"],
+["sublimación","sublimacja"],
+["sudario","cалун / calun"],
+["superfluo","zbedny / nadmiarowy"],
+["suspirar","westchnac / tesknic"],
+["tacaño","skápy"],
+["tardanza","opieszalosc / spónienie"],
+["tedioso","nudny / monotonny"],
+["temerano","nieustraszony"],
+["terco","uparty"],
+["tibio","letni / obojetny"],
+["timorato","bojaznliwy / pruderyiny"],
+["tinglado","budka / szopka"],
+["titubeante","wahajacy sie / jąkajacy"],
+["torpe","niezdolny / niezdarny"],
+["trashumancia","transhumancja"],
+["truhán","lajdak / szubrawiec"],
+["turbulento","burzliwy / niespokojny"],
+["ubicuo","wszechobecny"],
+["ufano","zarozumialy / pyszny"],
+["ultrajoso","obraliwy / haniebny"]
+]
+};
+
+
+const LEVEL_INFO = {
+  A1:{label:"Początkujący",desc:"Podstawowe wyrażenia i słowa",col:"var(--lA1)"},
+  A2:{label:"Podstawowy",desc:"Codzienne zwroty i wyrażenia",col:"var(--lA2)"},
+  B1:{label:"Średniozaawansowany",desc:"Standardowa komunikacja",col:"var(--lB1)"},
+  B2:{label:"Wyższy średniozaaw.",desc:"Płynna komunikacja",col:"var(--lB2)"},
+  C1:{label:"Zaawansowany",desc:"Efektywna komunikacja",col:"var(--lC1)"},
+  C2:{label:"Biegłość",desc:"Opanowanie języka",col:"var(--lC2)"},
+};
+const LEVELS = ["A1","A2","B1","B2","C1","C2"];
+const COL_MAP = {A1:"#27AE60",A2:"#2ECC71",B1:"#F39C12",B2:"#E67E22",C1:"#E74C3C",C2:"#8E44AD"};
+
+// ── State ──────────────────────────────────────────────────────────
+let currentLevel = null;
+let knownWords = {}; // { "A1_0": true, ... }
+let fcPool = [], fcIdx = 0, fcFlipped = false;
+let qPool = [], qWord = null, qOpts = [], qAnswered = false;
+
+// ── Storage ────────────────────────────────────────────────────────
+const STORE_KEY = "espanol_known_v1";
+function loadKnown() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) knownWords = JSON.parse(raw);
+  } catch(e) { knownWords = {}; }
+}
+function saveKnown() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(knownWords)); } catch(e) {}
 }
 
-function renderHome() { 
-  return `<div class="header"><div><div class="app-title">Słówka <em>Hiszpańskie</em></div><div class="subtitle">3000+ RZECZYWISTYCH słów</div></div></div>
-  <div class="levels">
-    ${['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].map(l => `
-      <div class="level-card" onclick="selectLevel('${l}')">
-        <div class="level-badge ${l.toLowerCase()}">${l}</div>
-        <div class="level-name">${l}</div>
-        <div class="level-desc">${WORDS_DATA[l].length} słów</div>
-      </div>
-    `).join('')}
-  </div>`; 
+// ── Helpers ────────────────────────────────────────────────────────
+function wkey(lvl, idx) { return lvl + "_" + idx; }
+function countKnown(lvl) { return VOCAB[lvl].filter((_,i) => knownWords[wkey(lvl,i)]).length; }
+function countLeft(lvl) { return VOCAB[lvl].length - countKnown(lvl); }
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
-function selectLevel(level) { 
-  state.level = level; 
-  state.view = 'flash'; 
-  state.idx = 0;
-  state.flipped = false;
-  render(); 
+function getOptions(word, lvl) {
+  const all = VOCAB[lvl];
+  const wrong = shuffle(all.filter(w => w[1] !== word[1])).slice(0,3);
+  return shuffle([...wrong, word]);
 }
 
-function renderFlash() { 
-  const w = WORDS_DATA[state.level][state.idx];
-  return `
-    <div class="header">
-      <div class="app-title">${state.level} <em>Flashcard</em></div>
-      <div class="counter">${state.idx + 1}/${WORDS_DATA[state.level].length}</div>
-    </div>
-    <div class="flashcard" onclick="state.flipped = !state.flipped; render()">
-      ${!state.flipped ? 
-        `<div class="flashcard-word">${w.es}</div>` : 
-        `<div class="flashcard-translation">${w.pl}</div>`}
-    </div>
-    <div style="text-align: center;">
-      <button class="speak-btn" onclick="speak('${w.es}')">🔊 Wymowa</button>
-    </div>
-    <div class="actions">
-      <button class="btn btn-secondary" onclick="state.view='home'; render()">← Powrót</button>
-      <button class="btn btn-primary" onclick="state.idx = (state.idx + 1) % WORDS_DATA[state.level].length; state.flipped = false; render()">Następne →</button>
-      <button class="btn btn-secondary" onclick="state.view='quiz-setup'; render()">Start Quiz</button>
-    </div>
-  `;
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "es-ES"; u.rate = 0.85; u.pitch = 1.05;
+  window.speechSynthesis.speak(u);
 }
 
-function renderQuizSetup() {
-  return `
-    <div class="header">
-      <div class="app-title">${state.level} <em>Quiz</em></div>
-    </div>
-    <div style="margin-bottom: 20px;">
-      <label style="display: block; margin-bottom: 8px; font-weight: 600;">Ile pytań?</label>
-      <select id="quiz-size" style="width: 100%; padding: 12px; border: 1.5px solid #e0dcd3; border-radius: 6px;">
-        <option value="">Wybierz...</option>
-        <option value="10">10 pytań</option>
-        <option value="20">20 pytań</option>
-        <option value="50">50 pytań</option>
-      </select>
-    </div>
-    <div class="actions">
-      <button class="btn btn-secondary" onclick="state.view='home'; render()">← Powrót</button>
-      <button class="btn btn-primary" onclick="startQuiz()">Start!</button>
-    </div>
-  `;
+// ── Screen Routing ─────────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  const el = document.getElementById(id);
+  el.classList.add("active");
+  el.style.animation = "none";
+  requestAnimationFrame(() => { el.style.animation = ""; });
+  updateNavBack(id);
+  if (id === "scLevels") renderLevelList();
+  if (id === "scMode") renderModeScreen();
 }
 
-function startQuiz() {
-  const size = parseInt(document.getElementById('quiz-size').value);
-  if (!size) return alert('Wybierz liczbę pytań!');
-  
-  const words = WORDS_DATA[state.level];
-  const selected = [...words].sort(() => Math.random() - 0.5).slice(0, size);
-  
-  state.quiz = selected.map(w => {
-    const wrong = words.filter(x => x.es !== w.es).sort(() => Math.random() - 0.5).slice(0, 3).map(x => x.pl);
-    const opts = [w.pl, ...wrong].sort(() => Math.random() - 0.5);
-    return {es: w.es, pl: w.pl, options: opts, correct: opts.indexOf(w.pl)};
-  });
-  
-  state.qIdx = 0;
-  state.score = 0;
-  state.answered = false;
-  state.view = 'quiz';
-  render();
+function updateNavBack(id) {
+  const btn = document.getElementById("navBack");
+  if (id === "scHome") { btn.style.display = "none"; return; }
+  if (id === "scLevels") { btn.style.display = "block"; btn.setAttribute("data-target","scHome"); }
+  else if (id === "scMode") { btn.style.display = "block"; btn.setAttribute("data-target","scLevels"); }
+  else { btn.style.display = "block"; btn.setAttribute("data-target","scMode"); }
 }
 
-function renderQuiz() {
-  if (state.qIdx >= state.quiz.length) {
-    const percent = Math.round((state.score / state.quiz.length) * 100);
-    return `
-      <div class="header"><div class="app-title">${state.level} <em>Wynik</em></div></div>
-      <div style="text-align: center; padding: 40px 20px;">
-        <div style="font-size: 48px; font-weight: 700; color: #d85d47; margin-bottom: 20px;">${state.score}/${state.quiz.length}</div>
-        <div style="font-size: 24px; margin-bottom: 28px;">${percent}%</div>
-        <div class="actions">
-          <button class="btn btn-secondary" onclick="state.view='home'; render()">← Powrót do domu</button>
-          <button class="btn btn-primary" onclick="state.view='quiz-setup'; render()">Kolejny quiz</button>
+function goBack() {
+  const target = document.getElementById("navBack").getAttribute("data-target") || "scHome";
+  showScreen(target);
+}
+
+// ── Level List ─────────────────────────────────────────────────────
+function renderLevelList() {
+  const container = document.getElementById("levelList");
+  container.innerHTML = LEVELS.map((l, i) => {
+    const info = LEVEL_INFO[l];
+    const col = COL_MAP[l];
+    const ck = countKnown(l);
+    const total = VOCAB[l].length;
+    const pct = Math.round(ck / total * 100);
+    return `<div class="level-card pop" style="animation-delay:${i*0.05}s" onclick="selectLevel('${l}')">
+      <div class="lv-badge" style="background:${col}">${l}</div>
+      <div class="lv-info">
+        <div class="lv-header">
+          <div><span class="lv-name">${info.label}</span><span class="lv-desc">${info.desc}</span></div>
+          <span class="lv-pct" style="color:${col}">${pct}%</span>
         </div>
+        <div class="lv-bar-bg"><div class="lv-bar" style="width:${pct}%;background:${col}"></div></div>
+        <div class="lv-stats">${ck}/${total} słów &middot; ${countLeft(l)} do nauczenia</div>
       </div>
-    `;
-  }
-  
-  const q = state.quiz[state.qIdx];
-  const progress = ((state.qIdx + 1) / state.quiz.length) * 100;
-  
-  return `
-    <div class="header">
-      <div class="app-title">${state.level}</div>
-      <div class="counter">${state.qIdx + 1}/${state.quiz.length}</div>
-    </div>
-    <div style="width: 100%; height: 6px; background: #e0dcd3; border-radius: 3px; margin-bottom: 20px; overflow: hidden;">
-      <div style="width: ${progress}%; height: 100%; background: #d85d47;"></div>
-    </div>
-    <div style="text-align: center; font-size: 24px; margin-bottom: 20px; font-weight: 600;">"${q.es}"</div>
-    <button class="speak-btn" onclick="speak('${q.es}')" style="margin-bottom: 20px;">🔊 Wymowa</button>
-    <div class="quiz-options">
-      ${q.options.map((opt, i) => `
-        <button class="quiz-option" onclick="handleAnswer(${i}, ${q.correct})" ${state.answered ? 'disabled' : ''}>
-          ${opt}
-        </button>
-      `).join('')}
-    </div>
-  `;
+    </div>`;
+  }).join("");
 }
 
-function handleAnswer(selected, correct) {
-  if (state.answered) return;
-  state.answered = true;
-  
-  if (selected === correct) {
-    state.score++;
-  }
-  
-  setTimeout(() => {
-    state.qIdx++;
-    state.answered = false;
-    render();
-  }, 1000);
-  
-  render();
+function selectLevel(lvl) {
+  currentLevel = lvl;
+  showScreen("scMode");
 }
 
-render();
+// ── Mode Screen ────────────────────────────────────────────────────
+function renderModeScreen() {
+  const l = currentLevel;
+  const info = LEVEL_INFO[l];
+  const col = COL_MAP[l];
+  const ck = countKnown(l);
+  const total = VOCAB[l].length;
+  const pct = Math.round(ck / total * 100);
+  document.getElementById("modeBadge").textContent = l;
+  document.getElementById("modeBadge").style.background = col;
+  document.getElementById("modeTitle").textContent = info.label;
+  document.getElementById("modeSubtitle").textContent = info.desc;
+  document.getElementById("modeStats").innerHTML = `
+    <div><div class="stat-num" style="color:${col}">${ck}</div><div class="stat-lbl">Znane</div></div>
+    <div><div class="stat-num" style="color:#E67E22">${countLeft(l)}</div><div class="stat-lbl">Do nauki</div></div>
+    <div><div class="stat-num">${total}</div><div class="stat-lbl">Razem</div></div>
+    <div><div class="stat-num" style="color:${col}">${pct}%</div><div class="stat-lbl">Ukończone</div></div>`;
+}
+
+function resetLevel() {
+  if (!confirm("Zresetować postęp dla poziomu " + currentLevel + "?")) return;
+  const l = currentLevel;
+  VOCAB[l].forEach((_,i) => delete knownWords[wkey(l,i)]);
+  saveKnown();
+  renderModeScreen();
+}
+
+// ── Flashcards ─────────────────────────────────────────────────────
+function startFC() {
+  const l = currentLevel;
+  const words = VOCAB[l];
+  const unk = words.map((w,i) => ({es:w[0],pl:w[1],idx:i})).filter(w => !knownWords[wkey(l,w.idx)]);
+  const kn  = words.map((w,i) => ({es:w[0],pl:w[1],idx:i})).filter(w =>  knownWords[wkey(l,w.idx)]);
+  fcPool = unk.length > 0 ? [...unk,...kn] : words.map((w,i) => ({es:w[0],pl:w[1],idx:i}));
+  fcIdx = 0; fcFlipped = false;
+  showScreen("scFC");
+  renderFC();
+}
+
+function renderFC() {
+  const card = fcPool[fcIdx];
+  const col = COL_MAP[currentLevel];
+  const total = VOCAB[currentLevel].length;
+  const ck = countKnown(currentLevel);
+  document.getElementById("fcWord").textContent = card.es;
+  document.getElementById("fcTrans").textContent = card.pl;
+  document.getElementById("fcCounter").textContent = (fcIdx+1) + " / " + fcPool.length + " fiszek";
+  document.getElementById("fcBadge").textContent = currentLevel;
+  document.getElementById("fcBadge").style.background = col;
+  document.getElementById("fcKnown").textContent = "✓ " + ck + "/" + total;
+  document.getElementById("fcKnown").style.color = col;
+  document.getElementById("fcProgress").style.width = Math.round((fcIdx+1)/fcPool.length*100) + "%";
+  document.getElementById("fcProgress").style.background = col;
+  document.getElementById("flipInner").classList.remove("flipped");
+  fcFlipped = false;
+  document.getElementById("fcTip").style.display = "block";
+}
+
+function flipCard() {
+  fcFlipped = !fcFlipped;
+  document.getElementById("flipInner").classList.toggle("flipped", fcFlipped);
+  document.getElementById("fcTip").style.display = fcFlipped ? "none" : "block";
+}
+
+function speakWord() { speak(fcPool[fcIdx].es); }
+
+function fcAnswer(know) {
+  if (know) {
+    knownWords[wkey(currentLevel, fcPool[fcIdx].idx)] = true;
+    saveKnown();
+  }
+  if (fcIdx < fcPool.length - 1) {
+    fcIdx++;
+    renderFC();
+  } else {
+    showDone();
+  }
+}
+
+// ── Quiz ───────────────────────────────────────────────────────────
+function startQuiz() {
+  const l = currentLevel;
+  const words = VOCAB[l];
+  const unk = words.map((w,i) => ({es:w[0],pl:w[1],idx:i})).filter(w => !knownWords[wkey(l,w.idx)]);
+  qPool = shuffle(unk.length > 0 ? unk : words.map((w,i) => ({es:w[0],pl:w[1],idx:i})));
+  showScreen("scQuiz");
+  setupQuestion();
+}
+
+function setupQuestion() {
+  if (qPool.length === 0) { showDone(); return; }
+  qWord = qPool[Math.floor(Math.random() * qPool.length)];
+  qOpts = getOptions([qWord.es, qWord.pl], currentLevel).map(w => ({es:w[0],pl:w[1]}));
+  qAnswered = false;
+
+  const col = COL_MAP[currentLevel];
+  document.getElementById("quizBadge").textContent = currentLevel;
+  document.getElementById("quizBadge").style.background = col;
+  document.getElementById("quizRemaining").textContent = qPool.length;
+  document.getElementById("quizWord").textContent = qWord.es;
+  document.getElementById("quizCard").className = "quiz-card";
+
+  const optsEl = document.getElementById("quizOpts");
+  optsEl.innerHTML = qOpts.map((opt,i) => `
+    <button class="opt-btn" id="opt${i}" onclick="answerQuiz(${i})">
+      <span class="opt-key">${["A","B","C","D"][i]}</span>
+      <span>${opt.pl}</span>
+    </button>`).join("");
+
+  document.getElementById("quizFeedback").style.display = "none";
+  document.getElementById("btnNext").style.display = "none";
+}
+
+function speakQuizWord() { if(qWord) speak(qWord.es); }
+
+function answerQuiz(idx) {
+  if (qAnswered) return;
+  qAnswered = true;
+  const chosen = qOpts[idx];
+  const correct = chosen.pl === qWord.pl;
+
+  qOpts.forEach((opt,i) => {
+    const btn = document.getElementById("opt" + i);
+    btn.classList.add("answered");
+    if (opt.pl === qWord.pl) btn.classList.add("correct-ans");
+    else if (i === idx) btn.classList.add("wrong-ans");
+    else btn.classList.add("neutral-ans");
+  });
+
+  const card = document.getElementById("quizCard");
+  const fb = document.getElementById("quizFeedback");
+  if (correct) {
+    card.classList.add("correct");
+    fb.className = "quiz-feedback ok";
+    fb.textContent = "🎉 Świetnie! Poprawna odpowiedź!";
+    knownWords[wkey(currentLevel, qWord.idx)] = true;
+    saveKnown();
+    qPool = qPool.filter(w => w.idx !== qWord.idx);
+  } else {
+    card.classList.add("wrong");
+    fb.className = "quiz-feedback err";
+    fb.textContent = "❌ Błąd. Poprawna odpowiedź: " + qWord.pl;
+    // wrong: move to end
+    qPool = [...qPool.filter(w => w.idx !== qWord.idx), qWord];
+  }
+  fb.style.display = "block";
+  document.getElementById("quizRemaining").textContent = qPool.filter(w => !knownWords[wkey(currentLevel,w.idx)]).length;
+
+  const btnNext = document.getElementById("btnNext");
+  btnNext.style.display = "block";
+  btnNext.textContent = qPool.filter(w => !knownWords[wkey(currentLevel,w.idx)]).length === 0 ? "Zakończ →" : "Następne słówko →";
+}
+
+function nextQuestion() {
+  setupQuestion();
+}
+
+// ── Done ───────────────────────────────────────────────────────────
+function showDone() {
+  const l = currentLevel;
+  const col = COL_MAP[l];
+  const ck = countKnown(l);
+  const total = VOCAB[l].length;
+  const pct = Math.round(ck/total*100);
+  document.getElementById("doneSub").textContent = "Poziom " + l + " · " + LEVEL_INFO[l].label;
+  document.getElementById("donePct").textContent = pct + "%";
+  document.getElementById("donePct").style.color = col;
+  document.getElementById("doneBar").style.width = pct + "%";
+  document.getElementById("doneBar").style.background = col;
+  document.getElementById("doneStats").textContent = ck + " z " + total + " słów opanowanych";
+  showScreen("scDone");
+}
+
+// ── Init ───────────────────────────────────────────────────────────
+loadKnown();
+showScreen("scHome");
 </script>
 </body>
 </html>
